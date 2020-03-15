@@ -84,7 +84,6 @@ export default class App extends Component {
     // Styles object for our modal 
     const styles = { overlay: { background: 'rgba(0, 0, 0, 0.35)' }}
 
-
     const releases = this.state.games.map(release => {
 
       // We ultimately need an array of objects, so we'll want to map
@@ -112,7 +111,9 @@ export default class App extends Component {
       <div className="App">
 
         <header className="App-header">
-          <h1>vgCal</h1>      
+          <h1>vgCal</h1>
+          <input className="search" type="text" placeholder="Search for a game"/>
+          <span></span>
         </header>
 
         <main>      
