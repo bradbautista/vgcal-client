@@ -15,7 +15,8 @@
     "react-dom": "^16.13.0",
     "react-responsive": "^8.0.3",
     "react-responsive-modal": "^4.0.1",
-    "react-scripts": "3.4.0"
+    "react-scripts": "3.4.0",
+    "react-select": "^3.0.8"
   },
   "scripts": {
     "start": "react-scripts start",

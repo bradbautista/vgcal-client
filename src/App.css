@@ -1,10 +1,10 @@
 .App-header {
   background-color: blue;
-  height: 65px;
+  height: auto;
   padding: 20px;
   display: flex;
-  flex-direction: row;
-  align-items: center;
+  flex-direction: column;
+  align-items: flex-start;
   justify-content: space-between;
   font-size: 12px;
   letter-spacing: 0px;
@@ -13,10 +13,19 @@
 }
 
 .search {
-  border-radius: 15px;
+  border-radius: 5px;
   border: none;
-  padding: 10px;
-  width: 25%;
+  padding: 0px;
+  width: 100%;
+  color: black;
+  font-family: Consolas;
+  font-size: 16px;
+  z-index: 2;
+}
+
+.logotype {
+  flex-grow: 1;
+  margin-bottom: 15px;
 }
 
 h1, h2, h3, h4 {
@@ -66,6 +75,59 @@ main {
   width: 100%;
 }
 
+.boxart {
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
+  margin-top: 30px;
+  margin-bottom: 15px;
+}
+
+.modal-heading {
+  font-size: 30px;
+  margin-bottom: 5px;
+}
+
+.info {
+  font-size: 18px;
+  margin-bottom: 4px;
+}
+
+.fav-button {
+  margin-top: 10px;
+  background-color: white;
+  border: 1px solid black;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  padding-left: 20px;
+  padding-right: 20px;
+  border-radius: 50px;
+  font-size: 16px;
+  transition: all 0.5s ease 0s;
+}
+
+.favorited {
+  background-color: black;
+  color: white;
+}
+
+.filters-header {
+  margin-bottom: 5px;
+}
+
+.filters-header + div {
+  margin-bottom: 10px;
+}
+
+.favorites-header {
+  margin-bottom: 5px;
+  margin-top: 10px;
+}
+
+.favorites-list li {
+  margin-bottom: 10px;
+}
+
 /* UNIFY TOOLBAR */
   
 @media screen and (min-width: 600px) {
@@ -94,9 +156,22 @@ main {
 
 @media screen and (min-width: 1200px) {
 
-  /* .App-header {
-    height: 150px;
-  } */
+  .App-header {
+    flex-direction: row;
+    align-items: center;
+  }
+
+  .logotype {
+    flex-grow: 0;
+    margin-bottom: 0;
+  }
+
+  .search {
+    border-radius: 5px;
+    border: none;
+    padding: 0px;
+    width: 35%;
+  }
 
   .calendar-wrapper {
     display: flex;

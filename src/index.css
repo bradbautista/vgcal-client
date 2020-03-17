@@ -24,3 +24,11 @@ ul {
   padding: 0;
   margin: 0;
 }
+
+@media screen and (min-width: 1200px) {
+
+  html {
+    overflow-y: hidden;
+  }
+  
+}
