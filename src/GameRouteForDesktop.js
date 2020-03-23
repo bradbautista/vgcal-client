@@ -19,9 +19,6 @@ export default class GameRouteForDesktop extends Component {
 
         const gameName = this.props.match.params.game;
 
-        console.log(gameName)
-        console.log(this.context)
-
         const selectedGame = this.context.releases.filter(game => game.gameUrl.split('/').pop() === gameName).shift();
 
         if (typeof selectedGame !== "undefined") {
@@ -36,7 +33,6 @@ export default class GameRouteForDesktop extends Component {
             this.setState({ timer: this.state.timer + 1 })
             this.context.setLoading(true)
             setTimeout(this.waitForGame, 1000);
-            console.log(this.state.timer)
         }
     }
 
@@ -57,6 +53,7 @@ export default class GameRouteForDesktop extends Component {
                 plugins={[ dayGridPlugin ]} 
                 events={ this.context.releases }
                 eventClick={ this.context.handleClick }
+                datesRender={ (info) => this.context.paintUrlDesktop(info) }
                 height={ "auto" }
                 />
 

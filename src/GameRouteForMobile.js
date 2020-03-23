@@ -56,6 +56,7 @@ export default class GameRouteForMobile extends Component {
                 plugins={[ listPlugin ]} 
                 events={ this.context.releases }
                 eventClick={ this.context.handleClick }
+                datesRender={ (info) => this.context.paintUrl(info) }
                 height={ "auto" }
                 />
             </>

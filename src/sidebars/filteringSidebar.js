@@ -27,6 +27,7 @@ import './filteringSidebar.css'
                 <input type="checkbox" id="PC" name="PC" value="PC" />
                 <label htmlFor="PC"> PC</label><br/> 
               </div>
+              {/* TODO: MAKE FAVORITES CONTAINER ITS OWN COMPONENT */}
               <div className={"favorites-container"}>
                 <h2 className="favorites-header">Your favorites</h2>
                 <ul className="favorites-list">

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import FullCalendar from '@fullcalendar/react'
-import dayGridPlugin from '@fullcalendar/daygrid'
-import listPlugin from '@fullcalendar/list'
+import FullCalendar from '@fullcalendar/react';
+import dayGridPlugin from '@fullcalendar/daygrid';
+import listPlugin from '@fullcalendar/list';
 import '@fullcalendar/core/main.css';
 import '@fullcalendar/daygrid/main.css';
 import '@fullcalendar/list/main.css';
@@ -9,11 +9,11 @@ import MediaQuery from 'react-responsive';
 import GameRouteForMobile from './GameRouteForMobile';
 import GameRouteForDesktop from './GameRouteForDesktop';
 import Modal from 'react-responsive-modal';
-import Context from './Context'
-import { BrowserRouter as Router, Route } from "react-router-dom";
-import Header from './Header'
-import InfoSidebar from './infoSidebar'
-import FilteringSidebar from './filteringSidebar'
+import Context from './Context';
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import Header from './Header';
+import InfoSidebar from './sidebars/infoSidebar';
+import FilteringSidebar from './sidebars/filteringSidebar';
 import LoadingOverlay from 'react-loading-overlay';
 import PacmanLoader from "react-spinners/PacmanLoader";
 import './App.css';
@@ -75,8 +75,6 @@ export default class App extends Component {
 
   filterReleases = (games) => {
 
-    console.log(games)
-
     const filteredGames = games.filter(game => {
       return game.expected_release_day !== null
     })
@@ -104,7 +102,7 @@ export default class App extends Component {
       // Note these are distinct from title and url; the calendar uses
       // those properties in a way that makes it difficult to consume
       // and use them, so we're naming these such that they'll get passed
-      // in extendedProps
+      // in the event object's extendedProps
       tempObj.gameUrl = `/game/${release.name.split(' ').join('-')}`;
       tempObj.gameTitle = release.name;
       // After we pass the date to the calendar it becomes
@@ -119,8 +117,6 @@ export default class App extends Component {
       return tempObj
 
     })
-
-    // console.log(this.state.games)
 
     this.setState({ releases: [...releases] })
 
@@ -144,31 +140,40 @@ export default class App extends Component {
 
   handleClick = ({ event }) => {
 
-    // event.preventDefault()
-
-    // console.log(event)
-    console.log(event._def.title)
-    console.log(this)
     this.setState({ game: event._def.extendedProps })
     this.setState({ open: true });
     window.history.pushState({}, 'vgCal', event._def.extendedProps.gameUrl);
+
   }
 
   handleChange = selectedOption => {
 
-    console.log(selectedOption);
     this.setState({game: selectedOption.value})
     this.setState({ selectedOption: selectedOption });
     this.setState({ open: true })
     window.history.pushState({}, 'vgCal', selectedOption.value.gameUrl);
+
   }
 
   formatPlatforms = (platforms) => {
-    return platforms.map(platform => platform.name).join(', ');
+
+    // Bolting router onto this introduced a bug where
+    // platforms is occasionally null when it shouldn't be,
+    // so avert disaster by just making it an empty list instead.
+    // (setError(true) is not possible, since this function is
+    // called in the render method & we can't set state there)
+    if (platforms === null) {
+      platforms = []
+    } else {
+      return platforms.map(platform => platform.name).join(', ');
+    }
+
   }
 
   formatDate = (date) => {
+
     return moment(date).format('MMMM D, YYYY')
+
   }
  
   onCloseModal = () => {
@@ -189,53 +194,76 @@ export default class App extends Component {
 
   }
 
-  setStateAsync(state) {
-    console.log(state)
+  setStateAsync(gameState, openState, errorState) {
+
     return new Promise((resolve) => {
-      this.setGame(state, resolve)
-  });
-  }
-
-  waitForGame = () => {
-
-    const gameName = window.location.pathname;
-
-    const selectedGame = this.state.releases.filter(game => game.gameUrl === gameName);
-
-    // console.log(selectedGame)
-
-    // this.setOpen(false)
-    // setTimeout(this.setGame(selectedGame), 1500)
-    // setTimeout(this.setOpen(true), 2000)
-
-
-    // if (typeof this.state.game.platforms !== "undefined") {
-    //   this.setGame(selectedGame);
-    //   this.setLoading(false);
-    //   this.setOpen(true)
-    // } else if (this.state.timer > 7) {
-    //   this.setError(true)
-    //   this.setLoading(false)
-    // } else {
-    //   this.setState({ timer: this.state.timer + 1});
-    //   this.setLoading(true);
-    //   this.setOpen(false);
-    //   setTimeout(this.waitForGame, 5000);
-    //   console.log(this.state.timer)
-    // }
+      this.setOpen(openState, resolve)
+      this.setGame(gameState, resolve)
+      this.setError(errorState, resolve)
+    });
 
   }
 
   syncViews = () => {
     
-    this.setStateAsync(this.state.game)
+    this.setStateAsync(this.state.game, this.state.open, this.state.error)
+
+  }
+
+  loadReleases = () => {
+    
+    if (this.state.releases.length > 0) {
+      this.setLoading(false)
+    } else {
+      this.setLoading(true)
+      setTimeout(this.loadReleases, 1000)
+    }
+
+  }
+
+  paintUrl = (info) => {
+
+    const currentDate = moment()._d
+    const formattedCurrentDate = moment(currentDate).format('YYYY-MM-DD')
+    const formattedDates = info.view.dayDates.map(date => {
+      return moment(date).format('YYYY-MM-DD')
+    })
+    const pathnameArray = window.location.pathname.split('/')
+
+    if (pathnameArray.includes('game')) {
+      return
+    } else if (formattedDates.includes(formattedCurrentDate)) {
+      window.history.pushState({}, 'vgCal', '/');
+    } else {
+      window.history.pushState({}, 'vgCal', `/date/${formattedDates[0]}`);
+    }
+    
+  }
+
+  paintUrlDesktop = (info) => {
+
+    const currentMonth = moment()._d
+    const formattedCurrentMonth = moment(currentMonth).format('MMMM YYYY')
+    const currentCalendarMonth = info.view.title
+    const dateArray = moment(currentCalendarMonth, 'MMMM YYYY').format('MM YYYY').split(' ')
+    dateArray.splice(1, 0, '01')
+    const dateToPaintToUrl = dateArray.join('-')
+    const pathnameArray = window.location.pathname.split('/')
+
+    if (pathnameArray.includes('game')) {
+      return
+    } else if (formattedCurrentMonth === currentCalendarMonth) {
+      window.history.pushState({}, 'vgCal', '/');
+    } else {
+      window.history.pushState({}, 'vgCal', `/date/${dateToPaintToUrl}`);
+    }
 
   }
 
   componentDidMount() {
 
     this.fetchGames();
-    // this.filterReleases(this.state.games);
+    this.loadReleases();
 
   }
 
@@ -249,7 +277,7 @@ export default class App extends Component {
       closeIcon: { fill: 'white', filter: 'drop-shadow( 3px 3px 2px rgba(0, 0, 0, .7))' }
     }
 
-    const platforms = this.formatPlatforms(this.state.game.platforms)
+    const platforms = this.formatPlatforms(this.state.game.platforms) || []
     const date = this.formatDate(this.state.game.releaseDate)
 
     const contextValue = {
@@ -263,18 +291,21 @@ export default class App extends Component {
       handleChange: this.handleChange,
       handleClick: this.handleClick,
       setGame: this.setGame,
-      formatPlatforms: this.formatPlatforms,
-      formatDate: this.formatDate,
       setOpen: this.setOpen,
       setLoading: this.setLoading,
-      setError: this.setError
+      setError: this.setError,
+      paintUrl: this.paintUrl,
+      paintUrlDesktop: this.paintUrlDesktop,
     }
 
-    // Since we're serving up two different views, we're going
-    // to need to make some accommodations for different screen
-    // sizes; overarching philosphy here is to minimize the extent
-    // to which we serve up two different sites, so the number of
-    // elements being <MediaQuery>'d are kept minimal
+    // Since we're serving up two different views for mobile
+    // and desktop and because we're required to use React Router, 
+    // we need routes for each required URL for each view. 
+    // This gives us a total of eight (!) routes:
+    // -- Root * 2
+    // -- /date/:date * 2
+    // -- /game/:game * 2
+    // -- all others * 2
 
     return (
       <Context.Provider value={contextValue}>
@@ -304,58 +335,79 @@ export default class App extends Component {
                 maxWidth={1199}
                 onChange={ this.syncViews }
               >
+                <Switch>
+                  {/* Root */}
+                  <Route 
+                    exact path="/"
+                    render={(props) => {
+                      return (
+                        <FullCalendar 
+                        defaultView="listWeek" 
+                        plugins={[ listPlugin ]} 
+                        events={ this.state.releases }
+                        eventClick={ this.handleClick }
+                        height={ "auto" }
+                        datesRender={ (info) => this.paintUrl(info) }
+                        {...props}
+                        />
+                      )
+                    }}
+                  />
 
-                {/* Root */}
-                <Route 
-                  exact path="/"
-                  render={(props) => {
-                    return (
-                      <FullCalendar 
-                      defaultView="listWeek" 
-                      plugins={[ listPlugin ]} 
-                      events={ this.state.releases }
-                      eventClick={ this.handleClick }
-                      height={ "auto" }
-                      {...props}
-                      />
-                    )
-                  }}
-                />
+                  {/* Specified date */}
+                  <Route 
+                    path="/date/:date"
+                    render={(props) => {
 
-                {/* Specified date */}
-                <Route 
-                  path="/date/:date"
-                  render={(props) => {
+                      const providedDate = props.match.params.date;
+                      const parsedDate = providedDate.split('-');
+                      const isDateValid = (
+                        parsedDate.length === 3 && 
+                        parsedDate[0].length === 4 &&
+                        parsedDate[1].length === 2 &&
+                        parsedDate[2].length === 2 &&
+                        /* eslint no-self-compare: off */
+                        // Checking for NaN; method described here:
+                        // http://adripofjavascript.com/blog/drips/the-problem-with-testing-for-nan-in-javascript.html
+                        // tldr: NaN is not equal to itself
+                        (parsedDate.every(element => parseInt(element) === parseInt(element)))
+                      )
 
-                    const providedDate = props.match.params.date;
-                    const parsedDate = providedDate.split('-');
-                    const isDateValid = (
-                      parsedDate.length === 3 && 
-                      parsedDate[0].length === 4 &&
-                      parsedDate[1].length === 2 &&
-                      parsedDate[2].length === 2 &&
-                      /* eslint no-self-compare: off */
-                      // Checking for NaN; method described here:
-                      // http://adripofjavascript.com/blog/drips/the-problem-with-testing-for-nan-in-javascript.html
-                      // tldr: NaN is not equal to itself
-                      (parsedDate.every(element => parseInt(element) === parseInt(element)))
-                    )
+                      return (
+                        <FullCalendar 
+                        defaultView="listWeek" 
+                        plugins={[ listPlugin ]} 
+                        events={ this.state.releases }
+                        eventClick={ this.handleClick }
+                        height={ "auto" }
+                        datesRender={ (info) => this.paintUrl(info) }
+                        defaultDate={ isDateValid ? providedDate : null }                    
+                        />
+                      )
+                    }}
+                  />
 
-                    return (
-                      <FullCalendar 
-                      defaultView="listWeek" 
-                      plugins={[ listPlugin ]} 
-                      events={ this.state.releases }
-                      eventClick={ this.handleClick }
-                      height={ "auto" }
-                      defaultDate={ isDateValid ? providedDate : null }                    
-                      />
-                    )
-                  }}
-                />
+                  {/* Specified game */}
+                  <Route path="/game/:game" component={GameRouteForMobile} />
 
-                {/* Specified game */}
-                <Route path="/game/:game" component={GameRouteForMobile} />                  
+                  {/* Bad URL */}
+                  <Route 
+                    render={(props) => {
+                      return (
+                        <FullCalendar 
+                        defaultView="listWeek" 
+                        plugins={[ listPlugin ]} 
+                        events={ this.state.releases }
+                        eventClick={ this.handleClick }
+                        fixedWeekCount={ false }
+                        datesRender={ (info) => this.paintUrl(info) }
+                        {...props}
+                        />
+                      )
+                    }}
+                  />
+
+                </Switch>                  
                     
 
               </MediaQuery>
@@ -365,58 +417,79 @@ export default class App extends Component {
                 minWidth={1200}
                 onChange={this.syncViews}
               >
-      
-                <Route 
-                  exact path="/"
-                  render={(props) => {
-                    return (
-                      <FullCalendar 
-                      defaultView="dayGridMonth" 
-                      plugins={[ dayGridPlugin ]} 
-                      events={ this.state.releases }
-                      eventClick={ this.handleClick }
-                      fixedWeekCount={ false }
-                      // height={ "auto" }
-                      {...props}
-                      />
-                    )
-                  }}
-                />
+                <Switch>
+                  <Route 
+                    exact path="/"
+                    render={(props) => {
+                      return (
+                        <FullCalendar 
+                        defaultView="dayGridMonth" 
+                        plugins={[ dayGridPlugin ]} 
+                        events={ this.state.releases }
+                        eventClick={ this.handleClick }
+                        fixedWeekCount={ false }
+                        datesRender={ (info) => this.paintUrlDesktop(info) }
+                        {...props}
+                        />
+                      )
+                    }}
+                  />
 
-                <Route 
-                  path="/date/:date"
-                  render={(props) => {
+                  <Route 
+                    path="/date/:date"
+                    render={(props) => {
 
-                    const providedDate = props.match.params.date;
-                    const parsedDate = providedDate.split('-');
-                    const isDateValid = (
-                      parsedDate.length === 3 && 
-                      parsedDate[0].length === 4 &&
-                      parsedDate[1].length === 2 &&
-                      parsedDate[2].length === 2 &&
-                      /* eslint no-self-compare: off */
-                      // Checking for NaN on parseInt(); method described here:
-                      // http://adripofjavascript.com/blog/drips/the-problem-with-testing-for-nan-in-javascript.html
-                      // tldr: NaN is not equal to itself
-                      (parsedDate.every(element => parseInt(element) === parseInt(element)))
-                    )
+                      const providedDate = props.match.params.date;
+                      const parsedDate = providedDate.split('-');
+                      const isDateValid = (
+                        parsedDate.length === 3 && 
+                        parsedDate[0].length === 4 &&
+                        parsedDate[1].length === 2 &&
+                        parsedDate[2].length === 2 &&
+                        /* eslint no-self-compare: off */
+                        // Checking for NaN on parseInt(); method described here:
+                        // http://adripofjavascript.com/blog/drips/the-problem-with-testing-for-nan-in-javascript.html
+                        // tldr: NaN is not equal to itself
+                        (parsedDate.every(element => parseInt(element) === parseInt(element)))
+                      )
 
-                    return (
-                      <FullCalendar 
-                      defaultView="dayGridMonth" 
-                      plugins={[ dayGridPlugin ]} 
-                      events={ this.state.releases }
-                      eventClick={ this.handleClick }
-                      fixedWeekCount={ false }
-                      height={ "auto" }
-                      defaultDate={ isDateValid ? providedDate : null }
-                      />
-                    )
-                  }}
-                />
+                      return (
+                        <FullCalendar 
+                        defaultView="dayGridMonth" 
+                        plugins={[ dayGridPlugin ]} 
+                        events={ this.state.releases }
+                        eventClick={ this.handleClick }
+                        fixedWeekCount={ false }
+                        height={ "auto" }
+                        datesRender={ (info) => this.paintUrlDesktop(info) }
+                        defaultDate={ isDateValid ? providedDate : null }
+                        />
+                      )
+                    }}
+                  />
 
-                {/* Specified game */}
-                <Route path="/game/:game" component={GameRouteForDesktop} /> 
+                  {/* Specified game */}
+                  <Route path="/game/:game" component={GameRouteForDesktop} />
+
+                  {/* Bad URL */}
+                  <Route 
+                    render={(props) => {
+                      return (
+                        <FullCalendar 
+                        defaultView="dayGridMonth" 
+                        plugins={[ dayGridPlugin ]} 
+                        events={ this.state.releases }
+                        eventClick={ this.handleClick }
+                        fixedWeekCount={ false }
+                        datesRender={ (info) => this.paintUrlDesktop(info) }
+                        // height={ "auto" }
+                        {...props}
+                        />
+                      )
+                    }}
+                  />
+
+                </Switch>
                 
               </MediaQuery>
 
@@ -424,6 +497,8 @@ export default class App extends Component {
 
             {/* Filtering & favorites */}
             <FilteringSidebar favorites={this.state.favorites} />
+
+            {/* Content modal */}
 
             <Modal 
               open={this.state.open} 
@@ -471,16 +546,16 @@ export default class App extends Component {
               onClose={ this.onCloseModal }
               styles={styles}
             >
-            <img 
-                alt='error' 
-                className='error' 
-                src={error}
-            />
-                
-            <h2 className='error-heading'>
-                Bad link? vgCal can't find that game, or it doesn't exist. Reload to try again, or give up, skeleton.
-            </h2>
-            
+              <img 
+                  alt='error' 
+                  className='error' 
+                  src={error}
+              />
+                  
+              <h2 className='error-heading'>
+                  Bad link? vgCal can't find that game, or it doesn't exist. Reload to try again, or give up, skeleton.
+              </h2>
+              
             </Modal>
 
 
