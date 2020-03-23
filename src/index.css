@@ -25,10 +25,25 @@ ul {
   margin: 0;
 }
 
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+strong {
+  font-weight: 500;
+}
+
 @media screen and (min-width: 1200px) {
 
   html {
-    overflow-y: hidden;
+    /* overflow-y: hidden; */
+  }
+
+  html, body {
+    height: 100%;
+    width: 100%;
+    margin: 0;
   }
   
 }

@@ -6,10 +6,20 @@ import '@fullcalendar/core/main.css';
 import '@fullcalendar/daygrid/main.css';
 import '@fullcalendar/list/main.css';
 import MediaQuery from 'react-responsive';
+import GameRouteForMobile from './GameRouteForMobile';
+import GameRouteForDesktop from './GameRouteForDesktop';
 import Modal from 'react-responsive-modal';
-import Select from 'react-select';
+import Context from './Context'
+import { BrowserRouter as Router, Route } from "react-router-dom";
+import Header from './Header'
+import InfoSidebar from './infoSidebar'
+import FilteringSidebar from './filteringSidebar'
+import LoadingOverlay from 'react-loading-overlay';
+import PacmanLoader from "react-spinners/PacmanLoader";
 import './App.css';
 import config from './config';
+import moment from 'moment';
+import error from './images/error.jpg';
 
 export default class App extends Component {
 
@@ -17,34 +27,21 @@ export default class App extends Component {
     super(props);
     this.state = {
       games: [],
-      // This is a dummy object so we don't have to write
-      // cases for every undefined property
-      event: {
-        _def: {
-          extendedProps: {
-            image: '',
-            releaseDate: '',
-            platforms: [],
-            description: ''
-          },
-          title: ''          
-        },
-        _calendar: {
-          state: {
-            viewType: ''
-          }
-        }
-      },
+      releases: [],
       favorites: [],
-      dimensions: {
-        height: null,
-        width: null
+      open: false,
+      loading: null,
+      game: {
+        date: undefined,
+        platforms: [],
       },
-      selectedOption: null,
-      open: false
+      error: false,
+      timer: 0,
     };
 
   }
+
+  static contextType = Context;
 
   fetchGames = () => {
 
@@ -68,6 +65,7 @@ export default class App extends Component {
     })
     .then(games => {
       this.setState( { games: [...games] } )
+      this.filterReleases(games)
     })
     .catch(error => {
       console.log(error);
@@ -75,80 +73,11 @@ export default class App extends Component {
 
   }
 
-  handleClick = ({ event, el }) => {
+  filterReleases = (games) => {
 
-    console.log(event)
-    console.log(event._def.title)
-    console.log(el)
-    this.setState({ event: event })
-    this.setState({ open: true });
-    console.log(this.state.dimensions)
+    console.log(games)
 
-  }
-
-  handleChange = selectedOption => {
-    this.setState({ selectedOption: selectedOption });
-    console.log(this.state.selectedOption);
-    this.setState({ 
-      
-      event: {
-        _def: {
-          extendedProps: {
-            image: selectedOption.value.image,
-            releaseDate: selectedOption.value.date,
-            platforms: selectedOption.value.platforms.map( platform => { return <span key={platform.name}>{platform.name} </span>} ),
-            description: selectedOption.value.description
-          },
-          title: ''          
-        },
-        _calendar: {
-          state: {
-            viewType: ''
-          }
-        }
-      }
-    
-    })
-    this.setState({ open: true })
-  }
- 
-  onCloseModal = () => {
-
-    this.setState({ open: false });
-
-  };
-
-  onImgLoad = ({target:img}) => {
-    this.setState({ dimensions: {
-      height: img.offsetHeight,
-      width: img.offsetWidth
-    }});
-  }
-
-  addToFavorites = () => {
-
-    if (this.state.favorites.includes(this.state.event._def.title)) {
-      return
-    }
-
-    this.setState({ favorites: [...this.state.favorites, this.state.event._def.title]})
-
-    
-
-  }
-
-  componentDidMount() {
-
-    this.fetchGames();
-
-  }
-
-  render() {
-
-    // Styles object for our modal 
-    const styles = { overlay: { background: 'rgba(0, 0, 0, 0.35)' }}
-
-    const filteredGames = this.state.games.filter(game => {
+    const filteredGames = games.filter(game => {
       return game.expected_release_day !== null
     })
 
@@ -172,6 +101,12 @@ export default class App extends Component {
       tempObj.date = `${year}-${month}-${day}`;
       tempObj.platforms = release.platforms;
       tempObj.image = release.image.original_url;
+      // Note these are distinct from title and url; the calendar uses
+      // those properties in a way that makes it difficult to consume
+      // and use them, so we're naming these such that they'll get passed
+      // in extendedProps
+      tempObj.gameUrl = `/game/${release.name.split(' ').join('-')}`;
+      tempObj.gameTitle = release.name;
       // After we pass the date to the calendar it becomes
       // difficult to retrieve, so we're passing it again
       // as an extendedProp to make it easy to get to
@@ -185,147 +120,374 @@ export default class App extends Component {
 
     })
 
-    console.log(releases)
+    // console.log(this.state.games)
+
+    this.setState({ releases: [...releases] })
+
+  }
+
+  setGame = (game) => {
+    this.setState({ game: game })
+  }
+
+  setLoading = (bool) => {
+    this.setState({ loading: bool })
+  }
+
+  setOpen = (bool) => {
+    this.setState({ open: bool })
+  }
+
+  setError = (bool) => {
+    this.setState({ error: bool })
+  }
+
+  handleClick = ({ event }) => {
+
+    // event.preventDefault()
+
+    // console.log(event)
+    console.log(event._def.title)
+    console.log(this)
+    this.setState({ game: event._def.extendedProps })
+    this.setState({ open: true });
+    window.history.pushState({}, 'vgCal', event._def.extendedProps.gameUrl);
+  }
+
+  handleChange = selectedOption => {
+
+    console.log(selectedOption);
+    this.setState({game: selectedOption.value})
+    this.setState({ selectedOption: selectedOption });
+    this.setState({ open: true })
+    window.history.pushState({}, 'vgCal', selectedOption.value.gameUrl);
+  }
+
+  formatPlatforms = (platforms) => {
+    return platforms.map(platform => platform.name).join(', ');
+  }
+
+  formatDate = (date) => {
+    return moment(date).format('MMMM D, YYYY')
+  }
+ 
+  onCloseModal = () => {
+
+    this.setState({ open: false });
+    this.setState({ error: false });
+    window.history.pushState({}, 'vgCal', '/');
+
+  };
+
+  addToFavorites = () => {
+
+    if (this.state.favorites.includes(this.state.game.gameTitle)) {
+      return
+    }
+
+    this.setState({ favorites: [...this.state.favorites, this.state.game.gameTitle]})    
+
+  }
+
+  setStateAsync(state) {
+    console.log(state)
+    return new Promise((resolve) => {
+      this.setGame(state, resolve)
+  });
+  }
+
+  waitForGame = () => {
+
+    const gameName = window.location.pathname;
+
+    const selectedGame = this.state.releases.filter(game => game.gameUrl === gameName);
+
+    // console.log(selectedGame)
+
+    // this.setOpen(false)
+    // setTimeout(this.setGame(selectedGame), 1500)
+    // setTimeout(this.setOpen(true), 2000)
+
+
+    // if (typeof this.state.game.platforms !== "undefined") {
+    //   this.setGame(selectedGame);
+    //   this.setLoading(false);
+    //   this.setOpen(true)
+    // } else if (this.state.timer > 7) {
+    //   this.setError(true)
+    //   this.setLoading(false)
+    // } else {
+    //   this.setState({ timer: this.state.timer + 1});
+    //   this.setLoading(true);
+    //   this.setOpen(false);
+    //   setTimeout(this.waitForGame, 5000);
+    //   console.log(this.state.timer)
+    // }
+
+  }
+
+  syncViews = () => {
+    
+    this.setStateAsync(this.state.game)
+
+  }
+
+  componentDidMount() {
+
+    this.fetchGames();
+    // this.filterReleases(this.state.games);
+
+  }
+
+  render() {
+
+    // Styles object for our modal 
+    const styles = { 
+      overlay: { background: 'rgba(0, 0, 0, 0.35)' },
+      modal: { padding: 0, borderRadius: '4px', width: '80%', backgroundColor: 'white' },
+      closeButton: { cursor: 'pointer' },
+      closeIcon: { fill: 'white', filter: 'drop-shadow( 3px 3px 2px rgba(0, 0, 0, .7))' }
+    }
+
+    const platforms = this.formatPlatforms(this.state.game.platforms)
+    const date = this.formatDate(this.state.game.releaseDate)
+
+    const contextValue = {
+      releases: this.state.releases,
+      open: this.state.open,
+      favorites: this.state.favorites,
+      game: this.state.game,
+      error: this.state.error,
+      loading: this.state.loading,
+      onCloseModal: this.onCloseModal,
+      handleChange: this.handleChange,
+      handleClick: this.handleClick,
+      setGame: this.setGame,
+      formatPlatforms: this.formatPlatforms,
+      formatDate: this.formatDate,
+      setOpen: this.setOpen,
+      setLoading: this.setLoading,
+      setError: this.setError
+    }
 
     // Since we're serving up two different views, we're going
     // to need to make some accommodations for different screen
     // sizes; overarching philosphy here is to minimize the extent
     // to which we serve up two different sites, so the number of
-    // elements being <MediaQuery>'d are kept minimal and then we
-    // use inline ternaries when necessary to make those accomodations,
-    // which are mostly stylistic
+    // elements being <MediaQuery>'d are kept minimal
 
     return (
+      <Context.Provider value={contextValue}>
       <div className="App">
 
-        <header className="App-header">
-          <h1 className="logotype">vgCal</h1>
-          <Select
-            className="search"
-            value={this.state.selectedOption}
-            onChange={this.handleChange}
-            options={releases.map(release => {
-              
-              const tempObj = {}
-
-              tempObj.value = release;
-              tempObj.label = release.title;
-
-              return tempObj;
-            })}
-          />
-          <span></span>
-        </header>
+        <Header releases={this.context.releases} />
 
         <main>      
 
           <div className={"calendar-wrapper"}>
 
-            <div className={"sidebar-left"}>
-              <h2>Welcome to vgCal!</h2>
-              <p>Here's some info about how to use the site:</p>
-              <p>Click the left and right arrows above the calendar to change weeks or months. Click "today" to return to the present week or month.</p>
-              <p>Click on a release date to get more information about that release</p>
-              <p>Want to set a reminder for a release? Click on a release, click "Add to favorites" and then click "Export to ICS" in the favorites bar. Your browser will download a calendar file you can import into the calendar of your choosing, or email to yourself maybe</p>
-            </div>
+            {/* Landing page info */}
+            <InfoSidebar/>
 
-            {/* Weekly list view for phones / tablets */}
-            <MediaQuery maxWidth={1199}>
+            <LoadingOverlay
+            active={this.state.loading}
+            spinner={<PacmanLoader
+                size={20}
+                color={"yellow"}
+              />}
+            text=''
+            styles={{zIndex: 10}}
+            >
 
-              <FullCalendar 
-                defaultView="listWeek" 
-                plugins={[ listPlugin ]} 
-                events={ releases }
-                eventClick={ this.handleClick }
-                height= { "auto" }
-              />
+              {/* Weekly list view for phones / tablets */}
+              <MediaQuery 
+                maxWidth={1199}
+                onChange={ this.syncViews }
+              >
 
-            </MediaQuery>
+                {/* Root */}
+                <Route 
+                  exact path="/"
+                  render={(props) => {
+                    return (
+                      <FullCalendar 
+                      defaultView="listWeek" 
+                      plugins={[ listPlugin ]} 
+                      events={ this.state.releases }
+                      eventClick={ this.handleClick }
+                      height={ "auto" }
+                      {...props}
+                      />
+                    )
+                  }}
+                />
 
-            {/* Month grid view for laptops/desktops */}
-            <MediaQuery minWidth={1200}>
+                {/* Specified date */}
+                <Route 
+                  path="/date/:date"
+                  render={(props) => {
 
-              <FullCalendar 
-                defaultView="dayGridMonth" 
-                plugins={[ dayGridPlugin ]} 
-                events={ releases }
-                eventClick={ this.handleClick }
-                fixedWeekCount={ false }
-                height={ 850 }
-              />
-              
-            </MediaQuery>
+                    const providedDate = props.match.params.date;
+                    const parsedDate = providedDate.split('-');
+                    const isDateValid = (
+                      parsedDate.length === 3 && 
+                      parsedDate[0].length === 4 &&
+                      parsedDate[1].length === 2 &&
+                      parsedDate[2].length === 2 &&
+                      /* eslint no-self-compare: off */
+                      // Checking for NaN; method described here:
+                      // http://adripofjavascript.com/blog/drips/the-problem-with-testing-for-nan-in-javascript.html
+                      // tldr: NaN is not equal to itself
+                      (parsedDate.every(element => parseInt(element) === parseInt(element)))
+                    )
 
-            <div className="sidebar-right">
-              <div className="filtering-container">
-                <h2 className="filters-header">Filtering options</h2>
-                <div>These aren't functional yet :(</div>
-                <input type="checkbox" id="XBox" name="Xbox" value="XBox" />
-                <label htmlFor="XBox"> XBOX</label><br/>
-                <input type="checkbox" id="Playstation" name="Playstation" value="Playstation" />
-                <label htmlFor="Playstation"> Playstation</label><br/>
-                <input type="checkbox" id="Switch" name="Switch" value="Switch" />
-                <label htmlFor="Switch"> Switch</label><br/> 
-                <input type="checkbox" id="PC" name="PC" value="PC" />
-                <label htmlFor="PC"> PC</label><br/> 
-              </div>
-              <div className={"favorites-container"}>
-                <h2 className="favorites-header">Your favorites</h2>
-                <ul className="favorites-list">
-                  {(this.state.favorites.length === 0)
-                    ? <li>Add a game to your favorites list and you can export an ics file to add the release date to a calendar of your choice. Exports + persistent lists not working yet :(</li>
-                    : this.state.favorites.map(favorite => {
-                        return <li key={favorite}>{favorite}</li>
-                    })
-                  }
-                </ul>
-                <button>Export to ICS</button>
-              </div>
-            </div>
+                    return (
+                      <FullCalendar 
+                      defaultView="listWeek" 
+                      plugins={[ listPlugin ]} 
+                      events={ this.state.releases }
+                      eventClick={ this.handleClick }
+                      height={ "auto" }
+                      defaultDate={ isDateValid ? providedDate : null }                    
+                      />
+                    )
+                  }}
+                />
+
+                {/* Specified game */}
+                <Route path="/game/:game" component={GameRouteForMobile} />                  
+                    
+
+              </MediaQuery>
+
+              {/* Month grid view for laptops/desktops */}
+              <MediaQuery 
+                minWidth={1200}
+                onChange={this.syncViews}
+              >
+      
+                <Route 
+                  exact path="/"
+                  render={(props) => {
+                    return (
+                      <FullCalendar 
+                      defaultView="dayGridMonth" 
+                      plugins={[ dayGridPlugin ]} 
+                      events={ this.state.releases }
+                      eventClick={ this.handleClick }
+                      fixedWeekCount={ false }
+                      // height={ "auto" }
+                      {...props}
+                      />
+                    )
+                  }}
+                />
+
+                <Route 
+                  path="/date/:date"
+                  render={(props) => {
+
+                    const providedDate = props.match.params.date;
+                    const parsedDate = providedDate.split('-');
+                    const isDateValid = (
+                      parsedDate.length === 3 && 
+                      parsedDate[0].length === 4 &&
+                      parsedDate[1].length === 2 &&
+                      parsedDate[2].length === 2 &&
+                      /* eslint no-self-compare: off */
+                      // Checking for NaN on parseInt(); method described here:
+                      // http://adripofjavascript.com/blog/drips/the-problem-with-testing-for-nan-in-javascript.html
+                      // tldr: NaN is not equal to itself
+                      (parsedDate.every(element => parseInt(element) === parseInt(element)))
+                    )
+
+                    return (
+                      <FullCalendar 
+                      defaultView="dayGridMonth" 
+                      plugins={[ dayGridPlugin ]} 
+                      events={ this.state.releases }
+                      eventClick={ this.handleClick }
+                      fixedWeekCount={ false }
+                      height={ "auto" }
+                      defaultDate={ isDateValid ? providedDate : null }
+                      />
+                    )
+                  }}
+                />
+
+                {/* Specified game */}
+                <Route path="/game/:game" component={GameRouteForDesktop} /> 
+                
+              </MediaQuery>
+
+            </LoadingOverlay>
+
+            {/* Filtering & favorites */}
+            <FilteringSidebar favorites={this.state.favorites} />
 
             <Modal 
               open={this.state.open} 
               onClose={this.onCloseModal}
               styles={styles}
+              focusTrapped={false}
             >
               <img 
                 alt='boxart' 
                 className='boxart' 
-                src={this.state.event._def.extendedProps.image}
+                src={this.state.game.image}
                 onLoad={this.onImgLoad}
-                // If on desktop and the image is too large, make it not as large
-                style={ {'width': (this.state.event._calendar.state.viewType === 'dayGridMonth' && this.state.dimensions.height > 1000) ? '50%' : '100%' } }
               />
                 
               <h2 className='modal-heading'>
-                {this.state.event._def.title}
+                {this.state.game.gameTitle}
               </h2>
               <ul className="release-info">
-                <li className="info"><strong>Release date:</strong> {this.state.event._def.extendedProps.releaseDate}</li>
-                <li className="info"><strong>Platforms:</strong> {this.state.event._def.extendedProps.platforms.map( platform => { return <span key={platform.name}>{platform.name} </span>} )}</li>
-                <li className="info"><strong>Description:</strong> {this.state.event._def.extendedProps.description}</li>
-              </ul>
-              <button 
+                <li className="info"><strong>Release date:</strong> {date}</li>
+                <li className="info"><strong>Platforms:</strong> {platforms}</li>
+                <li className="info"><strong>Description:</strong> {this.state.game.description}</li>
+                <button 
                 onClick={this.addToFavorites}
-                className={(this.state.favorites.includes(this.state.event._def.title))
+                style={{ backgroundImage: `url(${this.state.game.image})` }}
+                className={(this.state.favorites.includes(this.state.game.title))
                   ? 'favorited fav-button'
                   : 'fav-button'                    
                 }
-              >
-                  {(this.state.favorites.includes(this.state.event._def.title))
+                >
+                  {(this.state.favorites.includes(this.state.game.title))
                     ? 'Added to favorites'
                     : 'Add to favorites'                    
                   }
                   
-              </button>
+                </button> 
+              </ul>
+              
               
             </Modal>
 
-          </div>
-        
+            {/* Error modal  */}
 
+            <Modal 
+              open={ this.state.error } 
+              onClose={ this.onCloseModal }
+              styles={styles}
+            >
+            <img 
+                alt='error' 
+                className='error' 
+                src={error}
+            />
+                
+            <h2 className='error-heading'>
+                Bad link? vgCal can't find that game, or it doesn't exist. Reload to try again, or give up, skeleton.
+            </h2>
+            
+            </Modal>
+
+
+          </div>
         </main>
       </div>
+      </Context.Provider>
     );
   }
 }

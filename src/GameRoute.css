@@ -1,0 +1,25 @@
+.error {
+    width: 100%;
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
+    margin: 0px;
+}
+
+.error-heading {
+    padding: 20px;
+    margin-top: -10px;
+}
+
+@media screen and (min-width: 1200px) {
+
+    ._loading_overlay_wrapper {
+        display: flex;
+        width: 80%;
+    }
+
+    .fc {
+        flex-grow: 1;
+    }
+  
+    
+  }
