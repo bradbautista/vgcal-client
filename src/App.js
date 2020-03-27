@@ -36,7 +36,7 @@ export default class App extends Component {
         platforms: [],
       },
       error: false,
-      timer: 0,
+      lastVisited: '/'
     };
 
   }
@@ -76,44 +76,37 @@ export default class App extends Component {
   filterReleases = (games) => {
 
     const filteredGames = games.filter(game => {
-      return game.expected_release_day !== null
+      return game.release_date_ISO !== null
     })
 
-    // Formatting API data so fullcalendar can use it
+    // Formatting API data for consumption by fullcalendar
     const releases = filteredGames.map(release => {
-
-      // We ultimately need an array of objects, so we'll want to map
-      // onto an object and push it into an array
 
       const tempObj = {};
 
-      let year = release.expected_release_year
-      let month = (release.expected_release_month < 10)
-                    ? '0' + release.expected_release_month
-                    : release.expected_release_month
-      let day = (release.expected_release_day < 10)
-                ? '0' + release.expected_release_day
-                : release.expected_release_day
+      // let year = release.expected_release_year
+      // let month = (release.expected_release_month < 10)
+      //               ? '0' + release.expected_release_month
+      //               : release.expected_release_month
+      // let day = (release.expected_release_day < 10)
+      //           ? '0' + release.expected_release_day
+      //           : release.expected_release_day
   
-      tempObj.title = release.name;
-      tempObj.date = `${year}-${month}-${day}`;
+      tempObj.title = release.game_name;
+      tempObj.date = release.release_date_ISO;
       tempObj.platforms = release.platforms;
-      tempObj.image = release.image.original_url;
+      tempObj.image = release.boxart_url;
       // Note these are distinct from title and url; the calendar uses
       // those properties in a way that makes it difficult to consume
       // and use them, so we're naming these such that they'll get passed
       // in the event object's extendedProps
-      tempObj.gameUrl = `/game/${release.name.split(' ').join('-')}`;
-      tempObj.gameTitle = release.name;
-      // After we pass the date to the calendar it becomes
-      // difficult to retrieve, so we're passing it again
-      // as an extendedProp to make it easy to get to
-      tempObj.releaseDate = `${year}-${month}-${day}`;
-      tempObj.description = (release.deck === null)
-                            ? 'No description available.'
-                            : release.deck.replace(/(<([^>]+)>)/ig,"")
+      tempObj.gameUrl = `/game/${release.game_name.split(' ').join('-')}`;
+      tempObj.gameTitle = release.game_name;
+      // Here we're passing the human-readable release date as an extendedProp 
+      // to make it easy to retrieve
+      tempObj.releaseDate = release.release_date_UTC;
+      tempObj.description = release.game_description
       
-
       return tempObj
 
     })
@@ -138,6 +131,10 @@ export default class App extends Component {
     this.setState({ error: bool })
   }
 
+  setLastVisited = (str) => {
+    this.setState({ lastVisited: str })
+  }
+
   handleClick = ({ event }) => {
 
     this.setState({ game: event._def.extendedProps })
@@ -146,41 +143,19 @@ export default class App extends Component {
 
   }
 
-  handleChange = selectedOption => {
+  handleSelect = selectedGame => {
 
-    this.setState({game: selectedOption.value})
-    this.setState({ selectedOption: selectedOption });
+    this.setState({game: selectedGame.value})
     this.setState({ open: true })
-    window.history.pushState({}, 'vgCal', selectedOption.value.gameUrl);
-
-  }
-
-  formatPlatforms = (platforms) => {
-
-    // Bolting router onto this introduced a bug where
-    // platforms is occasionally null when it shouldn't be,
-    // so avert disaster by just making it an empty list instead.
-    // (setError(true) is not possible, since this function is
-    // called in the render method & we can't set state there)
-    if (platforms === null) {
-      platforms = []
-    } else {
-      return platforms.map(platform => platform.name).join(', ');
-    }
-
-  }
-
-  formatDate = (date) => {
-
-    return moment(date).format('MMMM D, YYYY')
+    window.history.pushState({}, 'vgCal', selectedGame.value.gameUrl);
 
   }
  
   onCloseModal = () => {
 
-    this.setState({ open: false });
-    this.setState({ error: false });
-    window.history.pushState({}, 'vgCal', '/');
+    this.setOpen(false);
+    this.setError(false);
+    window.history.pushState({}, 'vgCal', this.state.lastVisited);
 
   };
 
@@ -236,6 +211,7 @@ export default class App extends Component {
       window.history.pushState({}, 'vgCal', '/');
     } else {
       window.history.pushState({}, 'vgCal', `/date/${formattedDates[0]}`);
+      this.setLastVisited(`/date/${formattedDates[0]}`)
     }
     
   }
@@ -256,6 +232,7 @@ export default class App extends Component {
       window.history.pushState({}, 'vgCal', '/');
     } else {
       window.history.pushState({}, 'vgCal', `/date/${dateToPaintToUrl}`);
+      this.setLastVisited(`/date/${dateToPaintToUrl}`)
     }
 
   }
@@ -277,10 +254,8 @@ export default class App extends Component {
       closeIcon: { fill: 'white', filter: 'drop-shadow( 3px 3px 2px rgba(0, 0, 0, .7))' }
     }
 
-    const platforms = this.formatPlatforms(this.state.game.platforms) || []
-    const date = this.formatDate(this.state.game.releaseDate)
-
     const contextValue = {
+      games: this.state.games,
       releases: this.state.releases,
       open: this.state.open,
       favorites: this.state.favorites,
@@ -288,7 +263,7 @@ export default class App extends Component {
       error: this.state.error,
       loading: this.state.loading,
       onCloseModal: this.onCloseModal,
-      handleChange: this.handleChange,
+      handleSelect: this.handleSelect,
       handleClick: this.handleClick,
       setGame: this.setGame,
       setOpen: this.setOpen,
@@ -296,6 +271,7 @@ export default class App extends Component {
       setError: this.setError,
       paintUrl: this.paintUrl,
       paintUrlDesktop: this.paintUrlDesktop,
+      setLastVisited: this.setLastVisited
     }
 
     // Since we're serving up two different views for mobile
@@ -428,6 +404,8 @@ export default class App extends Component {
                         events={ this.state.releases }
                         eventClick={ this.handleClick }
                         fixedWeekCount={ false }
+                        // contentHeight={ 600 }
+                        height={ "auto " }
                         datesRender={ (info) => this.paintUrlDesktop(info) }
                         {...props}
                         />
@@ -482,7 +460,7 @@ export default class App extends Component {
                         eventClick={ this.handleClick }
                         fixedWeekCount={ false }
                         datesRender={ (info) => this.paintUrlDesktop(info) }
-                        // height={ "auto" }
+                        height={ "auto" }
                         {...props}
                         />
                       )
@@ -517,8 +495,8 @@ export default class App extends Component {
                 {this.state.game.gameTitle}
               </h2>
               <ul className="release-info">
-                <li className="info"><strong>Release date:</strong> {date}</li>
-                <li className="info"><strong>Platforms:</strong> {platforms}</li>
+                <li className="info"><strong>Release date:</strong> {this.state.game.releaseDate}</li>
+                <li className="info"><strong>Platforms:</strong> {this.state.game.platforms}</li>
                 <li className="info"><strong>Description:</strong> {this.state.game.description}</li>
                 <button 
                 onClick={this.addToFavorites}

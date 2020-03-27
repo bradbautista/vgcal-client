@@ -146,11 +146,15 @@ main {
   }
 
   .fc {
-    width: 75%;
+    width: 100%;
     padding-left: 20px;
     padding-right: 20px;
     overflow: scroll;
     overflow-x: hidden;
+  }
+
+  .fc-week {
+    min-height: 199px !important;
   }
 
   /* .fc-dayGridMonth-view > table {
