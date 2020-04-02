@@ -19,16 +19,13 @@ export default class GameRouteForMobile extends Component {
 
         const gameName = this.props.match.params.game;
 
-        console.log(gameName)
-        console.log(this.context)
-
         const selectedGame = this.context.releases.filter(game => game.gameUrl.split('/').pop() === gameName).shift();
 
         if (typeof selectedGame !== "undefined") {
             this.context.setGame(selectedGame)
             this.context.setLoading(false)
             this.context.setOpen(true)
-        } else if (this.state.timer > 7) {
+        } else if (this.state.timer > 5) {
             this.context.setError(true)
             this.context.setLoading(false)
         }
@@ -36,31 +33,27 @@ export default class GameRouteForMobile extends Component {
             this.setState({ timer: this.state.timer + 1 })
             this.context.setLoading(true)
             setTimeout(this.waitForGame, 1000);
-            console.log(this.state.timer)
         }
     }
 
     componentDidMount() {   
-        
         this.waitForGame()
-
     }
   
     render() {
   
         return (
-            
             <>               
                 <FullCalendar 
                 defaultView="listWeek" 
                 plugins={[ listPlugin ]} 
                 events={ this.context.releases }
                 eventClick={ this.context.handleClick }
+                ref={this.context.calendar}
                 datesRender={ (info) => this.context.paintUrl(info) }
                 height={ "auto" }
                 />
             </>
-            
         );
     }
   }

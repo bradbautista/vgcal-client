@@ -12,8 +12,8 @@ import Modal from 'react-responsive-modal';
 import Context from './Context';
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Header from './Header';
-import InfoSidebar from './sidebars/infoSidebar';
-import FilteringSidebar from './sidebars/filteringSidebar';
+import InfoSidebar from './sidebars/infoSidebar/infoSidebar';
+import FilteringSidebar from './sidebars/filteringSidebar/filteringSidebar';
 import LoadingOverlay from 'react-loading-overlay';
 import PacmanLoader from "react-spinners/PacmanLoader";
 import './App.css';
@@ -25,9 +25,12 @@ export default class App extends Component {
 
   constructor(props) {
     super(props);
+    this.calendar = React.createRef()
+    this.checkboxes = []
     this.state = {
       games: [],
       releases: [],
+      filters: [],
       favorites: [],
       open: false,
       loading: null,
@@ -65,7 +68,7 @@ export default class App extends Component {
     })
     .then(games => {
       this.setState( { games: [...games] } )
-      this.filterReleases(games)
+      this.setDefaultReleases(games)
     })
     .catch(error => {
       console.log(error);
@@ -73,7 +76,7 @@ export default class App extends Component {
 
   }
 
-  filterReleases = (games) => {
+  setDefaultReleases = (games) => {
 
     const filteredGames = games.filter(game => {
       return game.release_date_ISO !== null
@@ -83,17 +86,9 @@ export default class App extends Component {
     const releases = filteredGames.map(release => {
 
       const tempObj = {};
-
-      // let year = release.expected_release_year
-      // let month = (release.expected_release_month < 10)
-      //               ? '0' + release.expected_release_month
-      //               : release.expected_release_month
-      // let day = (release.expected_release_day < 10)
-      //           ? '0' + release.expected_release_day
-      //           : release.expected_release_day
   
       tempObj.title = release.game_name;
-      tempObj.date = release.release_date_ISO;
+      tempObj.date = release.release_date_iso;
       tempObj.platforms = release.platforms;
       tempObj.image = release.boxart_url;
       // Note these are distinct from title and url; the calendar uses
@@ -104,15 +99,24 @@ export default class App extends Component {
       tempObj.gameTitle = release.game_name;
       // Here we're passing the human-readable release date as an extendedProp 
       // to make it easy to retrieve
-      tempObj.releaseDate = release.release_date_UTC;
-      tempObj.description = release.game_description
+      tempObj.releaseDate = release.release_date_utc;
+      tempObj.releaseDay = release.release_date_iso;
+      tempObj.description = release.game_description;
       
       return tempObj
 
     })
 
-    this.setState({ releases: [...releases] })
+    this.setReleases(releases);
 
+  }
+
+  setReleases = (releases) => {
+    this.setState({ releases: [...releases] })
+  }
+
+  setFilters = (filters) => {
+    this.setState({ filters: [...filters] })
   }
 
   setGame = (game) => {
@@ -165,7 +169,53 @@ export default class App extends Component {
       return
     }
 
-    this.setState({ favorites: [...this.state.favorites, this.state.game.gameTitle]})    
+    this.setState({ favorites: [...this.state.favorites, this.state.game]})
+
+    // LocalStorage calls get made too early to retrieve data,
+    // so wait a beat
+    setTimeout(this.addToLocalStorage(), 50);
+
+  }
+
+  removeFromFavorites = (favoriteToRemove) => {
+
+    console.log(favoriteToRemove)
+
+    const newFavorites = this.state.favorites.filter(favorite => favorite.gameTitle !== favoriteToRemove.gameTitle)
+
+    this.setState({ favorites: [...newFavorites]})
+
+    setTimeout(this.addToLocalStorage, 50);
+
+  }
+
+  addToLocalStorage = () => {
+
+    window.localStorage.clear()
+    
+    // LocalStorage needs a key and a value, and a hot sec
+    setTimeout(() => {
+        window.localStorage.setItem('vgCalFavorites', JSON.stringify(this.state.favorites))
+    }, 50)
+    
+  }
+
+  detectLocalStorage = () => {
+
+    console.log('Detecting local storage')
+
+    const favorites = JSON.parse(window.localStorage.getItem('vgCalFavorites'));
+
+    console.log(favorites)
+
+    if (favorites === null) {
+      return
+    } else {
+
+      this.setState({ favorites: [...favorites]})
+
+    }
+
 
   }
 
@@ -241,6 +291,7 @@ export default class App extends Component {
 
     this.fetchGames();
     this.loadReleases();
+    this.detectLocalStorage();
 
   }
 
@@ -257,14 +308,21 @@ export default class App extends Component {
     const contextValue = {
       games: this.state.games,
       releases: this.state.releases,
-      open: this.state.open,
+      filters: this.state.filters,
       favorites: this.state.favorites,
       game: this.state.game,
+      open: this.state.open,
       error: this.state.error,
       loading: this.state.loading,
+      calendar: this.calendar,
+      checkboxes: this.checkboxes,
+      setDefaultReleases: this.setDefaultReleases,
       onCloseModal: this.onCloseModal,
       handleSelect: this.handleSelect,
       handleClick: this.handleClick,
+      removeFromFavorites: this.removeFromFavorites,
+      setReleases: this.setReleases,
+      setFilters: this.setFilters,
       setGame: this.setGame,
       setOpen: this.setOpen,
       setLoading: this.setLoading,
@@ -275,19 +333,19 @@ export default class App extends Component {
     }
 
     // Since we're serving up two different views for mobile
-    // and desktop and because we're required to use React Router, 
+    // and desktop and because we're using React Router, 
     // we need routes for each required URL for each view. 
     // This gives us a total of eight (!) routes:
     // -- Root * 2
     // -- /date/:date * 2
     // -- /game/:game * 2
-    // -- all others * 2
+    // -- Bad URL * 2
 
     return (
       <Context.Provider value={contextValue}>
       <div className="App">
 
-        <Header releases={this.context.releases} />
+        <Header />
 
         <main>      
 
@@ -296,6 +354,7 @@ export default class App extends Component {
             {/* Landing page info */}
             <InfoSidebar/>
 
+            {/* Our loading overlay wraps all of our calendar components */}
             <LoadingOverlay
             active={this.state.loading}
             spinner={<PacmanLoader
@@ -311,30 +370,34 @@ export default class App extends Component {
                 maxWidth={1199}
                 onChange={ this.syncViews }
               >
+
                 <Switch>
-                  {/* Root */}
+
+                  {/* Root - mobile */}
                   <Route 
                     exact path="/"
                     render={(props) => {
                       return (
                         <FullCalendar 
-                        defaultView="listWeek" 
-                        plugins={[ listPlugin ]} 
-                        events={ this.state.releases }
-                        eventClick={ this.handleClick }
-                        height={ "auto" }
-                        datesRender={ (info) => this.paintUrl(info) }
-                        {...props}
+                          defaultView="listWeek" 
+                          plugins={[ listPlugin ]} 
+                          events={ this.state.releases }
+                          eventClick={ this.handleClick }
+                          height={ "auto" }
+                          ref={this.calendar}
+                          datesRender={ (info) => this.paintUrl(info) }
+                          {...props}
                         />
                       )
                     }}
                   />
 
-                  {/* Specified date */}
+                  {/* Specified date - mobile */}
                   <Route 
                     path="/date/:date"
                     render={(props) => {
 
+                      // URL date validation
                       const providedDate = props.match.params.date;
                       const parsedDate = providedDate.split('-');
                       const isDateValid = (
@@ -351,33 +414,35 @@ export default class App extends Component {
 
                       return (
                         <FullCalendar 
-                        defaultView="listWeek" 
-                        plugins={[ listPlugin ]} 
-                        events={ this.state.releases }
-                        eventClick={ this.handleClick }
-                        height={ "auto" }
-                        datesRender={ (info) => this.paintUrl(info) }
-                        defaultDate={ isDateValid ? providedDate : null }                    
+                          defaultView="listWeek" 
+                          plugins={[ listPlugin ]} 
+                          events={ this.state.releases }
+                          eventClick={ this.handleClick }
+                          height={ "auto" }
+                          ref={this.calendar}
+                          datesRender={ (info) => this.paintUrl(info) }
+                          defaultDate={ isDateValid ? providedDate : null }                    
                         />
                       )
                     }}
                   />
 
-                  {/* Specified game */}
+                  {/* Specified game - mobile */}
                   <Route path="/game/:game" component={GameRouteForMobile} />
 
-                  {/* Bad URL */}
+                  {/* Bad URL - mobile */}
                   <Route 
                     render={(props) => {
                       return (
                         <FullCalendar 
-                        defaultView="listWeek" 
-                        plugins={[ listPlugin ]} 
-                        events={ this.state.releases }
-                        eventClick={ this.handleClick }
-                        fixedWeekCount={ false }
-                        datesRender={ (info) => this.paintUrl(info) }
-                        {...props}
+                          defaultView="listWeek" 
+                          plugins={[ listPlugin ]} 
+                          events={ this.state.releases }
+                          eventClick={ this.handleClick }
+                          ref={this.calendar}
+                          fixedWeekCount={ false }
+                          datesRender={ (info) => this.paintUrl(info) }
+                          {...props}
                         />
                       )
                     }}
@@ -385,7 +450,6 @@ export default class App extends Component {
 
                 </Switch>                  
                     
-
               </MediaQuery>
 
               {/* Month grid view for laptops/desktops */}
@@ -393,30 +457,37 @@ export default class App extends Component {
                 minWidth={1200}
                 onChange={this.syncViews}
               >
+
                 <Switch>
+
+                  {/* Root - desktop */}
                   <Route 
                     exact path="/"
                     render={(props) => {
                       return (
                         <FullCalendar 
-                        defaultView="dayGridMonth" 
-                        plugins={[ dayGridPlugin ]} 
-                        events={ this.state.releases }
-                        eventClick={ this.handleClick }
-                        fixedWeekCount={ false }
-                        // contentHeight={ 600 }
-                        height={ "auto " }
-                        datesRender={ (info) => this.paintUrlDesktop(info) }
-                        {...props}
+                          defaultView="dayGridMonth" 
+                          plugins={[ dayGridPlugin ]} 
+                          events={ this.state.releases }
+                          eventClick={ this.handleClick }
+                          fixedWeekCount={ false }
+                          // contentHeight={ 600 }
+                          height={ "auto " }
+                          ref={this.calendar}
+                          gotoDate={ "auto" }
+                          datesRender={ (info) => this.paintUrlDesktop(info) }
+                          {...props}
                         />
                       )
                     }}
                   />
 
+                  {/* Specified date - desktop */}
                   <Route 
                     path="/date/:date"
                     render={(props) => {
 
+                      // URL date validation
                       const providedDate = props.match.params.date;
                       const parsedDate = providedDate.split('-');
                       const isDateValid = (
@@ -433,35 +504,37 @@ export default class App extends Component {
 
                       return (
                         <FullCalendar 
-                        defaultView="dayGridMonth" 
-                        plugins={[ dayGridPlugin ]} 
-                        events={ this.state.releases }
-                        eventClick={ this.handleClick }
-                        fixedWeekCount={ false }
-                        height={ "auto" }
-                        datesRender={ (info) => this.paintUrlDesktop(info) }
-                        defaultDate={ isDateValid ? providedDate : null }
+                          defaultView="dayGridMonth" 
+                          plugins={[ dayGridPlugin ]} 
+                          events={ this.state.releases }
+                          eventClick={ this.handleClick }
+                          fixedWeekCount={ false }
+                          height={ "auto" }
+                          ref={this.calendar}
+                          datesRender={ (info) => this.paintUrlDesktop(info) }
+                          defaultDate={ isDateValid ? providedDate : null }
                         />
                       )
                     }}
                   />
 
-                  {/* Specified game */}
+                  {/* Specified game - desktop */}
                   <Route path="/game/:game" component={GameRouteForDesktop} />
 
-                  {/* Bad URL */}
+                  {/* Bad URL - desktop */}
                   <Route 
                     render={(props) => {
                       return (
                         <FullCalendar 
-                        defaultView="dayGridMonth" 
-                        plugins={[ dayGridPlugin ]} 
-                        events={ this.state.releases }
-                        eventClick={ this.handleClick }
-                        fixedWeekCount={ false }
-                        datesRender={ (info) => this.paintUrlDesktop(info) }
-                        height={ "auto" }
-                        {...props}
+                          defaultView="dayGridMonth" 
+                          plugins={[ dayGridPlugin ]} 
+                          events={ this.state.releases }
+                          eventClick={ this.handleClick }
+                          fixedWeekCount={ false }
+                          ref={this.calendar}
+                          datesRender={ (info) => this.paintUrlDesktop(info) }
+                          height={ "auto" }
+                          {...props}
                         />
                       )
                     }}
@@ -474,7 +547,7 @@ export default class App extends Component {
             </LoadingOverlay>
 
             {/* Filtering & favorites */}
-            <FilteringSidebar favorites={this.state.favorites} />
+            <FilteringSidebar />
 
             {/* Content modal */}
 

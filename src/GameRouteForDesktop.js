@@ -25,7 +25,7 @@ export default class GameRouteForDesktop extends Component {
             this.context.setGame(selectedGame)
             this.context.setLoading(false)
             this.context.setOpen(true)
-        } else if (this.state.timer > 7) {
+        } else if (this.state.timer > 5) {
             this.context.setError(true)
             this.context.setLoading(false)
         }
@@ -37,28 +37,23 @@ export default class GameRouteForDesktop extends Component {
     }
 
     componentDidMount() {   
-        
         this.waitForGame()
-
     }
 
     render() {
 
         return (
-            
             <>               
-
                 <FullCalendar 
                 defaultView="dayGridMonth" 
                 plugins={[ dayGridPlugin ]} 
                 events={ this.context.releases }
                 eventClick={ this.context.handleClick }
+                ref={this.context.calendar}
                 datesRender={ (info) => this.context.paintUrlDesktop(info) }
                 height={ "auto" }
                 />
-
             </>
-            
         );
     }
 }
