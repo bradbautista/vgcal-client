@@ -52,7 +52,7 @@ export default class App extends Component {
 
   fetchGames = () => {
 
-    const url = config.VGRDC_API_GAMES_ENDPOINT;
+    const url = config.VGCAL_API_GAMES_ENDPOINT;
 
     const options = {
       method: 'GET',
