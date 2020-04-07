@@ -1,0 +1,84 @@
+.info-modal {
+    padding-left: 30px;
+    padding-right: 25px;
+    padding-top: 30px;
+    padding-bottom: 30px;
+}
+
+.info-modal-header {
+    font-family: 'Roboto Slab', serif;
+    font-weight: 600;
+    font-size: 40px;
+    line-height: 40px;
+    margin-bottom: 10px;
+}
+
+.info-modal-prompt {
+    color: black;
+    font-family: 'Roboto Slab', serif;
+    font-weight: 300;
+    font-size: 26px;
+    margin-top: 25px;
+    line-height: 28px;
+    margin-bottom: 0px;
+}
+
+.info-modal-graf {
+    font-family: 'Roboto Slab', serif;
+    font-weight: 300;
+    font-size: 21px;
+    word-break: break-word;
+    margin-top: 8px;
+    margin-bottom: 0px;
+    line-height: 25px;
+}
+
+.gb-link {
+    text-decoration: underline;
+    font-weight: 500;
+}
+
+@media screen and (min-width: 400px) {
+
+    .info-modal {
+        padding-left: 40px;
+        padding-right: 40px;
+        padding-top: 30px;
+        padding-bottom: 30px;
+    }
+
+
+}
+
+@media screen and (min-width: 1200px) {
+
+    .info-modal {
+        padding-left: 60px;
+        padding-right: 60px;
+        padding-bottom: 60px;
+        padding-top: 40px;
+    }
+
+    .info-modal-header {
+        font-family: 'Roboto Slab', serif;
+        font-weight: 600;
+        font-size: 60px;
+        margin-bottom: 0px;
+    }    
+
+    .info-modal-prompt {
+        color: black;
+        font-size: 27px;
+        margin-top: 25px;
+        line-height: 28px;
+    }
+    
+    .info-modal-graf {
+        font-size: 22px;
+        word-break: break-word;
+        line-height: 27px;
+    }
+
+  
+    
+  }

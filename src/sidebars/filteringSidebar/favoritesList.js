@@ -28,8 +28,8 @@ import fileDownload from 'js-file-download';
   
         })
   
-        const endpoint = config.VGRDC_API_ENDPOINT;
-        const url = `${endpoint}api/favorites/generate`;
+        const endpoint = config.VGCAL_API_FAVORITES_ENDPOINT;
+        const url = `${endpoint}generate`;
         const options = {
           method: 'POST',
           body: JSON.stringify(releaseInfo),
@@ -43,7 +43,8 @@ import fileDownload from 'js-file-download';
             return res.blob();
           })
           .then(blob => {
-            fileDownload(blob, 'gamereleases.ics')
+            fileDownload(blob, 'vgCal-game-releases.ics');
+            this.context.clearFavorites();
           })
           .catch(error => {
             console.error(error);
@@ -58,15 +59,21 @@ import fileDownload from 'js-file-download';
       return (
         <div className={"favorites-container"}>
                 <h2 className="favorites-header">Your favorites</h2>
+                {(this.context.favorites.length === 0)
+                  ? ''
+                  : <p>To delete a game from the list, click on it.</p>
+                }
                 <ul className="favorites-list">
                   {(this.context.favorites.length === 0)
-                    ? <li>Add games to your favorites list and you can export an ics file to add the release dates to your personal calendar. To delete a game from the list, just click on it.</li>
+                    ? <li className="favorites-prompt">Add games to your favorites list and you can export an ics file to add the release dates to your personal calendar.</li>
                     : this.context.favorites.map(favorite => {
-                        return <li key={favorite.gameTitle} onClick={() => this.context.removeFromFavorites(favorite)}>{favorite.gameTitle}</li>
+                        return <li className="favorite" key={favorite.gameTitle} onClick={() => this.context.removeFromFavorites(favorite)}>{favorite.gameTitle}</li>
                     })
                   }
                 </ul>
                 <button
+                  disabled={(this.context.favorites.length === 0)}
+                  className={"export-button"}
                   onClick={() => this.getICS() }
                 >Export to ICS</button>
         </div>

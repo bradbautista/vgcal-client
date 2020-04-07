@@ -11,15 +11,18 @@ import GameRouteForDesktop from './GameRouteForDesktop';
 import Modal from 'react-responsive-modal';
 import Context from './Context';
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import Header from './Header';
+import Header from './header/Header';
 import InfoSidebar from './sidebars/infoSidebar/infoSidebar';
+import InfoModal from './modals/InfoModal'
+import ErrorModal from './modals/ErrorModal'
+import ContentModal from './modals/ContentModal'
 import FilteringSidebar from './sidebars/filteringSidebar/filteringSidebar';
 import LoadingOverlay from 'react-loading-overlay';
 import PacmanLoader from "react-spinners/PacmanLoader";
 import './App.css';
 import config from './config';
 import moment from 'moment';
-import error from './images/error.jpg';
+// import error from './images/error.jpg';
 
 export default class App extends Component {
 
@@ -39,7 +42,8 @@ export default class App extends Component {
         platforms: [],
       },
       error: false,
-      lastVisited: '/'
+      lastVisited: '/',
+      hasVisited: true,
     };
 
   }
@@ -48,7 +52,7 @@ export default class App extends Component {
 
   fetchGames = () => {
 
-    const url = config.VGRDC_API_ENDPOINT;
+    const url = config.VGRDC_API_GAMES_ENDPOINT;
 
     const options = {
       method: 'GET',
@@ -79,7 +83,7 @@ export default class App extends Component {
   setDefaultReleases = (games) => {
 
     const filteredGames = games.filter(game => {
-      return game.release_date_ISO !== null
+      return game.release_date_iso !== null
     })
 
     // Formatting API data for consumption by fullcalendar
@@ -149,6 +153,11 @@ export default class App extends Component {
 
   handleSelect = selectedGame => {
 
+    // Prevents crash when user clears select field
+    if (selectedGame === null) {
+      return      
+    }
+
     this.setState({game: selectedGame.value})
     this.setState({ open: true })
     window.history.pushState({}, 'vgCal', selectedGame.value.gameUrl);
@@ -165,7 +174,7 @@ export default class App extends Component {
 
   addToFavorites = () => {
 
-    if (this.state.favorites.includes(this.state.game.gameTitle)) {
+    if (this.state.favorites.some(favorite => favorite.gameTitle === this.state.game.gameTitle)) {
       return
     }
 
@@ -173,25 +182,28 @@ export default class App extends Component {
 
     // LocalStorage calls get made too early to retrieve data,
     // so wait a beat
-    setTimeout(this.addToLocalStorage(), 50);
+    setTimeout(this.addFavoritesToLocalStorage(), 50);
 
   }
 
-  removeFromFavorites = (favoriteToRemove) => {
+  clearFavorites = () => {
+    this.setState({favorites: []})
+    window.localStorage.removeItem('vgCalFavorites')
+  }
 
-    console.log(favoriteToRemove)
+  removeFromFavorites = (favoriteToRemove) => {
 
     const newFavorites = this.state.favorites.filter(favorite => favorite.gameTitle !== favoriteToRemove.gameTitle)
 
     this.setState({ favorites: [...newFavorites]})
 
-    setTimeout(this.addToLocalStorage, 50);
+    setTimeout(this.addFavoritesToLocalStorage, 50);
 
   }
 
-  addToLocalStorage = () => {
+  addFavoritesToLocalStorage = () => {
 
-    window.localStorage.clear()
+    window.localStorage.removeItem('vgCalFavorites')
     
     // LocalStorage needs a key and a value, and a hot sec
     setTimeout(() => {
@@ -200,13 +212,9 @@ export default class App extends Component {
     
   }
 
-  detectLocalStorage = () => {
-
-    console.log('Detecting local storage')
+  detectFavorites = () => {
 
     const favorites = JSON.parse(window.localStorage.getItem('vgCalFavorites'));
-
-    console.log(favorites)
 
     if (favorites === null) {
       return
@@ -215,8 +223,33 @@ export default class App extends Component {
       this.setState({ favorites: [...favorites]})
 
     }
+  }
+
+  detectPriorVisit = () => {
+
+    const token = window.localStorage.getItem('vgCalToken')
+
+    // If token === null, new visitor
+    // TODO:
+    // x Set firstVisit (or something) to true
+    // - show/don't show sidebar
+    // x add token to localstorage
+
+    if (token === null) {
+
+      this.setVisited(false)
+      
+      window.localStorage.setItem('vgCalToken', `Hi there! This is just a token telling the site whether you've visited or not so I know whether to display the info sidebar for you. Have a nice day!`)
+
+    } else {
 
 
+    }
+
+  }
+
+  setVisited = (bool) => {
+    this.setState({ hasVisited: bool })
   }
 
   setStateAsync(gameState, openState, errorState) {
@@ -249,10 +282,14 @@ export default class App extends Component {
   paintUrl = (info) => {
 
     const currentDate = moment()._d
-    const formattedCurrentDate = moment(currentDate).format('YYYY-MM-DD')
+
+    const formattedCurrentDate = moment(currentDate).format('MM-DD-YYYY')
+
+    // Info is a cal object, here we're pulling a dates array and mapping it to an array of those dates in this format
     const formattedDates = info.view.dayDates.map(date => {
-      return moment(date).format('YYYY-MM-DD')
+      return moment(date).format('MM-DD-YYYY')
     })
+
     const pathnameArray = window.location.pathname.split('/')
 
     if (pathnameArray.includes('game')) {
@@ -260,8 +297,8 @@ export default class App extends Component {
     } else if (formattedDates.includes(formattedCurrentDate)) {
       window.history.pushState({}, 'vgCal', '/');
     } else {
-      window.history.pushState({}, 'vgCal', `/date/${formattedDates[0]}`);
-      this.setLastVisited(`/date/${formattedDates[0]}`)
+      window.history.pushState({}, 'vgCal', `/date/${formattedDates[1]}`);
+      this.setLastVisited(`/date/${formattedDates[1]}`)
     }
     
   }
@@ -291,18 +328,21 @@ export default class App extends Component {
 
     this.fetchGames();
     this.loadReleases();
-    this.detectLocalStorage();
+    this.detectFavorites();
 
+    // Commented out for dev work on info modal
+    this.detectPriorVisit();
+    
   }
 
   render() {
 
-    // Styles object for our modal 
+    // Styles object for our game(s) modal 
     const styles = { 
       overlay: { background: 'rgba(0, 0, 0, 0.35)' },
       modal: { padding: 0, borderRadius: '4px', width: '80%', backgroundColor: 'white' },
       closeButton: { cursor: 'pointer' },
-      closeIcon: { fill: 'white', filter: 'drop-shadow( 3px 3px 2px rgba(0, 0, 0, .7))' }
+      closeIcon: { fill: 'white', filter: 'drop-shadow( 2px 2px 1px rgba(0, 0, 0, .7))' }
     }
 
     const contextValue = {
@@ -316,11 +356,15 @@ export default class App extends Component {
       loading: this.state.loading,
       calendar: this.calendar,
       checkboxes: this.checkboxes,
+      hasVisited: this.state.hasVisited,
+      setVisited: this.setVisited,
       setDefaultReleases: this.setDefaultReleases,
       onCloseModal: this.onCloseModal,
       handleSelect: this.handleSelect,
       handleClick: this.handleClick,
+      addToFavorites: this.addToFavorites,
       removeFromFavorites: this.removeFromFavorites,
+      clearFavorites: this.clearFavorites,
       setReleases: this.setReleases,
       setFilters: this.setFilters,
       setGame: this.setGame,
@@ -352,7 +396,10 @@ export default class App extends Component {
           <div className={"calendar-wrapper"}>
 
             {/* Landing page info */}
-            <InfoSidebar/>
+            {/* <InfoSidebar/> */}
+
+            {/* Filtering & favorites */}
+            <FilteringSidebar />
 
             {/* Our loading overlay wraps all of our calendar components */}
             <LoadingOverlay
@@ -399,18 +446,7 @@ export default class App extends Component {
 
                       // URL date validation
                       const providedDate = props.match.params.date;
-                      const parsedDate = providedDate.split('-');
-                      const isDateValid = (
-                        parsedDate.length === 3 && 
-                        parsedDate[0].length === 4 &&
-                        parsedDate[1].length === 2 &&
-                        parsedDate[2].length === 2 &&
-                        /* eslint no-self-compare: off */
-                        // Checking for NaN; method described here:
-                        // http://adripofjavascript.com/blog/drips/the-problem-with-testing-for-nan-in-javascript.html
-                        // tldr: NaN is not equal to itself
-                        (parsedDate.every(element => parseInt(element) === parseInt(element)))
-                      )
+                      const isDateValid = moment(providedDate, "MM-DD-YYYY").isValid()
 
                       return (
                         <FullCalendar 
@@ -421,7 +457,10 @@ export default class App extends Component {
                           height={ "auto" }
                           ref={this.calendar}
                           datesRender={ (info) => this.paintUrl(info) }
-                          defaultDate={ isDateValid ? providedDate : null }                    
+                          // Calendar seems to prefer date strings formatted
+                          // YYYY-MM-DD, and moment needs to know input string
+                          // format so it doesn't give the calender a bad date
+                          defaultDate={ isDateValid ? moment(providedDate, "MM-DD-YYYY").format("YYYY-MM-DD") : moment().format("YYYY-MM-DD") }                    
                         />
                       )
                     }}
@@ -472,7 +511,7 @@ export default class App extends Component {
                           eventClick={ this.handleClick }
                           fixedWeekCount={ false }
                           // contentHeight={ 600 }
-                          height={ "auto " }
+                          height={ "auto" }
                           ref={this.calendar}
                           gotoDate={ "auto" }
                           datesRender={ (info) => this.paintUrlDesktop(info) }
@@ -489,18 +528,8 @@ export default class App extends Component {
 
                       // URL date validation
                       const providedDate = props.match.params.date;
-                      const parsedDate = providedDate.split('-');
-                      const isDateValid = (
-                        parsedDate.length === 3 && 
-                        parsedDate[0].length === 4 &&
-                        parsedDate[1].length === 2 &&
-                        parsedDate[2].length === 2 &&
-                        /* eslint no-self-compare: off */
-                        // Checking for NaN on parseInt(); method described here:
-                        // http://adripofjavascript.com/blog/drips/the-problem-with-testing-for-nan-in-javascript.html
-                        // tldr: NaN is not equal to itself
-                        (parsedDate.every(element => parseInt(element) === parseInt(element)))
-                      )
+
+                      const isDateValid = moment(providedDate, "MM-DD-YYYY").isValid()
 
                       return (
                         <FullCalendar 
@@ -512,7 +541,10 @@ export default class App extends Component {
                           height={ "auto" }
                           ref={this.calendar}
                           datesRender={ (info) => this.paintUrlDesktop(info) }
-                          defaultDate={ isDateValid ? providedDate : null }
+                          // Calendar seems to prefer date strings formatted
+                          // YYYY-MM-DD, and moment needs to know input string
+                          // format so it doesn't give the calender a bad date
+                          defaultDate={ isDateValid ? moment(providedDate, "MM-DD-YYYY").format("YYYY-MM-DD") : moment().format("YYYY-MM-DD") }
                         />
                       )
                     }}
@@ -546,68 +578,17 @@ export default class App extends Component {
 
             </LoadingOverlay>
 
-            {/* Filtering & favorites */}
-            <FilteringSidebar />
-
             {/* Content modal */}
 
-            <Modal 
-              open={this.state.open} 
-              onClose={this.onCloseModal}
-              styles={styles}
-              focusTrapped={false}
-            >
-              <img 
-                alt='boxart' 
-                className='boxart' 
-                src={this.state.game.image}
-                onLoad={this.onImgLoad}
-              />
-                
-              <h2 className='modal-heading'>
-                {this.state.game.gameTitle}
-              </h2>
-              <ul className="release-info">
-                <li className="info"><strong>Release date:</strong> {this.state.game.releaseDate}</li>
-                <li className="info"><strong>Platforms:</strong> {this.state.game.platforms}</li>
-                <li className="info"><strong>Description:</strong> {this.state.game.description}</li>
-                <button 
-                onClick={this.addToFavorites}
-                style={{ backgroundImage: `url(${this.state.game.image})` }}
-                className={(this.state.favorites.includes(this.state.game.title))
-                  ? 'favorited fav-button'
-                  : 'fav-button'                    
-                }
-                >
-                  {(this.state.favorites.includes(this.state.game.title))
-                    ? 'Added to favorites'
-                    : 'Add to favorites'                    
-                  }
-                  
-                </button> 
-              </ul>
-              
-              
-            </Modal>
+            <ContentModal />
 
             {/* Error modal  */}
 
-            <Modal 
-              open={ this.state.error } 
-              onClose={ this.onCloseModal }
-              styles={styles}
-            >
-              <img 
-                  alt='error' 
-                  className='error' 
-                  src={error}
-              />
-                  
-              <h2 className='error-heading'>
-                  Bad link? vgCal can't find that game, or it doesn't exist. Reload to try again, or give up, skeleton.
-              </h2>
-              
-            </Modal>
+            <ErrorModal />
+
+            {/* Info modal */}
+
+            <InfoModal />
 
 
           </div>

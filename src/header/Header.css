@@ -1,0 +1,104 @@
+.header {
+    /* background-color: rgb(55, 136, 216); */
+    background: rgb(24,69,130);
+    background: linear-gradient(0deg, rgba(24,69,130,1) 0%, rgba(55,136,216,1) 100%);    
+    height: auto;
+    padding: 20px;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: space-between;
+    font-size: 12px;
+    letter-spacing: 0px;
+    font-family: 'Press Start 2P';
+    color: white;
+    flex-wrap: wrap;
+    border-radius: 4px;
+}
+
+.logotype {
+    flex-grow: 1;
+    margin-bottom: 15px;
+    order: 1;
+}
+
+.search {
+    border-radius: 5px;
+    border: none;
+    padding: 0px;
+    width: 100%;
+    color: black;
+    font-family: Consolas;
+    font-size: 16px;
+    z-index: 2;
+    order: 3;
+    margin-top: 6px;
+}
+
+.header-nav {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    order: 2;
+}
+
+i {
+    font-family: FontAwesome;
+    font-size: 32px;
+    justify-self: center;
+    cursor: pointer;
+}
+
+.fa-github {
+    margin-left: 25px;
+    margin-right: 25px;
+}
+
+/* .fa-question-circle {
+    font-size: 30px;
+} */
+
+@media screen and (min-width: 1200px) {
+
+    .header {
+        flex-direction: row;
+        align-items: center;
+        height: 75px;
+        box-shadow: 0px 3px 20px 0px rgba(50, 50, 50, 0.66);
+    }
+    
+    .logotype {
+        flex-grow: 0;
+        margin-bottom: 0;
+        margin-left: 20px;
+    }
+    
+    .search {
+        border-radius: 5px;
+        border: none;
+        padding: 0px;
+        width: 35%;
+        order: 2;
+        margin-top: 0px;
+    }
+
+    .fa-github {
+        margin-right: 0px;
+    }
+
+    .header-nav {
+        order: 3;
+        margin-right: 20px;
+    }
+
+    i {
+        margin-left: 28px;
+    }
+
+}
+
+@media screen and (min-width: 1400px) {
+    .header-nav {
+        margin-right: 40px;
+    }
+}

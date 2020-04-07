@@ -4,20 +4,23 @@ h1, h2, h3, h4 {
 }
 
 main {
-  padding: 20px;
+  /* padding: 20px; */
 }
 
 .calendar-wrapper {
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  height: 900px;
+  height: auto;
+  padding-top: 10px;
 }
 
 .fc-toolbar {
   flex-direction: column;
   align-items: flex-start;
   height: 95px;
+  padding-left: 20px;
+  padding-right: 20px;
 }
 
 .fc-right {
@@ -47,22 +50,22 @@ main {
 }
 
 .modal-heading {
-  font-size: 72px;
-  margin-bottom: 20px;
+  font-size: 52px;
+  margin-bottom: 10px;
   padding-top: 30px;
-  padding-left: 60px;
-  padding-right: 60px;
+  padding-left: 40px;
+  padding-right: 30px;
   margin-top: 0;
   font-family: 'Roboto Slab', serif;
-  font-weight: 600;
-  line-height: 70px;
+  font-weight: 700;
+  line-height: 60px;
   letter-spacing: -2px;
 }
 
 .release-info {
-  padding-left: 60px;
-  padding-right: 60px;
-  padding-bottom: 50px;
+  padding-left: 40px;
+  padding-right: 40px;
+  padding-bottom: 40px;
   font-family: 'Roboto Slab', serif;
   font-weight: 200;
 }
@@ -81,7 +84,7 @@ main {
   padding-top: 20px;
   padding-bottom: 20px;
   padding-left: 30px;
-  padding-right: 30px;
+  padding-right: 60px;
   border-radius: 10px;
   font-size: 23px;
   transition: all 0.5s ease 0s;
@@ -135,14 +138,13 @@ main {
   .calendar-wrapper {
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
-    margin-top: 20px;
+    justify-content: flex-start;
+    margin-top: 0px;
     height: calc(100% - 95px);
-    /* flex-grow: 1;     */
     position: absolute;
     top: 75px;
     bottom: 0;
-    width: auto;
+    width: 100%;
   }
 
   .fc {
@@ -151,22 +153,45 @@ main {
     padding-right: 20px;
     overflow: scroll;
     overflow-x: hidden;
+    padding-top: 20px;
   }
 
+  /* Calendar collapses weeks without this */
   .fc-week {
     min-height: 199px !important;
   }
 
-  /* .fc-dayGridMonth-view > table {
-    height: 500px;
-  } */
-
+  /* Necessary to effect the style */
   .fc-toolbar {
     margin-bottom: 1em !important;
+    padding-left: 0;
+    padding-right: 0;
   }
+  
 
   .modal-heading {
     padding-right: 80px;
+    line-height: 70px;
+    font-size: 72px;
+  }
+
+  
+}
+
+@media screen and (min-width: 1400px) {
+
+  .calendar-wrapper {
+    justify-content: space-between;
+  }
+
+  .fc {
+    margin-left: -75px;
+  }
+
+  
+  ._loading_overlay_overlay { 
+    margin-left: -75px; 
+    width: calc(100% + 75px)
   }
 
   

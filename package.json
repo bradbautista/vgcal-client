@@ -1,5 +1,5 @@
 {
-  "name": "vgrdc_client",
+  "name": "vgcal_client",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -23,7 +23,8 @@
     "react-router-modal": "^1.5.2",
     "react-scripts": "3.4.0",
     "react-select": "^3.0.8",
-    "react-spinners": "^0.8.1"
+    "react-spinners": "^0.8.1",
+    "react-windowed-select": "^2.0.2"
   },
   "scripts": {
     "start": "react-scripts start",
