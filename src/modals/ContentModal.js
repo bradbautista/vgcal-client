@@ -24,7 +24,6 @@ import Modal from 'react-responsive-modal';
             closeIcon: { fill: 'white', filter: 'drop-shadow( 3px 3px 2px rgba(0, 0, 0, .7))' }
         }
       
-
         return(
 
             <Modal 

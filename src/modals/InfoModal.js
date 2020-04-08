@@ -17,13 +17,12 @@ export default class InfoModal extends Component {
   
     render() {
 
-        // Styles object for our modal 
         const styles = { 
             overlay: { background: 'rgba(0, 0, 0, 0.35)' },
             modal: { padding: 0, borderRadius: '4px', backgroundColor: 'white' },
             closeButton: { cursor: 'pointer' },
             closeIcon: { fill: 'white', filter: 'drop-shadow( 3px 3px 2px rgba(0, 0, 0, .7))' }
-          }
+        };
   
         return (
             <Modal
@@ -34,9 +33,9 @@ export default class InfoModal extends Component {
                 classNames = {{ overlay: 'react-responsive-modal-overlay', modal: 'react-responsive-modal' }}
             >
                 <img 
-                      alt='hello' 
-                      className='boxart' 
-                      src={wave}
+                    alt='hello' 
+                    className='boxart' 
+                    src={wave}
                 />
                 <div className={"info-modal"}>
                     <h2 className={"info-modal-header"}>Welcome to vgCal!</h2>

@@ -16,17 +16,17 @@ import Context from '../../Context';
 
     setChecked = (bool) => {
 
-      this.setState({ checked: bool })
+      this.setState({ checked: bool });
 
     }
 
     toggleCheck = (e) => {
 
-      this.setState({ checked: !this.state.checked })
+      this.setState({ checked: !this.state.checked });
 
       if (e.target.checked === true) {
 
-        this.context.filters.push(e.target.value)
+        this.context.filters.push(e.target.value);
 
         // Without setTimeout, context returns undefined
         setTimeout(() => {
@@ -35,15 +35,15 @@ import Context from '../../Context';
 
           const filteredReleases = this.context.releases.filter(release => this.context.filters.every(filter => release.platforms.includes(filter)));
 
-          this.context.setReleases(filteredReleases)
+          this.context.setReleases(filteredReleases);
 
-        }, 1)
+        }, 1);
 
       } else if (e.target.checked === false) {
 
-        const newFilters = this.context.filters.filter(filter => filter !== e.target.value)
+        const newFilters = this.context.filters.filter(filter => filter !== e.target.value);
 
-        this.context.setFilters(newFilters)
+        this.context.setFilters(newFilters);
 
         setTimeout(() => {
 
@@ -55,13 +55,13 @@ import Context from '../../Context';
 
             this.context.setDefaultReleases(this.context.games);
 
-            const filteredReleases = this.context.releases.filter(release => this.context.filters.every(filter => release.platforms.includes(filter)))
+            const filteredReleases = this.context.releases.filter(release => this.context.filters.every(filter => release.platforms.includes(filter)));
 
-            this.context.setReleases(filteredReleases)
+            this.context.setReleases(filteredReleases);
             
           }
 
-        }, 1)
+        }, 1);
 
 
       }

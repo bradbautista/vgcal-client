@@ -26,7 +26,7 @@ import './Header.css'
       // found a way to update that value, so until I can, for that edge 
       // case, reload achieves the same effect without crashing
       if (this.context.calendar.current === null) {
-        window.location.reload()
+        window.location.reload();
       }
 
       // This gives us access to methods via the calendar API by creating
@@ -36,20 +36,20 @@ import './Header.css'
       calendarApi.today();
 
       // Update history
-      this.context.setLastVisited('/')
+      this.context.setLastVisited('/');
 
       // Get rid of any filters
-      this.context.setFilters([])
+      this.context.setFilters([]);
 
       // Uncheck any checked checkboxes
       this.context.checkboxes.forEach(checkbox => {
         if (checkbox.state.checked === true) {
-          checkbox.setChecked(false)
+          checkbox.setChecked(false);
         }
       })
 
       // And restore calendar events to their initial state
-      this.context.setDefaultReleases(this.context.games)
+      this.context.setDefaultReleases(this.context.games);
 
     }
 
@@ -92,12 +92,12 @@ import './Header.css'
           <WindowedSelect
             styles={customStyles}
             className="search"
-            // menuIsOpen={true}
             classNamePrefix="react-select"
             onChange={this.context.handleSelect}
             placeholder="Select a game or type to search for one"
             // Solution to issue of input lag in
-            // React Select with large datasets
+            // React Select with large datasets,
+            // along with using WindowedSelect
             filterOption={createFilter({ignoreAccents: false})}
             isClearable={true}
             onKeyDown={this.handleKeyDown}
@@ -110,7 +110,7 @@ import './Header.css'
             }
             options={this.context.games.map(game => {
               
-              const tempObj = {}
+              const tempObj = {};
 
               tempObj.value = {
                 platforms: game.platforms,

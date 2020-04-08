@@ -65,11 +65,11 @@ export default class App extends Component {
           throw error;
         });
       }
-      return games.json()
+      return games.json();
     })
     .then(games => {
-      this.setState( { games: [...games] } )
-      this.setDefaultReleases(games)
+      this.setState( { games: [...games] } );
+      this.setDefaultReleases(games);
     })
     .catch(error => {
       console.log(error);
@@ -80,7 +80,7 @@ export default class App extends Component {
   setDefaultReleases = (games) => {
 
     const filteredGames = games.filter(game => {
-      return game.release_date_iso !== null
+      return game.release_date_iso !== null;
     })
 
     // Formatting API data for consumption by fullcalendar
@@ -106,43 +106,43 @@ export default class App extends Component {
       
       return tempObj
 
-    })
+    });
 
     this.setReleases(releases);
 
   }
 
   setReleases = (releases) => {
-    this.setState({ releases: [...releases] })
+    this.setState({ releases: [...releases] });
   }
 
   setFilters = (filters) => {
-    this.setState({ filters: [...filters] })
+    this.setState({ filters: [...filters] });
   }
 
   setGame = (game) => {
-    this.setState({ game: game })
+    this.setState({ game: game });
   }
 
   setLoading = (bool) => {
-    this.setState({ loading: bool })
+    this.setState({ loading: bool });
   }
 
   setOpen = (bool) => {
-    this.setState({ open: bool })
+    this.setState({ open: bool });
   }
 
   setError = (bool) => {
-    this.setState({ error: bool })
+    this.setState({ error: bool });
   }
 
   setLastVisited = (str) => {
-    this.setState({ lastVisited: str })
+    this.setState({ lastVisited: str });
   }
 
   handleClick = ({ event }) => {
 
-    this.setState({ game: event._def.extendedProps })
+    this.setState({ game: event._def.extendedProps });
     this.setState({ open: true });
     window.history.pushState({}, 'vgCal', event._def.extendedProps.gameUrl);
 
@@ -152,11 +152,11 @@ export default class App extends Component {
 
     // Prevents crash when user clears select field
     if (selectedGame === null) {
-      return      
+      return;
     }
 
-    this.setState({game: selectedGame.value})
-    this.setState({ open: true })
+    this.setState({game: selectedGame.value});
+    this.setState({ open: true });
     window.history.pushState({}, 'vgCal', selectedGame.value.gameUrl);
 
   }
@@ -175,7 +175,7 @@ export default class App extends Component {
       return
     }
 
-    this.setState({ favorites: [...this.state.favorites, this.state.game]})
+    this.setState({ favorites: [...this.state.favorites, this.state.game]});
 
     // LocalStorage calls get made too early to retrieve data,
     // so wait a beat
@@ -184,15 +184,15 @@ export default class App extends Component {
   }
 
   clearFavorites = () => {
-    this.setState({favorites: []})
-    window.localStorage.removeItem('vgCalFavorites')
+    this.setState({favorites: []});
+    window.localStorage.removeItem('vgCalFavorites');
   }
 
   removeFromFavorites = (favoriteToRemove) => {
 
-    const newFavorites = this.state.favorites.filter(favorite => favorite.gameTitle !== favoriteToRemove.gameTitle)
+    const newFavorites = this.state.favorites.filter(favorite => favorite.gameTitle !== favoriteToRemove.gameTitle);
 
-    this.setState({ favorites: [...newFavorites]})
+    this.setState({ favorites: [...newFavorites]});
 
     setTimeout(this.addFavoritesToLocalStorage, 50);
 
@@ -200,12 +200,12 @@ export default class App extends Component {
 
   addFavoritesToLocalStorage = () => {
 
-    window.localStorage.removeItem('vgCalFavorites')
+    window.localStorage.removeItem('vgCalFavorites');
     
     // LocalStorage needs a key and a value, and a hot sec
     setTimeout(() => {
-        window.localStorage.setItem('vgCalFavorites', JSON.stringify(this.state.favorites))
-    }, 50)
+        window.localStorage.setItem('vgCalFavorites', JSON.stringify(this.state.favorites));
+    }, 50);
     
   }
 
@@ -214,17 +214,17 @@ export default class App extends Component {
     const favorites = JSON.parse(window.localStorage.getItem('vgCalFavorites'));
 
     if (favorites === null) {
-      return
+      return;
     } else {
 
-      this.setState({ favorites: [...favorites]})
+      this.setState({ favorites: [...favorites]});
 
     }
   }
 
   detectPriorVisit = () => {
 
-    const token = window.localStorage.getItem('vgCalToken')
+    const token = window.localStorage.getItem('vgCalToken');
 
     // If token === null, new visitor
     // TODO:
@@ -234,7 +234,7 @@ export default class App extends Component {
 
     if (token === null) {
 
-      this.setVisited(false)
+      this.setVisited(false);
       
       window.localStorage.setItem('vgCalToken', `Hi there! This is just a token telling the site whether you've visited or not so I know whether to display the info sidebar for you. Have a nice day!`)
 
@@ -246,22 +246,22 @@ export default class App extends Component {
   }
 
   setVisited = (bool) => {
-    this.setState({ hasVisited: bool })
+    this.setState({ hasVisited: bool });
   }
 
   setStateAsync(gameState, openState, errorState) {
 
     return new Promise((resolve) => {
-      this.setOpen(openState, resolve)
-      this.setGame(gameState, resolve)
-      this.setError(errorState, resolve)
+      this.setOpen(openState, resolve);
+      this.setGame(gameState, resolve);
+      this.setError(errorState, resolve);
     });
 
   }
 
   syncViews = () => {
     
-    this.setStateAsync(this.state.game, this.state.open, this.state.error)
+    this.setStateAsync(this.state.game, this.state.open, this.state.error);
 
   }
 
@@ -278,16 +278,16 @@ export default class App extends Component {
 
   paintUrl = (info) => {
 
-    const currentDate = moment()._d
+    const currentDate = moment()._d;
 
-    const formattedCurrentDate = moment(currentDate).format('MM-DD-YYYY')
+    const formattedCurrentDate = moment(currentDate).format('MM-DD-YYYY');
 
     // Info is a cal object, here we're pulling a dates array and mapping it to an array of those dates in this format
     const formattedDates = info.view.dayDates.map(date => {
       return moment(date).format('MM-DD-YYYY')
-    })
+    });
 
-    const pathnameArray = window.location.pathname.split('/')
+    const pathnameArray = window.location.pathname.split('/');
 
     if (pathnameArray.includes('game')) {
       return
@@ -302,13 +302,13 @@ export default class App extends Component {
 
   paintUrlDesktop = (info) => {
 
-    const currentMonth = moment()._d
-    const formattedCurrentMonth = moment(currentMonth).format('MMMM YYYY')
-    const currentCalendarMonth = info.view.title
-    const dateArray = moment(currentCalendarMonth, 'MMMM YYYY').format('MM YYYY').split(' ')
-    dateArray.splice(1, 0, '01')
-    const dateToPaintToUrl = dateArray.join('-')
-    const pathnameArray = window.location.pathname.split('/')
+    const currentMonth = moment()._d;
+    const formattedCurrentMonth = moment(currentMonth).format('MMMM YYYY');
+    const currentCalendarMonth = info.view.title;
+    const dateArray = moment(currentCalendarMonth, 'MMMM YYYY').format('MM YYYY').split(' ');
+    dateArray.splice(1, 0, '01');
+    const dateToPaintToUrl = dateArray.join('-');
+    const pathnameArray = window.location.pathname.split('/');
 
     if (pathnameArray.includes('game')) {
       return
@@ -326,8 +326,6 @@ export default class App extends Component {
     this.fetchGames();
     this.loadReleases();
     this.detectFavorites();
-
-    // Commented out for dev work on info modal
     this.detectPriorVisit();
     
   }
@@ -437,7 +435,7 @@ export default class App extends Component {
 
                       // URL date validation
                       const providedDate = props.match.params.date;
-                      const isDateValid = moment(providedDate, "MM-DD-YYYY").isValid()
+                      const isDateValid = moment(providedDate, "MM-DD-YYYY").isValid();
 
                       return (
                         <FullCalendar 

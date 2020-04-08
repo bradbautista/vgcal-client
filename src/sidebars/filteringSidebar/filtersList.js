@@ -20,7 +20,7 @@ import Checkbox from './checkbox'
         // And to avoid PS4/5 XBoxOne/Series S nonsense we're just going to
         // filter for PlayStation and Xbox, since most games will be released
         // for both or be backwards-compatible
-        const commonPlatforms = ['Xbox', 'PlayStation', 'PC', 'Switch', 'Mac', 'Android', 'iPhone', 'iPad']
+        const commonPlatforms = ['Xbox', 'PlayStation', 'PC', 'Switch', 'Mac', 'Android', 'iPhone', 'iPad'];
   
         return (
             <div className="filtering-container">

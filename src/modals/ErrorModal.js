@@ -23,8 +23,7 @@ import error from '../images/error.jpg';
             modal: { padding: 0, borderRadius: '4px', width: '80%', backgroundColor: 'white' },
             closeButton: { cursor: 'pointer' },
             closeIcon: { fill: 'white', filter: 'drop-shadow( 3px 3px 2px rgba(0, 0, 0, .7))' }
-        }
-      
+        };      
 
         return(
 
@@ -34,13 +33,13 @@ import error from '../images/error.jpg';
               styles={styles}
             >
               <img 
-                  alt='error' 
-                  className='error' 
-                  src={error}
+                alt='error' 
+                className='error' 
+                src={error}
               />
                   
               <h2 className='error-heading'>
-                  Bad link? vgCal can't find that game, or it doesn't exist. Reload to try again, or give up.
+                Bad link? vgCal can't find that game, or it doesn't exist. Reload to try again, or give up.
               </h2>
               
             </Modal>
