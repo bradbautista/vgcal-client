@@ -337,14 +337,6 @@ export default class App extends Component {
 
   render() {
 
-    // Styles object for our game(s) modal 
-    const styles = { 
-      overlay: { background: 'rgba(0, 0, 0, 0.35)' },
-      modal: { padding: 0, borderRadius: '4px', width: '80%', backgroundColor: 'white' },
-      closeButton: { cursor: 'pointer' },
-      closeIcon: { fill: 'white', filter: 'drop-shadow( 2px 2px 1px rgba(0, 0, 0, .7))' }
-    }
-
     const contextValue = {
       games: this.state.games,
       releases: this.state.releases,
@@ -409,7 +401,7 @@ export default class App extends Component {
                 color={"yellow"}
               />}
             text=''
-            styles={{zIndex: 10}}
+            // styles={{zIndex: 10}}
             >
 
               {/* Weekly list view for phones / tablets */}

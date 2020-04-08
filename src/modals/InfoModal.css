@@ -8,9 +8,10 @@
 .info-modal-header {
     font-family: 'Roboto Slab', serif;
     font-weight: 600;
-    font-size: 40px;
-    line-height: 40px;
-    margin-bottom: 10px;
+    font-size: 60px;
+    line-height: 55px;
+    margin-bottom: 15px;
+    letter-spacing: -2px;
 }
 
 .info-modal-prompt {
@@ -38,6 +39,15 @@
     font-weight: 500;
 }
 
+.react-responsive-modal {
+    width: 95%;
+}
+
+.react-responsive-modal-overlay {
+    /* position: absolute;
+    top: 700; */
+}
+
 @media screen and (min-width: 400px) {
 
     .info-modal {
@@ -62,8 +72,9 @@
     .info-modal-header {
         font-family: 'Roboto Slab', serif;
         font-weight: 600;
-        font-size: 60px;
-        margin-bottom: 0px;
+        font-size: 72px;
+        letter-spacing: -1px;
+        margin-bottom: 30px;
     }    
 
     .info-modal-prompt {
@@ -77,6 +88,15 @@
         font-size: 22px;
         word-break: break-word;
         line-height: 27px;
+    }
+
+    .react-responsive-modal {
+       position: relative;
+       top: -1000;
+    }
+
+    .react-responsive-modal-overlay {
+        position: fixed;
     }
 
   

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Context from '../Context';
 import './InfoModal.css';
 import Modal from 'react-responsive-modal';
+import wave from '../images/wave.gif'
 
 export default class InfoModal extends Component {
   
@@ -19,9 +20,9 @@ export default class InfoModal extends Component {
         // Styles object for our modal 
         const styles = { 
             overlay: { background: 'rgba(0, 0, 0, 0.35)' },
-            modal: { padding: 0, borderRadius: '4px', backgroundColor: 'white', className: 'info-blodal' },
+            modal: { padding: 0, borderRadius: '4px', backgroundColor: 'white' },
             closeButton: { cursor: 'pointer' },
-            closeIcon: { fill: 'rgba(75, 75, 75, 0.75', filter: 'drop-shadow( 3px 3px 2px rgba(0, 0, 0, .7))' }
+            closeIcon: { fill: 'white', filter: 'drop-shadow( 3px 3px 2px rgba(0, 0, 0, .7))' }
           }
   
         return (
@@ -29,8 +30,15 @@ export default class InfoModal extends Component {
                 open={ !this.context.hasVisited } 
                 onClose={ () => this.context.setVisited(true) }
                 styles={styles}
+                focusTrapped={false}
+                classNames = {{ overlay: 'react-responsive-modal-overlay', modal: 'react-responsive-modal' }}
                 // focusTrapped={true}
             >
+                <img 
+                      alt='hello' 
+                      className='boxart' 
+                      src={wave}
+                />
                 <div className={"info-modal"}>
                     <h2 className={"info-modal-header"}>Welcome to vgCal!</h2>
                     {/* <p className={"info-modal-prompt"}><strong>Here's some info about the site and how to use it:</strong></p> */}

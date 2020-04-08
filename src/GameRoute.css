@@ -11,15 +11,6 @@
 }
 
 @media screen and (min-width: 1200px) {
-
-    ._loading_overlay_wrapper {
-        display: flex;
-        width: 80%;
-    }
-
-    .fc {
-        flex-grow: 1;
-    }
   
     
   }

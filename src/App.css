@@ -30,7 +30,7 @@ main {
   width: 100%;
 }
 
-.fc-event-container, .fc-list-item {
+.fc-content, .fc-list-item {
   cursor: pointer;
 }
 
@@ -187,11 +187,16 @@ main {
   .fc {
     margin-left: -75px;
   }
-
   
   ._loading_overlay_overlay { 
     margin-left: -75px; 
     width: calc(100% + 75px)
+  }
+
+  ._loading_overlay_wrapper {
+    margin-left: -75px;
+    display: flex;
+    width: 80%;
   }
 
   

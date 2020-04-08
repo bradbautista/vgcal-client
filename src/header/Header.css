@@ -30,7 +30,6 @@
     color: black;
     font-family: Consolas;
     font-size: 16px;
-    z-index: 2;
     order: 3;
     margin-top: 6px;
 }
@@ -53,10 +52,6 @@ i {
     margin-left: 25px;
     margin-right: 25px;
 }
-
-/* .fa-question-circle {
-    font-size: 30px;
-} */
 
 @media screen and (min-width: 1200px) {
 
