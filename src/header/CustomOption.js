@@ -4,6 +4,7 @@ import { components } from 'react-select'
 export default class CustomOption extends React.Component {
     constructor(props) {
         super(props);
+        this.state = {}
     }
 
     render() {

@@ -32,7 +32,6 @@ export default class InfoModal extends Component {
                 styles={styles}
                 focusTrapped={false}
                 classNames = {{ overlay: 'react-responsive-modal-overlay', modal: 'react-responsive-modal' }}
-                // focusTrapped={true}
             >
                 <img 
                       alt='hello' 
@@ -41,7 +40,6 @@ export default class InfoModal extends Component {
                 />
                 <div className={"info-modal"}>
                     <h2 className={"info-modal-header"}>Welcome to vgCal!</h2>
-                    {/* <p className={"info-modal-prompt"}><strong>Here's some info about the site and how to use it:</strong></p> */}
                     <p className={"info-modal-graf"}>Click the left and right arrows above the calendar to change weeks or months. Click "today" to return to the present week or month.</p>
                     <p className={"info-modal-graf"}>Click on a release date to get more information about that release.</p>
                     <p className={"info-modal-prompt"}><strong>Want to set a reminder for a release?</strong></p>
@@ -51,7 +49,7 @@ export default class InfoModal extends Component {
                     <p className={"info-modal-prompt"}><strong>Want to navigate to a specific game via the URL bar?</strong></p> 
                     <p className={"info-modal-graf"}>Do it like this: https://vgcal.now.sh/game/Mount-&-Blade-II:-Bannerlord</p>
                     <p className={"info-modal-prompt"}><strong>I don't see the game I'm looking for.</strong></p> 
-                    <p className={"info-modal-graf"}>vgCal uses the Giant Bomb API to populate its calendar. Add it to the <a className="gb-link" href="https://www.giantbomb.com/games/" target="_blank" rel="noopener noreferrer">Giant Bomb wiki</a> and it'll show up in the calendar — and lots of other places on the Internet!</p>
+                    <p className={"info-modal-graf"}>If a game has a set release date, it'll show up on the calendar. If it has an ambiguous release date (like September 2020), you can look for it in the searchable dropdown. Still don't see it? vgCal uses the Giant Bomb API to populate its calendar. Add it to the <a className="gb-link" href="https://www.giantbomb.com/games/" target="_blank" rel="noopener noreferrer">Giant Bomb wiki</a> and it'll show up in the calendar — and lots of other places on the Internet!</p>
                     <p className={"info-modal-prompt"}><strong>Why does the calendar only span 2019 to 2021?</strong></p> 
                     <p className={"info-modal-graf"}>Right now vgCal's database is size-limited by the database provider. I'm looking into migrating the database to a different provider, which would allow for a much larger dataset.</p>
                     <p className={"info-modal-prompt"}><strong>Want to see this information again? Click the question-mark button in the header.</strong></p>

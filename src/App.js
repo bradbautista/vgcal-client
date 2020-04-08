@@ -8,11 +8,9 @@ import '@fullcalendar/list/main.css';
 import MediaQuery from 'react-responsive';
 import GameRouteForMobile from './GameRouteForMobile';
 import GameRouteForDesktop from './GameRouteForDesktop';
-import Modal from 'react-responsive-modal';
 import Context from './Context';
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Header from './header/Header';
-import InfoSidebar from './sidebars/infoSidebar/infoSidebar';
 import InfoModal from './modals/InfoModal'
 import ErrorModal from './modals/ErrorModal'
 import ContentModal from './modals/ContentModal'
@@ -22,7 +20,6 @@ import PacmanLoader from "react-spinners/PacmanLoader";
 import './App.css';
 import config from './config';
 import moment from 'moment';
-// import error from './images/error.jpg';
 
 export default class App extends Component {
 
@@ -368,14 +365,20 @@ export default class App extends Component {
       setLastVisited: this.setLastVisited
     }
 
-    // Since we're serving up two different views for mobile
-    // and desktop and because we're using React Router, 
-    // we need routes for each required URL for each view. 
-    // This gives us a total of eight (!) routes:
+    // Since we're rendering different calendars for mobile
+    // and desktop as well as different calendars for each route,
+    // we have a total of eight routes:
+    //
     // -- Root * 2
     // -- /date/:date * 2
     // -- /game/:game * 2
     // -- Bad URL * 2
+
+    // Because of this, it's actually easier to maintain the
+    // routes & calendars if they're in one place, rather than split
+    // across files. Two, GameRouteForDesktop and GameRouteForMobile,
+    // require using their own ComponentDidMount, so they're
+    // split into their own files
 
     return (
       <Context.Provider value={contextValue}>
@@ -386,9 +389,6 @@ export default class App extends Component {
         <main>      
 
           <div className={"calendar-wrapper"}>
-
-            {/* Landing page info */}
-            {/* <InfoSidebar/> */}
 
             {/* Filtering & favorites */}
             <FilteringSidebar />
@@ -401,10 +401,9 @@ export default class App extends Component {
                 color={"yellow"}
               />}
             text=''
-            // styles={{zIndex: 10}}
             >
 
-              {/* Weekly list view for phones / tablets */}
+              {/* Weekly list view for phones / tablets, wraps all of our mobile calendars */}
               <MediaQuery 
                 maxWidth={1199}
                 onChange={ this.syncViews }
@@ -447,7 +446,7 @@ export default class App extends Component {
                           events={ this.state.releases }
                           eventClick={ this.handleClick }
                           height={ "auto" }
-                          ref={this.calendar}
+                          ref={ this.calendar }
                           datesRender={ (info) => this.paintUrl(info) }
                           // Calendar seems to prefer date strings formatted
                           // YYYY-MM-DD, and moment needs to know input string
@@ -502,7 +501,6 @@ export default class App extends Component {
                           events={ this.state.releases }
                           eventClick={ this.handleClick }
                           fixedWeekCount={ false }
-                          // contentHeight={ 600 }
                           height={ "auto" }
                           ref={this.calendar}
                           gotoDate={ "auto" }
@@ -520,7 +518,6 @@ export default class App extends Component {
 
                       // URL date validation
                       const providedDate = props.match.params.date;
-
                       const isDateValid = moment(providedDate, "MM-DD-YYYY").isValid()
 
                       return (
@@ -581,7 +578,6 @@ export default class App extends Component {
             {/* Info modal */}
 
             <InfoModal />
-
 
           </div>
         </main>

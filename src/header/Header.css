@@ -1,5 +1,4 @@
 .header {
-    /* background-color: rgb(55, 136, 216); */
     background: rgb(24,69,130);
     background: linear-gradient(0deg, rgba(24,69,130,1) 0%, rgba(55,136,216,1) 100%);    
     height: auto;
@@ -31,6 +30,7 @@
     font-family: Consolas;
     font-size: 16px;
     order: 3;
+    z-index: 2;
     margin-top: 6px;
 }
 

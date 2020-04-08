@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import './filteringSidebar.css';
 import Context from '../../Context';
-import config from '../../config';
 import FavoritesList from './favoritesList';
 import FiltersList from './filtersList';
 

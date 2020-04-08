@@ -9,7 +9,6 @@ import fileDownload from 'js-file-download';
 
       super(props);
       this.state = {
-
       };
   
     }

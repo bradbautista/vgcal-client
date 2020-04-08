@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import { Link } from "react-router-dom";
-import Select from 'react-select';
 import WindowedSelect, { createFilter } from "react-windowed-select";
 import CustomOption from './CustomOption';
 import Context from '../Context';
@@ -24,8 +23,8 @@ import './Header.css'
       // expanding the dev tools, and then tries to click the home
       // button, the app crashes because the value of the calendar
       // ref gets nulled when the mobile calendar mounts. Have not
-      // found a way to update that value, so until I can, reload achieves
-      // the same effect without crashing
+      // found a way to update that value, so until I can, for that edge 
+      // case, reload achieves the same effect without crashing
       if (this.context.calendar.current === null) {
         window.location.reload()
       }

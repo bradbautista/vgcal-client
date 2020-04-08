@@ -40,7 +40,7 @@ import error from '../images/error.jpg';
               />
                   
               <h2 className='error-heading'>
-                  Bad link? vgCal can't find that game, or it doesn't exist. Reload to try again, or give up, skeleton.
+                  Bad link? vgCal can't find that game, or it doesn't exist. Reload to try again, or give up.
               </h2>
               
             </Modal>

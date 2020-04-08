@@ -19,7 +19,7 @@ import Modal from 'react-responsive-modal';
 
         const styles = { 
             overlay: { background: 'rgba(0, 0, 0, 0.35)' },
-            modal: { padding: 0, borderRadius: '4px', width: '80%', backgroundColor: 'white' },
+            modal: { padding: 0, borderRadius: '4px', width: '90%', backgroundColor: 'white' },
             closeButton: { cursor: 'pointer' },
             closeIcon: { fill: 'white', filter: 'drop-shadow( 3px 3px 2px rgba(0, 0, 0, .7))' }
         }
