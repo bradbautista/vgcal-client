@@ -1,68 +1,111 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+**********************WILL WANT MOBILE + DESKTOP PICS
 
-## Available Scripts
+# [vgCal](https://vgcal.now.sh/)
 
-In the project directory, you can run:
+[![vgCal home](EVENTUAL LINK TO CLICKABLE PIC)](https://vgcal.now.sh/)
 
-### `npm start`
+## Table of Contents
+[About](#about)
+<br>
+[Features](#features)
+<br>
+[Tech](#tech)
+<br>
+[Why?](#why)
+ 
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+<a name="about"></a>
+## About
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+![vgCal demonstration](EVENTUAL LINK TO VGCAL GIF)
 
-### `npm test`
+**Finding release dates for games is harder than it needs to be.**
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+The easiest thing to do is Google it, but that's a gamble: You might get a Featured Snippet with the release date, or you might get a half-dozen links to articles that may or may not have the information, and then you have to read.
 
-### `npm run build`
+You could go Steam, but that's only going to get you Steam releases, and if you just want to browse upcoming releases, there's so much "Steam junk" and so many ambiguous dates that it winds up being impossible to sort through all the information — and the UX stinks on top of it.
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+You could go to gaming sites, but all of their missions are broader than release dates. Even if it's there, that information may be a half-dozen clicks deep, you may have to run a search, and then who knows how up-to-date their database is?
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+You could go to the game publisher's site, but that's just PR, so unless they're pushing the release date publicly, it won't be easy to find — and this is already too much work anyway.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Why isn't there just a calendar, like my Google calendar, that just shows you what's coming out and what's recently come out?
 
-### `npm run eject`
+Now there is!
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+Want to know what's coming out this month or the next? Have a Switch and an XBox and want to see what's coming out for both? Want to know what's coming out around a friend's birthday? vgCal makes it easy to see at a glance what's coming out in a given week or month, and quick to search for specific games — even those without a set release date.
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+<a name="features"></a>
+## Features
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+vgCal is a full-stack app that leverages the Fullcalendar and React Windowed Select components, along with the Giant Bomb API, to represent video game release-date information in familiar visual language and minimize the amount of effort required to find that information. It's a tool designed to do one thing and do it well.
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+It also allows users to quickly and easily filter that information by release platform, so they can easily identify cross-platform releases or check out the release landscape for their platform of choice.
 
-## Learn More
+Additionally, users can add releases to a list of favorites and generate an iCal file to add them to their calendar of choice.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+Favorites are stored in localstorage, so they'll persist across sessions without the need for account creation.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+It utilizes the MediaQuery component of the react-responsive package to serve up different calendars to mobile and desktop users, allowing for a familiar and appropriate interface on any platform.
 
-### Code Splitting
+<a name="tech"></a>
+## Tech
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
+vgCal is a full-stack web application. The client is hosted on [Zeit](https://zeit.co/home) and the server and database are hosted on [Heroku](https://www.heroku.com). Here's the stack:
 
-### Analyzing the Bundle Size
+**Front end**
+<br>
+HTML5/CSS3/JS
+<br>
+[React](https://reactjs.org/)
+<br>
+[React Router](https://reacttraining.com/react-router/)
+<br>
+[Fullcalendar](https://fullcalendar.io/)
+<br>
+[react-windowed-select](https://www.npmjs.com/package/react-windowed-select)
+<br>
+[react-responsive](https://www.npmjs.com/package/react-responsive)
+<br>
+[react-loading-overlay](https://www.npmjs.com/package/react-loading-overlay)
+<br>
+[react-responsive-modal](https://www.npmjs.com/package/react-responsive-modal)
+<br>
+[js-file-download](https://www.npmjs.com/package/js-file-download)
+<br>
+[Moment.js](https://momentjs.com/)
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
 
-### Making a Progressive Web App
+**Back end**
+<br>
+[Node.js](https://nodejs.org/en/)
+<br>
+[Express](https://expressjs.com/)
+<br>
+[PostgreSQL](https://www.postgresql.org/)
+<br>
+[node-cron](https://github.com/node-cron/node-cron)
+<br>
+[Knex](https://knexjs.org/)
+<br>
+[ical-generator](https://www.npmjs.com/package/ical-generator)
+<br>
+[nodemailer](https://nodemailer.com/about/)
+<br>
+[Moment.js](https://momentjs.com/)
+<br>
+[Mocha](https://mochajs.org/) / [Chai](https://www.chaijs.com/) / [Supertest](https://github.com/visionmedia/supertest)
+<br>
+[Morgan](https://github.com/expressjs/morgan) / [CORS](https://github.com/expressjs/cors) / [Helmet](https://github.com/helmetjs/helmet)
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
+For details about how the vgCal API works, check the comments in the source files of [its repo](https://github.com/bradbautista/vgcal-server).
 
-### Advanced Configuration
+**Misc.**
+<br>
+[Giant Bomb API](https://www.giantbomb.com/api/)
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
 
-### Deployment
+<a name="why"></a>
+## Why?
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+Ninety-five percent to solve the problems above, and 5 percent to spite the guys at Giant Bomb. Since the 95 percent is covered above, here's the other 5 percent: Early in the year, in the Before Times, there was general grousing on the Giant Bombcast and Beastcast — two great podcasts — about how few games were coming out. But a lot of quality games were coming out; they just didn't pique the Giant Bomb crew's interests. Rather than send them an email they didn't want to read, I figured I could show them using their own API.
