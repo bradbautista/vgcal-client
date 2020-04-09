@@ -98,7 +98,7 @@ HTML5/CSS3/JS
 <br>
 [Morgan](https://github.com/expressjs/morgan) / [CORS](https://github.com/expressjs/cors) / [Helmet](https://github.com/helmetjs/helmet)
 
-For details about how the vgCal API works, check the comments in the source files of [its repo](https://github.com/bradbautista/vgcal-server).
+For details about how the vgCal API works, visit [its repo](https://github.com/bradbautista/vgcal-server).
 
 **Misc.**
 <br>
