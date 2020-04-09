@@ -19,7 +19,7 @@
 
 ![vgCal demonstration](EVENTUAL LINK TO VGCAL GIF)
 
-#Finding release dates for games is harder than it needs to be.
+###Finding release dates for games is harder than it needs to be.
 
 The easiest thing to do is Google it, but that's a gamble: You might get a Featured Snippet with the release date, or you might get a half-dozen links to articles that may or may not have the information, and then you have to read.
 
