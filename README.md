@@ -71,6 +71,8 @@ HTML5/CSS3/JS
 <br>
 [react-responsive-modal](https://www.npmjs.com/package/react-responsive-modal)
 <br>
+[react-collapsible](https://www.npmjs.com/package/react-collapsible)
+<br>
 [js-file-download](https://www.npmjs.com/package/js-file-download)
 <br>
 [Moment.js](https://momentjs.com/)
