@@ -103,6 +103,15 @@ export default class App extends Component {
       tempObj.releaseDate = release.release_date_utc;
       tempObj.releaseDay = release.release_date_iso;
       tempObj.description = release.game_description;
+      // Styling the individual calendar events via
+      // css is troublesome; it's easier to do via
+      // a prop, but if we do it on the calendar
+      // level, we have to specify these for every
+      // calendar. By doing them here, we lose
+      // the ability to configure on a per-calendar
+      // basis, but also the need
+      tempObj.backgroundColor = `var(--primary)`
+      tempObj.borderColor = `var(--primary)`
       
       return tempObj
 
@@ -498,6 +507,8 @@ export default class App extends Component {
                           plugins={[ dayGridPlugin ]} 
                           events={ this.state.releases }
                           eventClick={ this.handleClick }
+                          // eventBackgroundColor={"var(--primary)"}
+                          // eventBorderColor={"white"}
                           fixedWeekCount={ false }
                           height={ "auto" }
                           ref={this.calendar}

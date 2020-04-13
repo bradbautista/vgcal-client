@@ -19,7 +19,7 @@ import Modal from 'react-responsive-modal';
 
         const styles = { 
             overlay: { background: 'rgba(0, 0, 0, 0.35)' },
-            modal: { padding: 0, borderRadius: '4px', width: '90%', backgroundColor: 'white' },
+            modal: { padding: 0, borderRadius: '4px', width: '90%', backgroundColor: 'white'},
             closeButton: { cursor: 'pointer' },
             closeIcon: { fill: 'white', filter: 'drop-shadow( 3px 3px 2px rgba(0, 0, 0, .7))' }
         }
@@ -47,12 +47,11 @@ import Modal from 'react-responsive-modal';
                 <li className="info"><strong>Description:</strong> {this.context.game.description}</li>
                 <button 
                 onClick={this.context.addToFavorites}
-                style={{ backgroundImage: `url(${this.context.game.image})` }}
 
                 // Some returns a boolean!
                 className={(this.context.favorites.some(favorite => favorite.gameTitle === this.context.game.gameTitle))
                   ? 'favorited fav-button'
-                  : 'fav-button'                    
+                  : 'unfavorited fav-button'                    
                 }
                 >
                   {(this.context.favorites.some(favorite => favorite.gameTitle === this.context.game.gameTitle))
@@ -60,7 +59,7 @@ import Modal from 'react-responsive-modal';
                     : 'Add to favorites'                    
                   }
                   
-                </button> 
+                </button>
               </ul>
               
               

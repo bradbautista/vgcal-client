@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import Context from '../../Context';
+import './checkbox.css'
 
   export default class Checkbox extends Component {
   
@@ -72,8 +73,11 @@ import Context from '../../Context';
   
       return (
             <>
+              <label className="checkbox-wrapper" htmlFor={this.props.platform}>
                 <input type="checkbox" id={this.props.platform} checked={this.state.checked} name={this.props.platform} value={this.props.platform} onChange={(e) => this.toggleCheck(e) } />
-                <label htmlFor={this.props.platform}> {this.props.platform}</label><br/> 
+                <span className="checkmark"></span>
+                  {this.props.platform}
+              </label>
             </>
       );
     }

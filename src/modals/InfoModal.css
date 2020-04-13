@@ -55,7 +55,7 @@
 }
 
 .collapsible {
-    border-bottom: 0.25px solid rgba(0, 0, 0, 0.15);
+    border-bottom: 1px solid var(--secondary);
     padding-bottom: 15px;
     margin-top: 18px;
 }

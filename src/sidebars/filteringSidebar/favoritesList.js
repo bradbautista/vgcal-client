@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import Context from '../../Context';
 import config from '../../config';
 import fileDownload from 'js-file-download';
+import './favoritesList.css';
 
   export default class favoritesList extends Component {
   
@@ -66,13 +67,22 @@ import fileDownload from 'js-file-download';
                   {(this.context.favorites.length === 0)
                     ? <li className="favorites-prompt">Add games to your favorites list and you can export an ics file to add the release dates to your personal calendar.</li>
                     : this.context.favorites.map(favorite => {
-                        return <li className="favorite" key={favorite.gameTitle} onClick={() => this.context.removeFromFavorites(favorite)}>{favorite.gameTitle}</li>
+                        return <li className="favorite" key={favorite.gameTitle} onClick={() => this.context.removeFromFavorites(favorite)}>
+                          <img className="favorite-image" src={favorite.image} alt={favorite.gameTitle}/>
+                          <span className="favorite-title">
+                          {favorite.gameTitle}
+                          </span>
+                        </li>
                     })
                   }
                 </ul>
                 <button
                   disabled={(this.context.favorites.length === 0)}
-                  className={"export-button"}
+                  className={
+                    (this.context.favorites.length > 0) 
+                    ? "export-button unfavorited" 
+                    : "export-button"
+                  }
                   onClick={() => this.getICS() }
                 >Export to ICS</button>
         </div>
