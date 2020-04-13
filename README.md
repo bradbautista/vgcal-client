@@ -34,7 +34,7 @@ Want to know what's coming out this month or the next? Have a Switch and an XBox
 <a name="features"></a>
 ## Features
 
-vgCal is a full-stack app that leverages the Fullcalendar and React Windowed Select components, along with the Giant Bomb API, to represent video game release-date information in familiar visual language and minimize the amount of effort required to find that information. It's a tool designed to do one thing and do it well.
+vgCal is a full-stack app that leverages the Fullcalendar and React Windowed Select components, along with the Giant Bomb API, to represent video game release-date information in familiar visual language and minimize the amount of effort required to find that information.
 
 ![vgCal filtering demonstration](https://github.com/bradbautista/vgcal-client/blob/master/images/vgcal-filtering.gif)
 
