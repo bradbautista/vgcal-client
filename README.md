@@ -36,11 +36,17 @@ Want to know what's coming out this month or the next? Have a Switch and an XBox
 
 vgCal is a full-stack app that leverages the Fullcalendar and React Windowed Select components, along with the Giant Bomb API, to represent video game release-date information in familiar visual language and minimize the amount of effort required to find that information. It's a tool designed to do one thing and do it well.
 
-It also allows users to quickly and easily filter that information by release platform, so they can easily identify cross-platform releases or check out the release landscape for their platform of choice.
+![vgCal filtering demonstration](https://github.com/bradbautista/vgcal-client/blob/master/images/vgcal-filtering.gif)
+
+It also allows users to quickly and easily filter that information by release platform, so they can easily identify cross-platform releases or check out the release landscape for their platform of choice. They can also simply search for their game.
+
+![vgCal searching and favoriting demonstration](https://github.com/bradbautista/vgcal-client/blob/master/images/vgcal-select-favorite.gif)
 
 Additionally, users can add releases to a list of favorites and generate an iCal file to add them to their calendar of choice.
 
 Favorites are stored in localstorage, so they'll persist across sessions without the need for account creation.
+
+![vgCal mobile demonstration](https://github.com/bradbautista/vgcal-client/blob/master/images/vgcal-mobile.gif)
 
 It utilizes the MediaQuery component of the react-responsive package to serve up different calendars to mobile and desktop users, allowing for a familiar and appropriate interface on any platform.
 
