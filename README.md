@@ -31,7 +31,7 @@ You could go to the game publisher's site, but that's just PR, so unless they're
 
 Why isn't there just a calendar, like my Google calendar, that just shows you what's coming out and what's recently come out?
 
-Now there is!
+**Now there is!**
 
 Want to know what's coming out this month or the next? Have a Switch and an XBox and want to see what's coming out for both? Want to know what's coming out around a friend's birthday? vgCal makes it easy to see at a glance what's coming out in a given week or month, and quick to search for specific games — even those without a set release date.
 
