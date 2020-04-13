@@ -77,7 +77,30 @@
 @media screen and (min-width: 1200px) {
 
     .favorites-header {
-        font-size: 26px;
+        font-size: 28px;
+        line-height: 30px;
+    }
+
+    .favorite-title {
+        word-break: break-word;
+    }
+
+}
+
+@media screen and (min-width: 1300px) {
+
+    .favorites-header {
+        font-size: 30px;
+        line-height: 32px;
+    }
+
+}
+
+@media screen and (min-width: 1400px) {
+
+    .favorites-header {
+        font-size: 32px;
+        line-height: 34px;
     }
 
 }

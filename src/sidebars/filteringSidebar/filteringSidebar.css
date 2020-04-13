@@ -40,9 +40,45 @@
 @media screen and (min-width: 1200px) {
 
     .filtering-sidebar {
-        width: 15vw;
-        /* flex-basis: 20%; */
-        /* padding-top: 20px; */
+        width: 20vw;
+        padding-top: 30px;
+        padding-left: 30px;
+        padding-right: 30px;
+        border-right: 5px solid var(--primary);
+        padding-bottom: 0px;
+        margin-left: 0px;
+        margin-top: 0px;
+        margin-bottom: 0px;
+        margin-right: 0px;
+        display: block;
+        height: auto;
+        overflow-y: auto;
+        overflow-x: hidden;
+        flex-grow: 1;
+        color: black;
+    }
+
+    .filtering-container {
+        padding-bottom: 15px;
+    }
+
+    .filters-header {
+        font-size: 32px;
+    }
+
+    .column-flex-container {
+        display: flex;
+        order: initial;
+        flex-direction: column;
+        height: 100%;
+    }
+
+}
+
+@media screen and (min-width: 1300px) {
+
+    .filtering-sidebar {
+        width: 20vw;
         padding-left: 30px;
         padding-right: 30px;
         border-right: 5px solid var(--primary);
@@ -61,24 +97,16 @@
         color: black;
     }
 
-    .filtering-container {
-        padding-bottom: 15px;
+    .filters-header {
+        font-size: 35px;
     }
-
-    .column-flex-container {
-        display: flex;
-        order: initial;
-        flex-direction: column;
-        height: 100%;
-    }
-
 }
+
 
 
 @media screen and (min-width: 1400px) {
 
     .filtering-sidebar {
-        padding-top: 30px;
     }
 
 }
@@ -86,6 +114,7 @@
 @media screen and (min-width: 1800px) {
 
     .filtering-sidebar {
+        width: 15vw;
     }
 
 }

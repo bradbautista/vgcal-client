@@ -171,6 +171,11 @@ h1, h2, h3, h4 {
     width: 100%;
   }
 
+  /* IF YOU CHANGE THIS, IT WILL BREAK THE CALENDAR SCROLL */
+  ._loading_overlay_wrapper {
+    display: flex;
+  }
+
   .fc-view-container {
     background-color: rgba(255, 255, 255, 0.85);
   }
@@ -180,8 +185,9 @@ h1, h2, h3, h4 {
     padding-left: 40px;
     padding-right: 40px;
     padding-top: 25px;
-    overflow: scroll;
+    overflow-y: scroll;
     overflow-x: hidden;
+    height: inherit;
   }
 
   .fc-left {
@@ -333,11 +339,10 @@ h1, h2, h3, h4 {
   .calendar-wrapper {
     justify-content: space-between;
   }
-
   
   ._loading_overlay_wrapper {
-    display: flex;
     width: 100%;
+    overflow: initial;
   }
 
   
