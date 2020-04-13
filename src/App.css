@@ -47,6 +47,7 @@ h1, h2, h3, h4 {
   font-family: 'Roboto Slab', serif;
   margin-top: 20px;
   margin-bottom: 20px;
+  text-align: center;
 }
 
 .fc-right {
