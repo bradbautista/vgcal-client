@@ -25,7 +25,7 @@ You could go to gaming sites, but all of their missions are broader than release
 
 Why isn't there just a calendar, like my Google calendar, that just shows you what's coming out and what's recently come out?
 
-# Now there is!
+### Now there is!
 
 ![vgCal desktop view](https://github.com/bradbautista/vgcal-client/blob/master/images/desktop-fullscreen.png)
 
