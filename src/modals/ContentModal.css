@@ -165,8 +165,19 @@
 @media screen and (min-width: 700px) {
 
     .modal-heading {
-        line-height: 70px;
         font-size: 65px;
+        padding-top: 25px;
+        padding-bottom: 5px;
+        padding-left: 40px;
+        padding-right: 80px;
+        line-height: 70px;
+    }
+
+    .release-info {
+        padding-left: 40px;
+        padding-right: 40px;
+        padding-bottom: 40px;
+        line-height: 32px;
     }
 
     .favorited {
@@ -183,20 +194,9 @@
 @media screen and (min-width: 1200px) {
 
     .modal-heading {
-        padding-top: 25px;
-        padding-bottom: 5px;
-        padding-left: 40px;
-        padding-right: 80px;
-        line-height: 70px;
         font-size: 72px;
     }
 
-    .release-info {
-        padding-left: 40px;
-        padding-right: 40px;
-        padding-bottom: 40px;
-        line-height: 32px;
-    }
 
     .info {
         font-size: 25px;
