@@ -1,8 +1,6 @@
-**********************WILL WANT MOBILE + DESKTOP PICS
-
 # [vgCal](https://vgcal.now.sh/)
 
-[![vgCal home](EVENTUAL LINK TO CLICKABLE PIC)](https://vgcal.now.sh/)
+[![vgCal home](https://github.com/bradbautista/vgcal-client/blob/master/images/logotype-stripe.png)](https://vgcal.now.sh/)
 
 ## Table of Contents
 [About](#about)
@@ -17,8 +15,6 @@
 <a name="about"></a>
 ## About
 
-![vgCal demonstration](EVENTUAL LINK TO VGCAL GIF)
-
 ### Finding release dates for games is harder than it needs to be.
 
 The easiest thing to do is Google it, but that's a gamble: You might get a Featured Snippet with the release date, or you might get a half-dozen links to articles that may or may not have the information, and then you have to read.
@@ -27,24 +23,30 @@ You could go Steam, but that's only going to get you Steam releases, and if you 
 
 You could go to gaming sites, but all of their missions are broader than release dates. Even if it's there, that information may be a half-dozen clicks deep, you may have to run a search, and then who knows how up-to-date their database is?
 
-You could go to the game publisher's site, but that's just PR, so unless they're pushing the release date publicly, it won't be easy to find — and this is already too much work anyway.
-
 Why isn't there just a calendar, like my Google calendar, that just shows you what's coming out and what's recently come out?
 
 **Now there is!**
+
+![vgCal desktop view](https://github.com/bradbautista/vgcal-client/blob/master/images/desktop-fullscreen.png)
 
 Want to know what's coming out this month or the next? Have a Switch and an XBox and want to see what's coming out for both? Want to know what's coming out around a friend's birthday? vgCal makes it easy to see at a glance what's coming out in a given week or month, and quick to search for specific games — even those without a set release date.
 
 <a name="features"></a>
 ## Features
 
-vgCal is a full-stack app that leverages the Fullcalendar and React Windowed Select components, along with the Giant Bomb API, to represent video game release-date information in familiar visual language and minimize the amount of effort required to find that information. It's a tool designed to do one thing and do it well.
+vgCal is a full-stack app that leverages the Fullcalendar and React Windowed Select components, along with the Giant Bomb API, to represent video game release-date information in familiar visual language and minimize the amount of effort required to find that information.
 
-It also allows users to quickly and easily filter that information by release platform, so they can easily identify cross-platform releases or check out the release landscape for their platform of choice.
+![vgCal filtering demonstration](https://github.com/bradbautista/vgcal-client/blob/master/images/vgcal-filtering.gif)
+
+It also allows users to quickly and easily filter that information by release platform, so they can easily identify cross-platform releases or check out the release landscape for their platform of choice. They can also simply search for their game.
+
+![vgCal searching and favoriting demonstration](https://github.com/bradbautista/vgcal-client/blob/master/images/vgcal-select-favorite.gif)
 
 Additionally, users can add releases to a list of favorites and generate an iCal file to add them to their calendar of choice.
 
 Favorites are stored in localstorage, so they'll persist across sessions without the need for account creation.
+
+![vgCal mobile demonstration](https://github.com/bradbautista/vgcal-client/blob/master/images/vgcal-mobile.gif)
 
 It utilizes the MediaQuery component of the react-responsive package to serve up different calendars to mobile and desktop users, allowing for a familiar and appropriate interface on any platform.
 
