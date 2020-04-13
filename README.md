@@ -15,8 +15,6 @@
 <a name="about"></a>
 ## About
 
-![vgCal demonstration](EVENTUAL LINK TO VGCAL GIF)
-
 ### Finding release dates for games is harder than it needs to be.
 
 The easiest thing to do is Google it, but that's a gamble: You might get a Featured Snippet with the release date, or you might get a half-dozen links to articles that may or may not have the information, and then you have to read.
@@ -25,11 +23,11 @@ You could go Steam, but that's only going to get you Steam releases, and if you 
 
 You could go to gaming sites, but all of their missions are broader than release dates. Even if it's there, that information may be a half-dozen clicks deep, you may have to run a search, and then who knows how up-to-date their database is?
 
-You could go to the game publisher's site, but that's just PR, so unless they're pushing the release date publicly, it won't be easy to find — and this is already too much work anyway.
-
 Why isn't there just a calendar, like my Google calendar, that just shows you what's coming out and what's recently come out?
 
 **Now there is!**
+
+![vgCal desktop view](https://github.com/bradbautista/vgcal-client/blob/master/images/desktop-fullscreen.png)
 
 Want to know what's coming out this month or the next? Have a Switch and an XBox and want to see what's coming out for both? Want to know what's coming out around a friend's birthday? vgCal makes it easy to see at a glance what's coming out in a given week or month, and quick to search for specific games — even those without a set release date.
 
