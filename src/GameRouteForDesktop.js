@@ -25,7 +25,7 @@ export default class GameRouteForDesktop extends Component {
 
         // Because the information in this.state.games is structured
         // differently than that in this.state.releases, but this.state.game
-        // dependants rely on the releases structure, we must give
+        // dependents rely on the releases structure, we must give
         // this data the same treatment it gets for consumption by the
         // select component
 
