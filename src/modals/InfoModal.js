@@ -101,7 +101,7 @@ export default class InfoModal extends Component {
                         triggerOpenedClassName="info-modal-prompt trigger"
                         transitionTime={275}
                     >
-                        <p className={"info-modal-graf"}>If a game has a set release date, it'll show up on the calendar. If it has an ambiguous release date (like September 2020), you can look for it in the searchable dropdown. Still don't see it? vgCal uses the Giant Bomb API to populate its calendar. Add it to the <a className="gb-link" href="https://www.giantbomb.com/games/" target="_blank" rel="noopener noreferrer">Giant Bomb wiki</a> and it'll show up in the calendar — and lots of other places on the Internet!</p>
+                        <p className={"info-modal-graf"}>If a game has a set release date, it'll show up on the calendar. If it has an ambiguous release date (like September 2020), you can look for it in the searchable dropdown. Still don't see it? vgCal uses the Giant Bomb API to populate its calendar. Add it to the <a className="gb-link" href="https://www.giantbomb.com/games/" target="_blank" rel="noopener noreferrer">Giant Bomb wiki</a> and it'll show up in the calendar — and lots of other places on the Web!</p>
                     </Collapsible>
 
                     <Collapsible
