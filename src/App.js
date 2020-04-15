@@ -110,8 +110,8 @@ export default class App extends Component {
       // calendar. By doing them here, we lose
       // the ability to configure on a per-calendar
       // basis, but also the need
-      tempObj.backgroundColor = `var(--primary)`
-      tempObj.borderColor = `var(--primary)`
+      tempObj.backgroundColor = `var(--primary)`;
+      tempObj.borderColor = `var(--primary)`;
       
       return tempObj
 
@@ -236,16 +236,11 @@ export default class App extends Component {
     const token = window.localStorage.getItem('vgCalToken');
 
     // If token === null, new visitor
-    // TODO:
-    // x Set firstVisit (or something) to true
-    // - show/don't show sidebar
-    // x add token to localstorage
-
     if (token === null) {
 
       this.setVisited(false);
       
-      window.localStorage.setItem('vgCalToken', `Hi there! This is just a token telling the site whether you've visited or not so I know whether to display the info sidebar for you. Have a nice day!`)
+      window.localStorage.setItem('vgCalToken', `Hi there! This is just a token telling the site whether you've visited or not so I know whether to display the info modal for you. Have a nice day!`)
 
     } else {
 
@@ -384,7 +379,7 @@ export default class App extends Component {
     // Because of this, it's actually easier to maintain the
     // routes & calendars if they're in one place, rather than split
     // across files. Two, GameRouteForDesktop and GameRouteForMobile,
-    // require using their own ComponentDidMount, so they're
+    // require utilization of their own ComponentDidMount, so they're
     // split into their own files
 
     return (

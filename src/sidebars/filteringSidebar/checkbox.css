@@ -1,4 +1,4 @@
-/* Customize the label (the container) */
+/* Label/container for our checkboxes */
 .checkbox-wrapper {
     display: block;
     position: relative;
@@ -12,7 +12,7 @@
     user-select: none;
 }
   
-/* Hide the browser's default checkbox */
+/* 'Hiding' the real checkbox */
 .checkbox-wrapper input {
     position: absolute;
     opacity: 0;
@@ -21,7 +21,7 @@
     width: 0;
 }
   
-/* Create a custom checkbox */
+/* Custom checkbox */
 .checkmark {
     position: absolute;
     border-radius: 3px;
@@ -32,17 +32,15 @@
     background-color: #eee;
 }
   
-/* On mouse-over, add a grey background color */
 .checkbox-wrapper:hover input ~ .checkmark {
     background-color: rgba(220, 20, 60, 0.85);
 }
   
-/* When the checkbox is checked, add a blue background */
 .checkbox-wrapper input:checked ~ .checkmark {
     background-color: var(--primary);
 }
   
-/* Create the checkmark/indicator (hidden when not checked) */
+/* Controls the icon/shape used for our custom checkmark */
 .checkmark:after {
     content: url("data:image/svg+xml,%3Csvg width='100%25' height='100%25' viewBox='0 0 427 427' version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' xml:space='preserve' xmlns:serif='http://www.serif.com/' style='fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:2;'%3E%3Cg transform='matrix(1,0,0,1,-0.001,0)'%3E%3Cg transform='matrix(0.0352814,0,0,0.0352814,0.000964719,0)'%3E%3Cg transform='matrix(21.35,0,0,21.35,-0.02035,0)'%3E%3Cg%3E%3Cpath d='M557.876,442.776L8.998,442.776C4.033,442.776 0.001,446.808 0.001,451.772L0.001,522.751C0.001,547.118 19.754,566.872 44.123,566.872L522.751,566.872C547.118,566.872 566.872,547.118 566.872,522.751L566.872,451.772C566.87,446.81 562.839,442.776 557.876,442.776Z' style='fill:white;fill-rule:nonzero;'/%3E%3Cpath d='M18.537,403.132L548.335,403.132C551.786,403.132 554.933,401.167 556.439,398.067C557.939,394.966 557.544,391.276 555.415,388.564L441.991,244.448C433.622,233.82 420.845,227.61 407.319,227.61L361.381,227.61L361.381,303.644C361.305,335.503 330.713,356.087 283.436,356.087C236.159,356.087 205.565,335.505 205.492,303.562L205.492,227.608L159.543,227.608C146.016,227.608 133.237,233.818 124.869,244.446L11.458,388.563C9.328,391.277 8.932,394.967 10.434,398.066C11.937,401.169 15.083,403.132 18.537,403.132Z' style='fill:white;fill-rule:nonzero;'/%3E%3Cpath d='M243.281,178.681L243.281,303.56C243.3,311.689 261.264,318.294 283.434,318.294C305.603,318.294 323.569,311.689 323.588,303.56L323.588,178.672C355.328,163.576 377.434,131.479 377.434,94C377.434,42.084 335.344,0 283.416,0C231.526,0 189.437,42.083 189.437,94C189.438,131.487 211.543,163.586 243.281,178.681Z' style='fill:white;fill-rule:nonzero;'/%3E%3C/g%3E%3C/g%3E%3C/g%3E%3C/g%3E%3C/svg%3E");;
     position: absolute;

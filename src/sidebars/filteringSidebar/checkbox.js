@@ -16,9 +16,7 @@ import './checkbox.css'
     static contextType = Context; 
 
     setChecked = (bool) => {
-
       this.setState({ checked: bool });
-
     }
 
     toggleCheck = (e) => {
@@ -63,7 +61,6 @@ import './checkbox.css'
           }
 
         }, 1);
-
 
       }
       

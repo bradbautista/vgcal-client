@@ -3,7 +3,6 @@
   --secondary: gainsboro;
 }
 
-
 h1, h2, h3, h4 {
   margin: 0;
   padding: 0;
@@ -140,20 +139,6 @@ h1, h2, h3, h4 {
   border: 0.5px solid white !important;
 }
 
-/* UNIFY TOOLBAR */
-  
-@media screen and (min-width: 600px) {
-  
-}
-
-
-/* TABLET BREAKPOINT */
-  
-@media screen and (min-width: 720px) {
-  
-}
-
-
 /* DESKTOP BREAKPOINT */
 
 @media screen and (min-width: 1200px) {
@@ -213,6 +198,10 @@ h1, h2, h3, h4 {
     border-radius: 0px;
     width: initial;
   }
+
+
+  /* !importants are !unfortunate, but it's the only way
+  to override the calendar styles in many cases */
 
   .fc-today-button {
     opacity: 1 !important;
@@ -302,8 +291,6 @@ h1, h2, h3, h4 {
   thead {
     font-family: 'Roboto Slab', serif;
   }
-
-
 
   /* Calendar collapses weeks without this */
   .fc-week {

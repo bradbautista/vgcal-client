@@ -33,12 +33,12 @@ export default class GameRouteForMobile extends Component {
               
             const tempObj = {};
 
-            tempObj.platforms = game.platforms
-            tempObj.image = game.boxart_url
-            tempObj.gameUrl = `/game/${game.game_name.split(' ').join('-')}`
-            tempObj.gameTitle = game.game_name
-            tempObj.releaseDate = game.release_date_utc
-            tempObj.description = game.game_description
+            tempObj.platforms = game.platforms;
+            tempObj.image = game.boxart_url;
+            tempObj.gameUrl = `/game/${game.game_name.split(' ').join('-')}`;
+            tempObj.gameTitle = game.game_name;
+            tempObj.releaseDate = game.release_date_utc;
+            tempObj.description = game.game_description;
 
             return tempObj;
 
