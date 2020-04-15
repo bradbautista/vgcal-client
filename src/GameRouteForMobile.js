@@ -19,10 +19,33 @@ export default class GameRouteForMobile extends Component {
 
         const gameName = this.props.match.params.game;
 
-        const selectedGame = this.context.releases.filter(game => game.gameUrl.split('/').pop() === gameName).shift();
+        console.log(gameName)
 
-        if (typeof selectedGame !== "undefined") {
-            this.context.setGame(selectedGame);
+        const selectedGame = this.context.games.filter(game => game.game_name.split(' ').join('-') === gameName)
+
+        // Because the information in this.state.games is structured
+        // differently than that in this.state.releases, but this.state.game
+        // dependants rely on the releases structure, we must give
+        // this data the same treatment it gets for consumption by the
+        // select component
+
+        const formattedGameObject = selectedGame.map(game => {
+              
+            const tempObj = {};
+
+            tempObj.platforms = game.platforms
+            tempObj.image = game.boxart_url
+            tempObj.gameUrl = `/game/${game.game_name.split(' ').join('-')}`
+            tempObj.gameTitle = game.game_name
+            tempObj.releaseDate = game.release_date_utc
+            tempObj.description = game.game_description
+
+            return tempObj;
+
+        }).shift();
+
+        if (typeof formattedGameObject !== "undefined") {
+            this.context.setGame(formattedGameObject);
             this.context.setLoading(false);
             this.context.setOpen(true);
         } else if (this.state.timer > 5) {
@@ -30,7 +53,7 @@ export default class GameRouteForMobile extends Component {
             this.context.setLoading(false);
         }
         else {
-            this.setState({ timer: this.state.timer + 1 });
+            this.setState({ timer: this.state.timer + 1 })
             this.context.setLoading(true);
             setTimeout(this.waitForGame, 1000);
         }

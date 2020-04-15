@@ -1,0 +1,102 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`resolves the url and renders the calendar 1`] = `
+<BrowserRouter>
+  <Router
+    history={
+      Object {
+        "action": "POP",
+        "block": [Function],
+        "createHref": [Function],
+        "go": [Function],
+        "goBack": [Function],
+        "goForward": [Function],
+        "length": 1,
+        "listen": [Function],
+        "location": Object {
+          "hash": "",
+          "pathname": "/",
+          "search": "",
+          "state": undefined,
+        },
+        "push": [Function],
+        "replace": [Function],
+      }
+    }
+  >
+    <GameRouteForDesktop
+      match={
+        Object {
+          "params": Object {
+            "game": "Namcot-Collection",
+          },
+        }
+      }
+    >
+      <FullCalendar
+        datesRender={[Function]}
+        defaultView="dayGridMonth"
+        eventClick={[Function]}
+        height="auto"
+        plugins={
+          Array [
+            Object {
+              "calendarInteractions": Array [],
+              "cmdFormatter": undefined,
+              "componentInteractions": Array [],
+              "datePointTransforms": Array [],
+              "dateSelectionTransformers": Array [],
+              "dateSpanTransforms": Array [],
+              "defaultView": "dayGridMonth",
+              "deps": Array [],
+              "elementDraggingImpl": undefined,
+              "eventDefMutationAppliers": Array [],
+              "eventDefParsers": Array [],
+              "eventDragMutationMassagers": Array [],
+              "eventDropTransformers": Array [],
+              "eventResizeJoinTransforms": Array [],
+              "eventSourceDefs": Array [],
+              "externalDefTransforms": Array [],
+              "id": "5",
+              "isDraggableTransformers": Array [],
+              "isPropsValid": null,
+              "namedTimeZonedImpl": undefined,
+              "optionChangeHandlers": Object {},
+              "recurringTypes": Array [],
+              "reducers": Array [],
+              "themeClasses": Object {},
+              "viewContainerModifiers": Array [],
+              "viewPropsTransformers": Array [],
+              "views": Object {
+                "dayGrid": [Function],
+                "dayGridDay": Object {
+                  "duration": Object {
+                    "days": 1,
+                  },
+                  "type": "dayGrid",
+                },
+                "dayGridMonth": Object {
+                  "duration": Object {
+                    "months": 1,
+                  },
+                  "fixedWeekCount": true,
+                  "monthMode": true,
+                  "type": "dayGrid",
+                },
+                "dayGridWeek": Object {
+                  "duration": Object {
+                    "weeks": 1,
+                  },
+                  "type": "dayGrid",
+                },
+              },
+            },
+          ]
+        }
+      >
+        <div />
+      </FullCalendar>
+    </GameRouteForDesktop>
+  </Router>
+</BrowserRouter>
+`;

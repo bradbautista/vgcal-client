@@ -74,16 +74,23 @@ import './Header.css'
   
     render() {
 
-      // Pointer for our select
+      // Pointer & font inheritance for our select
       const customStyles = {
         option: (styles) => ({
           ...styles,
           cursor: 'pointer',
+
         }),
         control: (styles) => ({
           ...styles,
           cursor: 'pointer',
         }),
+        input: base => ({
+          ...base,
+          '& input': {
+            font: 'inherit',
+          },
+        })
       }
   
       return (

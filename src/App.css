@@ -1,7 +1,5 @@
 :root {
   --primary: crimson;
-  /* --primary: #cc0067; */
-  /* --primary: rgb(64, 65, 82); */
   --secondary: gainsboro;
 }
 
@@ -315,7 +313,6 @@ h1, h2, h3, h4 {
   /* Necessary to effect the style */
   .fc-toolbar {
     margin-bottom: 1em !important;
-    /* height: 95px; */
     padding-left: 0;
     padding-right: 0;
     font-family: 'Roboto Slab', serif;

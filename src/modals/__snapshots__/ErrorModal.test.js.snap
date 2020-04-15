@@ -1,0 +1,290 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders the error modal correctly 1`] = `
+<BrowserRouter>
+  <Router
+    history={
+      Object {
+        "action": "POP",
+        "block": [Function],
+        "createHref": [Function],
+        "go": [Function],
+        "goBack": [Function],
+        "goForward": [Function],
+        "length": 1,
+        "listen": [Function],
+        "location": Object {
+          "hash": "",
+          "pathname": "/",
+          "search": "",
+          "state": undefined,
+        },
+        "push": [Function],
+        "replace": [Function],
+      }
+    }
+  >
+    <ErrorModal>
+      <Modal
+        animationDuration={500}
+        blockScroll={true}
+        center={false}
+        classNames={Object {}}
+        classes={
+          Object {
+            "closeButton": "styles_closeButton__20ID4",
+            "closeIcon": "styles_closeIcon__1QwbI",
+            "modal": "styles_modal__gNwvD",
+            "modalCenter": "styles_modalCenter__L9F2w",
+            "overlay": "styles_overlay__CLSq-",
+            "transitionEnter": "styles_transitionEnter__3j_-a",
+            "transitionEnterActive": "styles_transitionEnterActive___eQs7",
+            "transitionExit": "styles_transitionExit__1KmEf",
+            "transitionExitActive": "styles_transitionExitActive__1nQXw",
+          }
+        }
+        closeIconSize={28}
+        closeIconSvgPath={
+          <path
+            d="M28.5 9.62L26.38 7.5 18 15.88 9.62 7.5 7.5 9.62 15.88 18 7.5 26.38l2.12 2.12L18 20.12l8.38 8.38 2.12-2.12L20.12 18z"
+          />
+        }
+        closeOnEsc={true}
+        closeOnOverlayClick={true}
+        focusTrapOptions={Object {}}
+        focusTrapped={true}
+        open={true}
+        role="dialog"
+        showCloseIcon={true}
+        styles={
+          Object {
+            "closeButton": Object {
+              "cursor": "pointer",
+            },
+            "closeIcon": Object {
+              "fill": "white",
+              "filter": "drop-shadow( 3px 3px 2px rgba(0, 0, 0, .7))",
+            },
+            "modal": Object {
+              "backgroundColor": "white",
+              "borderRadius": "4px",
+              "padding": 0,
+              "width": "80%",
+            },
+            "overlay": Object {
+              "background": "rgba(0, 0, 0, 0.35)",
+            },
+          }
+        }
+      >
+        <Portal
+          containerInfo={
+            <div>
+              <div
+                class="styles_overlay__CLSq- styles_transitionEnter__3j_-a styles_transitionEnterActive___eQs7"
+                style="background: rgba(0, 0, 0, 0.35);"
+              >
+                <div
+                  aria-modal="true"
+                  class="styles_modal__gNwvD"
+                  role="dialog"
+                  style="padding: 0px; border-radius: 4px; width: 80%; background-color: white;"
+                >
+                  <div>
+                    <img
+                      alt="error"
+                      class="error"
+                      src="error.jpg"
+                    />
+                    <h2
+                      class="error-heading"
+                    >
+                      Bad link? vgCal can't find that game, or it doesn't exist. Reload to try again, or try another game.
+                    </h2>
+                    <button
+                      class="styles_closeButton__20ID4"
+                      style="cursor: pointer;"
+                    >
+                      <svg
+                        class="styles_closeIcon__1QwbI"
+                        height="28"
+                        style="fill: white; filter: drop-shadow( 3px 3px 2px rgba(0, 0, 0, .7));"
+                        viewBox="0 0 36 36"
+                        width="28"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          d="M28.5 9.62L26.38 7.5 18 15.88 9.62 7.5 7.5 9.62 15.88 18 7.5 26.38l2.12 2.12L18 20.12l8.38 8.38 2.12-2.12L20.12 18z"
+                        />
+                      </svg>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          }
+        >
+          <CSSTransition
+            appear={true}
+            classNames={
+              Object {
+                "appear": "styles_transitionEnter__3j_-a",
+                "appearActive": "styles_transitionEnterActive___eQs7",
+                "enter": "styles_transitionEnter__3j_-a",
+                "enterActive": "styles_transitionEnterActive___eQs7",
+                "exit": "styles_transitionExit__1KmEf",
+                "exitActive": "styles_transitionExitActive__1nQXw",
+              }
+            }
+            in={true}
+            onEntered={[Function]}
+            onExited={[Function]}
+            timeout={500}
+          >
+            <Transition
+              appear={true}
+              enter={true}
+              exit={true}
+              in={true}
+              mountOnEnter={false}
+              onEnter={[Function]}
+              onEntered={[Function]}
+              onEntering={[Function]}
+              onExit={[Function]}
+              onExited={[Function]}
+              onExiting={[Function]}
+              timeout={500}
+              unmountOnExit={false}
+            >
+              <div
+                className="styles_overlay__CLSq-"
+                onClick={[Function]}
+                style={
+                  Object {
+                    "background": "rgba(0, 0, 0, 0.35)",
+                  }
+                }
+              >
+                <div
+                  aria-modal="true"
+                  className="styles_modal__gNwvD"
+                  onClick={[Function]}
+                  onMouseDown={[Function]}
+                  onMouseUp={[Function]}
+                  role="dialog"
+                  style={
+                    Object {
+                      "backgroundColor": "white",
+                      "borderRadius": "4px",
+                      "padding": 0,
+                      "width": "80%",
+                    }
+                  }
+                >
+                  <FocusTrap
+                    _createFocusTrap={[Function]}
+                    active={true}
+                    focusTrapOptions={
+                      Object {
+                        "clickOutsideDeactivates": true,
+                      }
+                    }
+                    paused={false}
+                    tag="div"
+                  >
+                    <div>
+                      <img
+                        alt="error"
+                        className="error"
+                        src="error.jpg"
+                      />
+                      <h2
+                        className="error-heading"
+                      >
+                        Bad link? vgCal can't find that game, or it doesn't exist. Reload to try again, or try another game.
+                      </h2>
+                      <CloseIcon
+                        classNames={Object {}}
+                        classes={
+                          Object {
+                            "closeButton": "styles_closeButton__20ID4",
+                            "closeIcon": "styles_closeIcon__1QwbI",
+                            "modal": "styles_modal__gNwvD",
+                            "modalCenter": "styles_modalCenter__L9F2w",
+                            "overlay": "styles_overlay__CLSq-",
+                            "transitionEnter": "styles_transitionEnter__3j_-a",
+                            "transitionEnterActive": "styles_transitionEnterActive___eQs7",
+                            "transitionExit": "styles_transitionExit__1KmEf",
+                            "transitionExitActive": "styles_transitionExitActive__1nQXw",
+                          }
+                        }
+                        closeIconSize={28}
+                        closeIconSvgPath={
+                          <path
+                            d="M28.5 9.62L26.38 7.5 18 15.88 9.62 7.5 7.5 9.62 15.88 18 7.5 26.38l2.12 2.12L18 20.12l8.38 8.38 2.12-2.12L20.12 18z"
+                          />
+                        }
+                        id={null}
+                        onClickCloseIcon={[Function]}
+                        styles={
+                          Object {
+                            "closeButton": Object {
+                              "cursor": "pointer",
+                            },
+                            "closeIcon": Object {
+                              "fill": "white",
+                              "filter": "drop-shadow( 3px 3px 2px rgba(0, 0, 0, .7))",
+                            },
+                            "modal": Object {
+                              "backgroundColor": "white",
+                              "borderRadius": "4px",
+                              "padding": 0,
+                              "width": "80%",
+                            },
+                            "overlay": Object {
+                              "background": "rgba(0, 0, 0, 0.35)",
+                            },
+                          }
+                        }
+                      >
+                        <button
+                          className="styles_closeButton__20ID4"
+                          id={null}
+                          onClick={[Function]}
+                          style={
+                            Object {
+                              "cursor": "pointer",
+                            }
+                          }
+                        >
+                          <svg
+                            className="styles_closeIcon__1QwbI"
+                            height={28}
+                            style={
+                              Object {
+                                "fill": "white",
+                                "filter": "drop-shadow( 3px 3px 2px rgba(0, 0, 0, .7))",
+                              }
+                            }
+                            viewBox="0 0 36 36"
+                            width={28}
+                            xmlns="http://www.w3.org/2000/svg"
+                          >
+                            <path
+                              d="M28.5 9.62L26.38 7.5 18 15.88 9.62 7.5 7.5 9.62 15.88 18 7.5 26.38l2.12 2.12L18 20.12l8.38 8.38 2.12-2.12L20.12 18z"
+                            />
+                          </svg>
+                        </button>
+                      </CloseIcon>
+                    </div>
+                  </FocusTrap>
+                </div>
+              </div>
+            </Transition>
+          </CSSTransition>
+        </Portal>
+      </Modal>
+    </ErrorModal>
+  </Router>
+</BrowserRouter>
+`;

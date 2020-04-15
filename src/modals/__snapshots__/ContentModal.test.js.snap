@@ -1,0 +1,693 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders the content modal correctly when the game is favorited 1`] = `
+<BrowserRouter>
+  <Router
+    history={
+      Object {
+        "action": "POP",
+        "block": [Function],
+        "createHref": [Function],
+        "go": [Function],
+        "goBack": [Function],
+        "goForward": [Function],
+        "length": 1,
+        "listen": [Function],
+        "location": Object {
+          "hash": "",
+          "pathname": "/",
+          "search": "",
+          "state": undefined,
+        },
+        "push": [Function],
+        "replace": [Function],
+      }
+    }
+  >
+    <ErrorModal>
+      <Modal
+        animationDuration={500}
+        blockScroll={true}
+        center={false}
+        classNames={Object {}}
+        classes={
+          Object {
+            "closeButton": "styles_closeButton__20ID4",
+            "closeIcon": "styles_closeIcon__1QwbI",
+            "modal": "styles_modal__gNwvD",
+            "modalCenter": "styles_modalCenter__L9F2w",
+            "overlay": "styles_overlay__CLSq-",
+            "transitionEnter": "styles_transitionEnter__3j_-a",
+            "transitionEnterActive": "styles_transitionEnterActive___eQs7",
+            "transitionExit": "styles_transitionExit__1KmEf",
+            "transitionExitActive": "styles_transitionExitActive__1nQXw",
+          }
+        }
+        closeIconSize={28}
+        closeIconSvgPath={
+          <path
+            d="M28.5 9.62L26.38 7.5 18 15.88 9.62 7.5 7.5 9.62 15.88 18 7.5 26.38l2.12 2.12L18 20.12l8.38 8.38 2.12-2.12L20.12 18z"
+          />
+        }
+        closeOnEsc={true}
+        closeOnOverlayClick={true}
+        focusTrapOptions={Object {}}
+        focusTrapped={false}
+        open={true}
+        role="dialog"
+        showCloseIcon={true}
+        styles={
+          Object {
+            "closeButton": Object {
+              "cursor": "pointer",
+            },
+            "closeIcon": Object {
+              "fill": "white",
+              "filter": "drop-shadow( 3px 3px 2px rgba(0, 0, 0, .7))",
+            },
+            "modal": Object {
+              "backgroundColor": "white",
+              "borderRadius": "4px",
+              "padding": 0,
+              "width": "90%",
+            },
+            "overlay": Object {
+              "background": "rgba(0, 0, 0, 0.35)",
+            },
+          }
+        }
+      >
+        <Portal
+          containerInfo={
+            <div>
+              <div
+                class="styles_overlay__CLSq- styles_transitionEnter__3j_-a styles_transitionEnterActive___eQs7"
+                style="background: rgba(0, 0, 0, 0.35);"
+              >
+                <div
+                  aria-modal="true"
+                  class="styles_modal__gNwvD"
+                  role="dialog"
+                  style="padding: 0px; border-radius: 4px; width: 90%; background-color: white;"
+                >
+                  <img
+                    alt="boxart"
+                    class="boxart"
+                    src="https://giantbomb1.cbsistatic.com/uploads/original/0/30/3177321-job.png"
+                  />
+                  <h2
+                    class="modal-heading"
+                  >
+                    Good Job!
+                  </h2>
+                  <ul
+                    class="release-info"
+                  >
+                    <li
+                      class="info"
+                    >
+                      <strong>
+                        Release date:
+                      </strong>
+                       
+                      March 26, 2020
+                    </li>
+                    <li
+                      class="info"
+                    >
+                      <strong>
+                        Platforms:
+                      </strong>
+                       
+                      Nintendo Switch
+                    </li>
+                    <li
+                      class="info"
+                    >
+                      <strong>
+                        Description:
+                      </strong>
+                       
+                      Solve workplace problems with the power of physics in this action puzzle game for the Nintendo Switch.
+                    </li>
+                    <button
+                      class="favorited fav-button"
+                    >
+                      Added to favorites
+                    </button>
+                  </ul>
+                  <button
+                    class="styles_closeButton__20ID4"
+                    style="cursor: pointer;"
+                  >
+                    <svg
+                      class="styles_closeIcon__1QwbI"
+                      height="28"
+                      style="fill: white; filter: drop-shadow( 3px 3px 2px rgba(0, 0, 0, .7));"
+                      viewBox="0 0 36 36"
+                      width="28"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        d="M28.5 9.62L26.38 7.5 18 15.88 9.62 7.5 7.5 9.62 15.88 18 7.5 26.38l2.12 2.12L18 20.12l8.38 8.38 2.12-2.12L20.12 18z"
+                      />
+                    </svg>
+                  </button>
+                </div>
+              </div>
+            </div>
+          }
+        >
+          <CSSTransition
+            appear={true}
+            classNames={
+              Object {
+                "appear": "styles_transitionEnter__3j_-a",
+                "appearActive": "styles_transitionEnterActive___eQs7",
+                "enter": "styles_transitionEnter__3j_-a",
+                "enterActive": "styles_transitionEnterActive___eQs7",
+                "exit": "styles_transitionExit__1KmEf",
+                "exitActive": "styles_transitionExitActive__1nQXw",
+              }
+            }
+            in={true}
+            onEntered={[Function]}
+            onExited={[Function]}
+            timeout={500}
+          >
+            <Transition
+              appear={true}
+              enter={true}
+              exit={true}
+              in={true}
+              mountOnEnter={false}
+              onEnter={[Function]}
+              onEntered={[Function]}
+              onEntering={[Function]}
+              onExit={[Function]}
+              onExited={[Function]}
+              onExiting={[Function]}
+              timeout={500}
+              unmountOnExit={false}
+            >
+              <div
+                className="styles_overlay__CLSq-"
+                onClick={[Function]}
+                style={
+                  Object {
+                    "background": "rgba(0, 0, 0, 0.35)",
+                  }
+                }
+              >
+                <div
+                  aria-modal="true"
+                  className="styles_modal__gNwvD"
+                  onClick={[Function]}
+                  onMouseDown={[Function]}
+                  onMouseUp={[Function]}
+                  role="dialog"
+                  style={
+                    Object {
+                      "backgroundColor": "white",
+                      "borderRadius": "4px",
+                      "padding": 0,
+                      "width": "90%",
+                    }
+                  }
+                >
+                  <img
+                    alt="boxart"
+                    className="boxart"
+                    src="https://giantbomb1.cbsistatic.com/uploads/original/0/30/3177321-job.png"
+                  />
+                  <h2
+                    className="modal-heading"
+                  >
+                    Good Job!
+                  </h2>
+                  <ul
+                    className="release-info"
+                  >
+                    <li
+                      className="info"
+                    >
+                      <strong>
+                        Release date:
+                      </strong>
+                       
+                      March 26, 2020
+                    </li>
+                    <li
+                      className="info"
+                    >
+                      <strong>
+                        Platforms:
+                      </strong>
+                       
+                      Nintendo Switch
+                    </li>
+                    <li
+                      className="info"
+                    >
+                      <strong>
+                        Description:
+                      </strong>
+                       
+                      Solve workplace problems with the power of physics in this action puzzle game for the Nintendo Switch.
+                    </li>
+                    <button
+                      className="favorited fav-button"
+                      onClick={[Function]}
+                    >
+                      Added to favorites
+                    </button>
+                  </ul>
+                  <CloseIcon
+                    classNames={Object {}}
+                    classes={
+                      Object {
+                        "closeButton": "styles_closeButton__20ID4",
+                        "closeIcon": "styles_closeIcon__1QwbI",
+                        "modal": "styles_modal__gNwvD",
+                        "modalCenter": "styles_modalCenter__L9F2w",
+                        "overlay": "styles_overlay__CLSq-",
+                        "transitionEnter": "styles_transitionEnter__3j_-a",
+                        "transitionEnterActive": "styles_transitionEnterActive___eQs7",
+                        "transitionExit": "styles_transitionExit__1KmEf",
+                        "transitionExitActive": "styles_transitionExitActive__1nQXw",
+                      }
+                    }
+                    closeIconSize={28}
+                    closeIconSvgPath={
+                      <path
+                        d="M28.5 9.62L26.38 7.5 18 15.88 9.62 7.5 7.5 9.62 15.88 18 7.5 26.38l2.12 2.12L18 20.12l8.38 8.38 2.12-2.12L20.12 18z"
+                      />
+                    }
+                    id={null}
+                    onClickCloseIcon={[Function]}
+                    styles={
+                      Object {
+                        "closeButton": Object {
+                          "cursor": "pointer",
+                        },
+                        "closeIcon": Object {
+                          "fill": "white",
+                          "filter": "drop-shadow( 3px 3px 2px rgba(0, 0, 0, .7))",
+                        },
+                        "modal": Object {
+                          "backgroundColor": "white",
+                          "borderRadius": "4px",
+                          "padding": 0,
+                          "width": "90%",
+                        },
+                        "overlay": Object {
+                          "background": "rgba(0, 0, 0, 0.35)",
+                        },
+                      }
+                    }
+                  >
+                    <button
+                      className="styles_closeButton__20ID4"
+                      id={null}
+                      onClick={[Function]}
+                      style={
+                        Object {
+                          "cursor": "pointer",
+                        }
+                      }
+                    >
+                      <svg
+                        className="styles_closeIcon__1QwbI"
+                        height={28}
+                        style={
+                          Object {
+                            "fill": "white",
+                            "filter": "drop-shadow( 3px 3px 2px rgba(0, 0, 0, .7))",
+                          }
+                        }
+                        viewBox="0 0 36 36"
+                        width={28}
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          d="M28.5 9.62L26.38 7.5 18 15.88 9.62 7.5 7.5 9.62 15.88 18 7.5 26.38l2.12 2.12L18 20.12l8.38 8.38 2.12-2.12L20.12 18z"
+                        />
+                      </svg>
+                    </button>
+                  </CloseIcon>
+                </div>
+              </div>
+            </Transition>
+          </CSSTransition>
+        </Portal>
+      </Modal>
+    </ErrorModal>
+  </Router>
+</BrowserRouter>
+`;
+
+exports[`renders the content modal correctly when the game is not favorited 1`] = `
+<BrowserRouter>
+  <Router
+    history={
+      Object {
+        "action": "POP",
+        "block": [Function],
+        "createHref": [Function],
+        "go": [Function],
+        "goBack": [Function],
+        "goForward": [Function],
+        "length": 1,
+        "listen": [Function],
+        "location": Object {
+          "hash": "",
+          "pathname": "/",
+          "search": "",
+          "state": undefined,
+        },
+        "push": [Function],
+        "replace": [Function],
+      }
+    }
+  >
+    <ErrorModal>
+      <Modal
+        animationDuration={500}
+        blockScroll={true}
+        center={false}
+        classNames={Object {}}
+        classes={
+          Object {
+            "closeButton": "styles_closeButton__20ID4",
+            "closeIcon": "styles_closeIcon__1QwbI",
+            "modal": "styles_modal__gNwvD",
+            "modalCenter": "styles_modalCenter__L9F2w",
+            "overlay": "styles_overlay__CLSq-",
+            "transitionEnter": "styles_transitionEnter__3j_-a",
+            "transitionEnterActive": "styles_transitionEnterActive___eQs7",
+            "transitionExit": "styles_transitionExit__1KmEf",
+            "transitionExitActive": "styles_transitionExitActive__1nQXw",
+          }
+        }
+        closeIconSize={28}
+        closeIconSvgPath={
+          <path
+            d="M28.5 9.62L26.38 7.5 18 15.88 9.62 7.5 7.5 9.62 15.88 18 7.5 26.38l2.12 2.12L18 20.12l8.38 8.38 2.12-2.12L20.12 18z"
+          />
+        }
+        closeOnEsc={true}
+        closeOnOverlayClick={true}
+        focusTrapOptions={Object {}}
+        focusTrapped={false}
+        open={true}
+        role="dialog"
+        showCloseIcon={true}
+        styles={
+          Object {
+            "closeButton": Object {
+              "cursor": "pointer",
+            },
+            "closeIcon": Object {
+              "fill": "white",
+              "filter": "drop-shadow( 3px 3px 2px rgba(0, 0, 0, .7))",
+            },
+            "modal": Object {
+              "backgroundColor": "white",
+              "borderRadius": "4px",
+              "padding": 0,
+              "width": "90%",
+            },
+            "overlay": Object {
+              "background": "rgba(0, 0, 0, 0.35)",
+            },
+          }
+        }
+      >
+        <Portal
+          containerInfo={
+            <div>
+              <div
+                class="styles_overlay__CLSq- styles_transitionEnter__3j_-a styles_transitionEnterActive___eQs7"
+                style="background: rgba(0, 0, 0, 0.35);"
+              >
+                <div
+                  aria-modal="true"
+                  class="styles_modal__gNwvD"
+                  role="dialog"
+                  style="padding: 0px; border-radius: 4px; width: 90%; background-color: white;"
+                >
+                  <img
+                    alt="boxart"
+                    class="boxart"
+                    src="https://giantbomb1.cbsistatic.com/uploads/original/0/30/3177321-job.png"
+                  />
+                  <h2
+                    class="modal-heading"
+                  >
+                    Good Job!
+                  </h2>
+                  <ul
+                    class="release-info"
+                  >
+                    <li
+                      class="info"
+                    >
+                      <strong>
+                        Release date:
+                      </strong>
+                       
+                      March 26, 2020
+                    </li>
+                    <li
+                      class="info"
+                    >
+                      <strong>
+                        Platforms:
+                      </strong>
+                       
+                      Nintendo Switch
+                    </li>
+                    <li
+                      class="info"
+                    >
+                      <strong>
+                        Description:
+                      </strong>
+                       
+                      Solve workplace problems with the power of physics in this action puzzle game for the Nintendo Switch.
+                    </li>
+                    <button
+                      class="unfavorited fav-button"
+                    >
+                      Add to favorites
+                    </button>
+                  </ul>
+                  <button
+                    class="styles_closeButton__20ID4"
+                    style="cursor: pointer;"
+                  >
+                    <svg
+                      class="styles_closeIcon__1QwbI"
+                      height="28"
+                      style="fill: white; filter: drop-shadow( 3px 3px 2px rgba(0, 0, 0, .7));"
+                      viewBox="0 0 36 36"
+                      width="28"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        d="M28.5 9.62L26.38 7.5 18 15.88 9.62 7.5 7.5 9.62 15.88 18 7.5 26.38l2.12 2.12L18 20.12l8.38 8.38 2.12-2.12L20.12 18z"
+                      />
+                    </svg>
+                  </button>
+                </div>
+              </div>
+            </div>
+          }
+        >
+          <CSSTransition
+            appear={true}
+            classNames={
+              Object {
+                "appear": "styles_transitionEnter__3j_-a",
+                "appearActive": "styles_transitionEnterActive___eQs7",
+                "enter": "styles_transitionEnter__3j_-a",
+                "enterActive": "styles_transitionEnterActive___eQs7",
+                "exit": "styles_transitionExit__1KmEf",
+                "exitActive": "styles_transitionExitActive__1nQXw",
+              }
+            }
+            in={true}
+            onEntered={[Function]}
+            onExited={[Function]}
+            timeout={500}
+          >
+            <Transition
+              appear={true}
+              enter={true}
+              exit={true}
+              in={true}
+              mountOnEnter={false}
+              onEnter={[Function]}
+              onEntered={[Function]}
+              onEntering={[Function]}
+              onExit={[Function]}
+              onExited={[Function]}
+              onExiting={[Function]}
+              timeout={500}
+              unmountOnExit={false}
+            >
+              <div
+                className="styles_overlay__CLSq-"
+                onClick={[Function]}
+                style={
+                  Object {
+                    "background": "rgba(0, 0, 0, 0.35)",
+                  }
+                }
+              >
+                <div
+                  aria-modal="true"
+                  className="styles_modal__gNwvD"
+                  onClick={[Function]}
+                  onMouseDown={[Function]}
+                  onMouseUp={[Function]}
+                  role="dialog"
+                  style={
+                    Object {
+                      "backgroundColor": "white",
+                      "borderRadius": "4px",
+                      "padding": 0,
+                      "width": "90%",
+                    }
+                  }
+                >
+                  <img
+                    alt="boxart"
+                    className="boxart"
+                    src="https://giantbomb1.cbsistatic.com/uploads/original/0/30/3177321-job.png"
+                  />
+                  <h2
+                    className="modal-heading"
+                  >
+                    Good Job!
+                  </h2>
+                  <ul
+                    className="release-info"
+                  >
+                    <li
+                      className="info"
+                    >
+                      <strong>
+                        Release date:
+                      </strong>
+                       
+                      March 26, 2020
+                    </li>
+                    <li
+                      className="info"
+                    >
+                      <strong>
+                        Platforms:
+                      </strong>
+                       
+                      Nintendo Switch
+                    </li>
+                    <li
+                      className="info"
+                    >
+                      <strong>
+                        Description:
+                      </strong>
+                       
+                      Solve workplace problems with the power of physics in this action puzzle game for the Nintendo Switch.
+                    </li>
+                    <button
+                      className="unfavorited fav-button"
+                      onClick={[Function]}
+                    >
+                      Add to favorites
+                    </button>
+                  </ul>
+                  <CloseIcon
+                    classNames={Object {}}
+                    classes={
+                      Object {
+                        "closeButton": "styles_closeButton__20ID4",
+                        "closeIcon": "styles_closeIcon__1QwbI",
+                        "modal": "styles_modal__gNwvD",
+                        "modalCenter": "styles_modalCenter__L9F2w",
+                        "overlay": "styles_overlay__CLSq-",
+                        "transitionEnter": "styles_transitionEnter__3j_-a",
+                        "transitionEnterActive": "styles_transitionEnterActive___eQs7",
+                        "transitionExit": "styles_transitionExit__1KmEf",
+                        "transitionExitActive": "styles_transitionExitActive__1nQXw",
+                      }
+                    }
+                    closeIconSize={28}
+                    closeIconSvgPath={
+                      <path
+                        d="M28.5 9.62L26.38 7.5 18 15.88 9.62 7.5 7.5 9.62 15.88 18 7.5 26.38l2.12 2.12L18 20.12l8.38 8.38 2.12-2.12L20.12 18z"
+                      />
+                    }
+                    id={null}
+                    onClickCloseIcon={[Function]}
+                    styles={
+                      Object {
+                        "closeButton": Object {
+                          "cursor": "pointer",
+                        },
+                        "closeIcon": Object {
+                          "fill": "white",
+                          "filter": "drop-shadow( 3px 3px 2px rgba(0, 0, 0, .7))",
+                        },
+                        "modal": Object {
+                          "backgroundColor": "white",
+                          "borderRadius": "4px",
+                          "padding": 0,
+                          "width": "90%",
+                        },
+                        "overlay": Object {
+                          "background": "rgba(0, 0, 0, 0.35)",
+                        },
+                      }
+                    }
+                  >
+                    <button
+                      className="styles_closeButton__20ID4"
+                      id={null}
+                      onClick={[Function]}
+                      style={
+                        Object {
+                          "cursor": "pointer",
+                        }
+                      }
+                    >
+                      <svg
+                        className="styles_closeIcon__1QwbI"
+                        height={28}
+                        style={
+                          Object {
+                            "fill": "white",
+                            "filter": "drop-shadow( 3px 3px 2px rgba(0, 0, 0, .7))",
+                          }
+                        }
+                        viewBox="0 0 36 36"
+                        width={28}
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          d="M28.5 9.62L26.38 7.5 18 15.88 9.62 7.5 7.5 9.62 15.88 18 7.5 26.38l2.12 2.12L18 20.12l8.38 8.38 2.12-2.12L20.12 18z"
+                        />
+                      </svg>
+                    </button>
+                  </CloseIcon>
+                </div>
+              </div>
+            </Transition>
+          </CSSTransition>
+        </Portal>
+      </Modal>
+    </ErrorModal>
+  </Router>
+</BrowserRouter>
+`;

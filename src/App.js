@@ -507,8 +507,6 @@ export default class App extends Component {
                           plugins={[ dayGridPlugin ]} 
                           events={ this.state.releases }
                           eventClick={ this.handleClick }
-                          // eventBackgroundColor={"var(--primary)"}
-                          // eventBorderColor={"white"}
                           fixedWeekCount={ false }
                           height={ "auto" }
                           ref={this.calendar}

@@ -1,0 +1,21 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Renders the checkbox as expected 1`] = `
+<label
+  className="checkbox-wrapper"
+  htmlFor="PlayStation"
+>
+  <input
+    checked={false}
+    id="PlayStation"
+    name="PlayStation"
+    onChange={[Function]}
+    type="checkbox"
+    value="PlayStation"
+  />
+  <span
+    className="checkmark"
+  />
+  PlayStation
+</label>
+`;

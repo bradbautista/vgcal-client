@@ -1,0 +1,874 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders the info modal correctly 1`] = `
+<BrowserRouter>
+  <Router
+    history={
+      Object {
+        "action": "POP",
+        "block": [Function],
+        "createHref": [Function],
+        "go": [Function],
+        "goBack": [Function],
+        "goForward": [Function],
+        "length": 1,
+        "listen": [Function],
+        "location": Object {
+          "hash": "",
+          "pathname": "/",
+          "search": "",
+          "state": undefined,
+        },
+        "push": [Function],
+        "replace": [Function],
+      }
+    }
+  >
+    <InfoModal>
+      <Modal
+        animationDuration={500}
+        blockScroll={true}
+        center={false}
+        classNames={
+          Object {
+            "modal": "react-responsive-modal",
+            "overlay": "react-responsive-modal-overlay",
+          }
+        }
+        classes={
+          Object {
+            "closeButton": "styles_closeButton__20ID4",
+            "closeIcon": "styles_closeIcon__1QwbI",
+            "modal": "styles_modal__gNwvD",
+            "modalCenter": "styles_modalCenter__L9F2w",
+            "overlay": "styles_overlay__CLSq-",
+            "transitionEnter": "styles_transitionEnter__3j_-a",
+            "transitionEnterActive": "styles_transitionEnterActive___eQs7",
+            "transitionExit": "styles_transitionExit__1KmEf",
+            "transitionExitActive": "styles_transitionExitActive__1nQXw",
+          }
+        }
+        closeIconSize={28}
+        closeIconSvgPath={
+          <path
+            d="M28.5 9.62L26.38 7.5 18 15.88 9.62 7.5 7.5 9.62 15.88 18 7.5 26.38l2.12 2.12L18 20.12l8.38 8.38 2.12-2.12L20.12 18z"
+          />
+        }
+        closeOnEsc={true}
+        closeOnOverlayClick={true}
+        focusTrapOptions={Object {}}
+        focusTrapped={false}
+        onClose={[Function]}
+        open={true}
+        role="dialog"
+        showCloseIcon={true}
+        styles={
+          Object {
+            "closeButton": Object {
+              "cursor": "pointer",
+            },
+            "closeIcon": Object {
+              "fill": "white",
+              "filter": "drop-shadow( 3px 3px 2px rgba(0, 0, 0, .7))",
+            },
+            "modal": Object {
+              "backgroundColor": "white",
+              "borderRadius": "4px",
+              "padding": 0,
+            },
+            "overlay": Object {
+              "background": "rgba(0, 0, 0, 0.35)",
+            },
+          }
+        }
+      >
+        <Portal
+          containerInfo={
+            <div>
+              <div
+                class="styles_overlay__CLSq- react-responsive-modal-overlay styles_transitionEnter__3j_-a styles_transitionEnterActive___eQs7"
+                style="background: rgba(0, 0, 0, 0.35);"
+              >
+                <div
+                  aria-modal="true"
+                  class="styles_modal__gNwvD react-responsive-modal"
+                  role="dialog"
+                  style="padding: 0px; border-radius: 4px; background-color: white;"
+                >
+                  <img
+                    alt="hello"
+                    class="boxart"
+                    src="wave.gif"
+                  />
+                  <div
+                    class="info-modal"
+                  >
+                    <h2
+                      class="info-modal-header"
+                    >
+                      Welcome to vgCal!
+                    </h2>
+                    <h3
+                      class="info-modal-lede"
+                    >
+                      vgCal helps you find video-game release information quickly.
+                    </h3>
+                    <p
+                      class="info-modal-graf"
+                    >
+                      For more info on how to use the site, click a heading below. To see this info again, click on the question-mark button in the top bar.
+                    </p>
+                    <div
+                      class="Collapsible collapsible"
+                    >
+                      <span
+                        class="Collapsible__trigger is-closed  info-modal-prompt trigger"
+                      >
+                        How do I use this?
+                      </span>
+                      <div
+                        class="Collapsible__contentOuter"
+                        style="height: 0px; transition: height 275ms linear; overflow: hidden;"
+                      >
+                        <div
+                          class="Collapsible__contentInner"
+                        >
+                          <p
+                            class="info-modal-graf"
+                          >
+                            Click the left and right arrows above the calendar to change weeks or months. Click "today" to return to the present week or month.
+                          </p>
+                          <p
+                            class="info-modal-graf"
+                          >
+                            Click on a release to get more information about that release.
+                          </p>
+                          <p
+                            class="info-modal-graf"
+                          >
+                            Know the name of the game but not the date? You can search for it in the searchable dropdown in the top bar.
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                    <div
+                      class="Collapsible collapsible"
+                    >
+                      <span
+                        class="Collapsible__trigger is-closed  info-modal-prompt trigger"
+                      >
+                        What does "Export to ICS" do?
+                      </span>
+                      <div
+                        class="Collapsible__contentOuter"
+                        style="height: 0px; transition: height 275ms linear; overflow: hidden;"
+                      >
+                        <div
+                          class="Collapsible__contentInner"
+                        >
+                          <p
+                            class="info-modal-graf"
+                          >
+                            Click on a release, click "Add to favorites" and it will show up in your favorites list. With one or more favorites in your list, click "Export to ICS" in the favorites bar. Your browser will download a calendar file you can import into the calendar of your choosing with the release dates as events.
+                          </p>
+                          <p
+                            class="info-modal-graf"
+                          >
+                            vgCal will remember your favorites, but will forget them if you switch devices or browsers.
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                    <div
+                      class="Collapsible collapsible"
+                    >
+                      <span
+                        class="Collapsible__trigger is-closed  info-modal-prompt trigger"
+                      >
+                        I want to go to a specific date.
+                      </span>
+                      <div
+                        class="Collapsible__contentOuter"
+                        style="height: 0px; transition: height 275ms linear; overflow: hidden;"
+                      >
+                        <div
+                          class="Collapsible__contentInner"
+                        >
+                          <p
+                            class="info-modal-graf"
+                          >
+                            Do it like this: https://vgcal.now.sh/date/12-31-2020
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                    <div
+                      class="Collapsible collapsible"
+                    >
+                      <span
+                        class="Collapsible__trigger is-closed  info-modal-prompt trigger"
+                      >
+                        I want to go to a specific game.
+                      </span>
+                      <div
+                        class="Collapsible__contentOuter"
+                        style="height: 0px; transition: height 275ms linear; overflow: hidden;"
+                      >
+                        <div
+                          class="Collapsible__contentInner"
+                        >
+                          <p
+                            class="info-modal-graf"
+                          >
+                            Do it like this: https://vgcal.now.sh/game/Mount-&-Blade-II:-Bannerlord
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                    <div
+                      class="Collapsible collapsible"
+                    >
+                      <span
+                        class="Collapsible__trigger is-closed  info-modal-prompt trigger"
+                      >
+                        I don't see the game I'm looking for.
+                      </span>
+                      <div
+                        class="Collapsible__contentOuter"
+                        style="height: 0px; transition: height 275ms linear; overflow: hidden;"
+                      >
+                        <div
+                          class="Collapsible__contentInner"
+                        >
+                          <p
+                            class="info-modal-graf"
+                          >
+                            If a game has a set release date, it'll show up on the calendar. If it has an ambiguous release date (like September 2020), you can look for it in the searchable dropdown. Still don't see it? vgCal uses the Giant Bomb API to populate its calendar. Add it to the 
+                            <a
+                              class="gb-link"
+                              href="https://www.giantbomb.com/games/"
+                              rel="noopener noreferrer"
+                              target="_blank"
+                            >
+                              Giant Bomb wiki
+                            </a>
+                             and it'll show up in the calendar — and lots of other places on the Internet!
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                    <div
+                      class="Collapsible collapsible"
+                    >
+                      <span
+                        class="Collapsible__trigger is-closed  info-modal-prompt trigger"
+                      >
+                        Why does the calendar only span 2019 to 2021?
+                      </span>
+                      <div
+                        class="Collapsible__contentOuter"
+                        style="height: 0px; transition: height 275ms linear; overflow: hidden;"
+                      >
+                        <div
+                          class="Collapsible__contentInner"
+                        >
+                          <p
+                            class="info-modal-graf"
+                          >
+                            Right now vgCal's database is size-limited by the database provider. I'm looking into migrating the database to a different provider, which would allow for a much larger dataset.
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <button
+                    class="styles_closeButton__20ID4"
+                    style="cursor: pointer;"
+                  >
+                    <svg
+                      class="styles_closeIcon__1QwbI"
+                      height="28"
+                      style="fill: white; filter: drop-shadow( 3px 3px 2px rgba(0, 0, 0, .7));"
+                      viewBox="0 0 36 36"
+                      width="28"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        d="M28.5 9.62L26.38 7.5 18 15.88 9.62 7.5 7.5 9.62 15.88 18 7.5 26.38l2.12 2.12L18 20.12l8.38 8.38 2.12-2.12L20.12 18z"
+                      />
+                    </svg>
+                  </button>
+                </div>
+              </div>
+            </div>
+          }
+        >
+          <CSSTransition
+            appear={true}
+            classNames={
+              Object {
+                "appear": "styles_transitionEnter__3j_-a",
+                "appearActive": "styles_transitionEnterActive___eQs7",
+                "enter": "styles_transitionEnter__3j_-a",
+                "enterActive": "styles_transitionEnterActive___eQs7",
+                "exit": "styles_transitionExit__1KmEf",
+                "exitActive": "styles_transitionExitActive__1nQXw",
+              }
+            }
+            in={true}
+            onEntered={[Function]}
+            onExited={[Function]}
+            timeout={500}
+          >
+            <Transition
+              appear={true}
+              enter={true}
+              exit={true}
+              in={true}
+              mountOnEnter={false}
+              onEnter={[Function]}
+              onEntered={[Function]}
+              onEntering={[Function]}
+              onExit={[Function]}
+              onExited={[Function]}
+              onExiting={[Function]}
+              timeout={500}
+              unmountOnExit={false}
+            >
+              <div
+                className="styles_overlay__CLSq- react-responsive-modal-overlay"
+                onClick={[Function]}
+                style={
+                  Object {
+                    "background": "rgba(0, 0, 0, 0.35)",
+                  }
+                }
+              >
+                <div
+                  aria-modal="true"
+                  className="styles_modal__gNwvD react-responsive-modal"
+                  onClick={[Function]}
+                  onMouseDown={[Function]}
+                  onMouseUp={[Function]}
+                  role="dialog"
+                  style={
+                    Object {
+                      "backgroundColor": "white",
+                      "borderRadius": "4px",
+                      "padding": 0,
+                    }
+                  }
+                >
+                  <img
+                    alt="hello"
+                    className="boxart"
+                    src="wave.gif"
+                  />
+                  <div
+                    className="info-modal"
+                  >
+                    <h2
+                      className="info-modal-header"
+                    >
+                      Welcome to vgCal!
+                    </h2>
+                    <h3
+                      className="info-modal-lede"
+                    >
+                      vgCal helps you find video-game release information quickly.
+                    </h3>
+                    <p
+                      className="info-modal-graf"
+                    >
+                      For more info on how to use the site, click a heading below. To see this info again, click on the question-mark button in the top bar.
+                    </p>
+                    <Collapsible
+                      className="collapsible"
+                      classParentString="Collapsible"
+                      contentContainerTagName="div"
+                      contentInnerClassName=""
+                      contentOuterClassName=""
+                      easing="linear"
+                      lazyRender={false}
+                      onClose={[Function]}
+                      onClosing={[Function]}
+                      onOpen={[Function]}
+                      onOpening={[Function]}
+                      open={false}
+                      openedClassName="collapsible"
+                      overflowWhenOpen="hidden"
+                      tabIndex={null}
+                      transitionCloseTime={null}
+                      transitionTime={275}
+                      trigger="How do I use this?"
+                      triggerClassName="info-modal-prompt trigger"
+                      triggerDisabled={false}
+                      triggerOpenedClassName="info-modal-prompt trigger"
+                      triggerSibling={null}
+                      triggerStyle={null}
+                      triggerTagName="span"
+                    >
+                      <div
+                        className="Collapsible collapsible"
+                      >
+                        <span
+                          className="Collapsible__trigger is-closed  info-modal-prompt trigger"
+                          onClick={[Function]}
+                          onKeyPress={[Function]}
+                          style={null}
+                          tabIndex={null}
+                        >
+                          How do I use this?
+                        </span>
+                        <div
+                          className="Collapsible__contentOuter"
+                          onTransitionEnd={[Function]}
+                          style={
+                            Object {
+                              "WebkitTransition": "height 275ms linear",
+                              "height": 0,
+                              "msTransition": "height 275ms linear",
+                              "overflow": "hidden",
+                              "transition": "height 275ms linear",
+                            }
+                          }
+                        >
+                          <div
+                            className="Collapsible__contentInner"
+                          >
+                            <p
+                              className="info-modal-graf"
+                            >
+                              Click the left and right arrows above the calendar to change weeks or months. Click "today" to return to the present week or month.
+                            </p>
+                            <p
+                              className="info-modal-graf"
+                            >
+                              Click on a release to get more information about that release.
+                            </p>
+                            <p
+                              className="info-modal-graf"
+                            >
+                              Know the name of the game but not the date? You can search for it in the searchable dropdown in the top bar.
+                            </p>
+                          </div>
+                        </div>
+                      </div>
+                    </Collapsible>
+                    <Collapsible
+                      className="collapsible"
+                      classParentString="Collapsible"
+                      contentContainerTagName="div"
+                      contentInnerClassName=""
+                      contentOuterClassName=""
+                      easing="linear"
+                      lazyRender={false}
+                      onClose={[Function]}
+                      onClosing={[Function]}
+                      onOpen={[Function]}
+                      onOpening={[Function]}
+                      open={false}
+                      openedClassName="collapsible"
+                      overflowWhenOpen="hidden"
+                      tabIndex={null}
+                      transitionCloseTime={null}
+                      transitionTime={275}
+                      trigger="What does \\"Export to ICS\\" do?"
+                      triggerClassName="info-modal-prompt trigger"
+                      triggerDisabled={false}
+                      triggerOpenedClassName="info-modal-prompt trigger"
+                      triggerSibling={null}
+                      triggerStyle={null}
+                      triggerTagName="span"
+                    >
+                      <div
+                        className="Collapsible collapsible"
+                      >
+                        <span
+                          className="Collapsible__trigger is-closed  info-modal-prompt trigger"
+                          onClick={[Function]}
+                          onKeyPress={[Function]}
+                          style={null}
+                          tabIndex={null}
+                        >
+                          What does "Export to ICS" do?
+                        </span>
+                        <div
+                          className="Collapsible__contentOuter"
+                          onTransitionEnd={[Function]}
+                          style={
+                            Object {
+                              "WebkitTransition": "height 275ms linear",
+                              "height": 0,
+                              "msTransition": "height 275ms linear",
+                              "overflow": "hidden",
+                              "transition": "height 275ms linear",
+                            }
+                          }
+                        >
+                          <div
+                            className="Collapsible__contentInner"
+                          >
+                            <p
+                              className="info-modal-graf"
+                            >
+                              Click on a release, click "Add to favorites" and it will show up in your favorites list. With one or more favorites in your list, click "Export to ICS" in the favorites bar. Your browser will download a calendar file you can import into the calendar of your choosing with the release dates as events.
+                            </p>
+                            <p
+                              className="info-modal-graf"
+                            >
+                              vgCal will remember your favorites, but will forget them if you switch devices or browsers.
+                            </p>
+                          </div>
+                        </div>
+                      </div>
+                    </Collapsible>
+                    <Collapsible
+                      className="collapsible"
+                      classParentString="Collapsible"
+                      contentContainerTagName="div"
+                      contentInnerClassName=""
+                      contentOuterClassName=""
+                      easing="linear"
+                      lazyRender={false}
+                      onClose={[Function]}
+                      onClosing={[Function]}
+                      onOpen={[Function]}
+                      onOpening={[Function]}
+                      open={false}
+                      openedClassName="collapsible"
+                      overflowWhenOpen="hidden"
+                      tabIndex={null}
+                      transitionCloseTime={null}
+                      transitionTime={275}
+                      trigger="I want to go to a specific date."
+                      triggerClassName="info-modal-prompt trigger"
+                      triggerDisabled={false}
+                      triggerOpenedClassName="info-modal-prompt trigger"
+                      triggerSibling={null}
+                      triggerStyle={null}
+                      triggerTagName="span"
+                    >
+                      <div
+                        className="Collapsible collapsible"
+                      >
+                        <span
+                          className="Collapsible__trigger is-closed  info-modal-prompt trigger"
+                          onClick={[Function]}
+                          onKeyPress={[Function]}
+                          style={null}
+                          tabIndex={null}
+                        >
+                          I want to go to a specific date.
+                        </span>
+                        <div
+                          className="Collapsible__contentOuter"
+                          onTransitionEnd={[Function]}
+                          style={
+                            Object {
+                              "WebkitTransition": "height 275ms linear",
+                              "height": 0,
+                              "msTransition": "height 275ms linear",
+                              "overflow": "hidden",
+                              "transition": "height 275ms linear",
+                            }
+                          }
+                        >
+                          <div
+                            className="Collapsible__contentInner"
+                          >
+                            <p
+                              className="info-modal-graf"
+                            >
+                              Do it like this: https://vgcal.now.sh/date/12-31-2020
+                            </p>
+                          </div>
+                        </div>
+                      </div>
+                    </Collapsible>
+                    <Collapsible
+                      className="collapsible"
+                      classParentString="Collapsible"
+                      contentContainerTagName="div"
+                      contentInnerClassName=""
+                      contentOuterClassName=""
+                      easing="linear"
+                      lazyRender={false}
+                      onClose={[Function]}
+                      onClosing={[Function]}
+                      onOpen={[Function]}
+                      onOpening={[Function]}
+                      open={false}
+                      openedClassName="collapsible"
+                      overflowWhenOpen="hidden"
+                      tabIndex={null}
+                      transitionCloseTime={null}
+                      transitionTime={275}
+                      trigger="I want to go to a specific game."
+                      triggerClassName="info-modal-prompt trigger"
+                      triggerDisabled={false}
+                      triggerOpenedClassName="info-modal-prompt trigger"
+                      triggerSibling={null}
+                      triggerStyle={null}
+                      triggerTagName="span"
+                    >
+                      <div
+                        className="Collapsible collapsible"
+                      >
+                        <span
+                          className="Collapsible__trigger is-closed  info-modal-prompt trigger"
+                          onClick={[Function]}
+                          onKeyPress={[Function]}
+                          style={null}
+                          tabIndex={null}
+                        >
+                          I want to go to a specific game.
+                        </span>
+                        <div
+                          className="Collapsible__contentOuter"
+                          onTransitionEnd={[Function]}
+                          style={
+                            Object {
+                              "WebkitTransition": "height 275ms linear",
+                              "height": 0,
+                              "msTransition": "height 275ms linear",
+                              "overflow": "hidden",
+                              "transition": "height 275ms linear",
+                            }
+                          }
+                        >
+                          <div
+                            className="Collapsible__contentInner"
+                          >
+                            <p
+                              className="info-modal-graf"
+                            >
+                              Do it like this: https://vgcal.now.sh/game/Mount-&-Blade-II:-Bannerlord
+                            </p>
+                          </div>
+                        </div>
+                      </div>
+                    </Collapsible>
+                    <Collapsible
+                      className="collapsible"
+                      classParentString="Collapsible"
+                      contentContainerTagName="div"
+                      contentInnerClassName=""
+                      contentOuterClassName=""
+                      easing="linear"
+                      lazyRender={false}
+                      onClose={[Function]}
+                      onClosing={[Function]}
+                      onOpen={[Function]}
+                      onOpening={[Function]}
+                      open={false}
+                      openedClassName="collapsible"
+                      overflowWhenOpen="hidden"
+                      tabIndex={null}
+                      transitionCloseTime={null}
+                      transitionTime={275}
+                      trigger="I don't see the game I'm looking for."
+                      triggerClassName="info-modal-prompt trigger"
+                      triggerDisabled={false}
+                      triggerOpenedClassName="info-modal-prompt trigger"
+                      triggerSibling={null}
+                      triggerStyle={null}
+                      triggerTagName="span"
+                    >
+                      <div
+                        className="Collapsible collapsible"
+                      >
+                        <span
+                          className="Collapsible__trigger is-closed  info-modal-prompt trigger"
+                          onClick={[Function]}
+                          onKeyPress={[Function]}
+                          style={null}
+                          tabIndex={null}
+                        >
+                          I don't see the game I'm looking for.
+                        </span>
+                        <div
+                          className="Collapsible__contentOuter"
+                          onTransitionEnd={[Function]}
+                          style={
+                            Object {
+                              "WebkitTransition": "height 275ms linear",
+                              "height": 0,
+                              "msTransition": "height 275ms linear",
+                              "overflow": "hidden",
+                              "transition": "height 275ms linear",
+                            }
+                          }
+                        >
+                          <div
+                            className="Collapsible__contentInner"
+                          >
+                            <p
+                              className="info-modal-graf"
+                            >
+                              If a game has a set release date, it'll show up on the calendar. If it has an ambiguous release date (like September 2020), you can look for it in the searchable dropdown. Still don't see it? vgCal uses the Giant Bomb API to populate its calendar. Add it to the 
+                              <a
+                                className="gb-link"
+                                href="https://www.giantbomb.com/games/"
+                                rel="noopener noreferrer"
+                                target="_blank"
+                              >
+                                Giant Bomb wiki
+                              </a>
+                               and it'll show up in the calendar — and lots of other places on the Internet!
+                            </p>
+                          </div>
+                        </div>
+                      </div>
+                    </Collapsible>
+                    <Collapsible
+                      className="collapsible"
+                      classParentString="Collapsible"
+                      contentContainerTagName="div"
+                      contentInnerClassName=""
+                      contentOuterClassName=""
+                      easing="linear"
+                      lazyRender={false}
+                      onClose={[Function]}
+                      onClosing={[Function]}
+                      onOpen={[Function]}
+                      onOpening={[Function]}
+                      open={false}
+                      openedClassName="collapsible"
+                      overflowWhenOpen="hidden"
+                      tabIndex={null}
+                      transitionCloseTime={null}
+                      transitionTime={275}
+                      trigger="Why does the calendar only span 2019 to 2021?"
+                      triggerClassName="info-modal-prompt trigger"
+                      triggerDisabled={false}
+                      triggerOpenedClassName="info-modal-prompt trigger"
+                      triggerSibling={null}
+                      triggerStyle={null}
+                      triggerTagName="span"
+                    >
+                      <div
+                        className="Collapsible collapsible"
+                      >
+                        <span
+                          className="Collapsible__trigger is-closed  info-modal-prompt trigger"
+                          onClick={[Function]}
+                          onKeyPress={[Function]}
+                          style={null}
+                          tabIndex={null}
+                        >
+                          Why does the calendar only span 2019 to 2021?
+                        </span>
+                        <div
+                          className="Collapsible__contentOuter"
+                          onTransitionEnd={[Function]}
+                          style={
+                            Object {
+                              "WebkitTransition": "height 275ms linear",
+                              "height": 0,
+                              "msTransition": "height 275ms linear",
+                              "overflow": "hidden",
+                              "transition": "height 275ms linear",
+                            }
+                          }
+                        >
+                          <div
+                            className="Collapsible__contentInner"
+                          >
+                            <p
+                              className="info-modal-graf"
+                            >
+                              Right now vgCal's database is size-limited by the database provider. I'm looking into migrating the database to a different provider, which would allow for a much larger dataset.
+                            </p>
+                          </div>
+                        </div>
+                      </div>
+                    </Collapsible>
+                  </div>
+                  <CloseIcon
+                    classNames={
+                      Object {
+                        "modal": "react-responsive-modal",
+                        "overlay": "react-responsive-modal-overlay",
+                      }
+                    }
+                    classes={
+                      Object {
+                        "closeButton": "styles_closeButton__20ID4",
+                        "closeIcon": "styles_closeIcon__1QwbI",
+                        "modal": "styles_modal__gNwvD",
+                        "modalCenter": "styles_modalCenter__L9F2w",
+                        "overlay": "styles_overlay__CLSq-",
+                        "transitionEnter": "styles_transitionEnter__3j_-a",
+                        "transitionEnterActive": "styles_transitionEnterActive___eQs7",
+                        "transitionExit": "styles_transitionExit__1KmEf",
+                        "transitionExitActive": "styles_transitionExitActive__1nQXw",
+                      }
+                    }
+                    closeIconSize={28}
+                    closeIconSvgPath={
+                      <path
+                        d="M28.5 9.62L26.38 7.5 18 15.88 9.62 7.5 7.5 9.62 15.88 18 7.5 26.38l2.12 2.12L18 20.12l8.38 8.38 2.12-2.12L20.12 18z"
+                      />
+                    }
+                    id={null}
+                    onClickCloseIcon={[Function]}
+                    styles={
+                      Object {
+                        "closeButton": Object {
+                          "cursor": "pointer",
+                        },
+                        "closeIcon": Object {
+                          "fill": "white",
+                          "filter": "drop-shadow( 3px 3px 2px rgba(0, 0, 0, .7))",
+                        },
+                        "modal": Object {
+                          "backgroundColor": "white",
+                          "borderRadius": "4px",
+                          "padding": 0,
+                        },
+                        "overlay": Object {
+                          "background": "rgba(0, 0, 0, 0.35)",
+                        },
+                      }
+                    }
+                  >
+                    <button
+                      className="styles_closeButton__20ID4"
+                      id={null}
+                      onClick={[Function]}
+                      style={
+                        Object {
+                          "cursor": "pointer",
+                        }
+                      }
+                    >
+                      <svg
+                        className="styles_closeIcon__1QwbI"
+                        height={28}
+                        style={
+                          Object {
+                            "fill": "white",
+                            "filter": "drop-shadow( 3px 3px 2px rgba(0, 0, 0, .7))",
+                          }
+                        }
+                        viewBox="0 0 36 36"
+                        width={28}
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          d="M28.5 9.62L26.38 7.5 18 15.88 9.62 7.5 7.5 9.62 15.88 18 7.5 26.38l2.12 2.12L18 20.12l8.38 8.38 2.12-2.12L20.12 18z"
+                        />
+                      </svg>
+                    </button>
+                  </CloseIcon>
+                </div>
+              </div>
+            </Transition>
+          </CSSTransition>
+        </Portal>
+      </Modal>
+    </InfoModal>
+  </Router>
+</BrowserRouter>
+`;
